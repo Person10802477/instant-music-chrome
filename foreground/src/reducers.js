@@ -1,13 +1,9 @@
-// import { combineReducers } from 'redux';
-// import user from '../user/userReducer';
-// import product from '../product/productReducer';
-// import command from '../command/commandReducer';
+import { combineReducers } from 'redux';
+import { currentPlaylist, playlistsBySource } from './containers/PlaylistContainer/PlaylistReducer';
 
-// const rootReducer = combineReducers({
-//   routing: routeReducer,
-//   user,
-//   product,
-//   command,
-// });
+const rootReducers = combineReducers({
+  currentPlaylist,
+  playlistsBySource,
+});
 
-// export default rootReducer;
+export default rootReducers;
