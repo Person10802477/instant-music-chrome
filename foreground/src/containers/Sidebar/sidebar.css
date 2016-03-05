@@ -1,0 +1,9 @@
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 40px;
+  width: 300px;
+  min-height: 100%;
+  background-color: skyblue;
+  height: 100%;
+}

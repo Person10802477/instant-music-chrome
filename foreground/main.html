@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <title>Instant Music : Chrome App</title>
+    <!-- <link rel="stylesheet" type="text/css" href="main.css"> -->
+    <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="./bundle/app.css">
+    <link rel="stylesheet" type="text/css" href="./main.css">
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <div id="webview-container">
+      <webview id="youtube-webview" src="sandbox/sandbox.html" partition="static"></webview>
+    </div>
+
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../node_modules/underscore/underscore.js"></script>
+
+    <script src="setup.js"></script>
+    <script src="./bundle/app.js"></script>
+  </body>
+</html>
