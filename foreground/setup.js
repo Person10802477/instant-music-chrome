@@ -50,8 +50,6 @@ var sendMsg = function(webview, msg) {
 var resizeWebview = function(webview) {
   webview.style.width = "300px";
   webview.style.height = "200px";
-  // var appWidth = window.screen.width;
-  // var appHeight = window.screen.height-100;
 }
 
 $(function() {
