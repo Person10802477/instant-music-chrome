@@ -2,13 +2,14 @@ import React from "react";
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-// FIXME: we only need fetching-related functions here
-import * as PlaylistActions from '../PlaylistContainer/PlaylistActions';
-import MainArea from '../../components/MainArea/MainArea';
+// FIXME: get the related ones
+import * as PlaylistActions from './PlaylistActions';
+import Playlists from '../../components/Playlists/Playlists';
 
 const mapStateToProps = (state) => {
   return {
-    currentPlaylist: state.currentPlaylist
+    currentPlaylist: state.currentPlaylist,
+    playlists: state.playlistsBySource
   };
 }
 
@@ -18,7 +19,10 @@ const mapDispatchToProps = (dispatch) => {
   };
 }
 
+// I want to subscribe to a store,
+// but I dont necessary have a component
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(MainArea);
+)();

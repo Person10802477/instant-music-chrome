@@ -1,6 +1,7 @@
 import fetch from 'isomorphic-fetch';
 import { CONSTANTS, PLAYLIST_DATA } from './constants';
 import YouTubeFetcher from '../../others/youtube-api';
+import SandboxMessenger from '../../others/sandbox-messenger';
 
 export function updateCurrentPlaylist(playlist) {
   return {
@@ -9,10 +10,24 @@ export function updateCurrentPlaylist(playlist) {
   }
 }
 
+// Call this when we automatically advance to the next video
 export function updateCurrentSong(song) {
   return {
     type: CONSTANTS.UPDATE_CURRENT_SONG,
     song
+  }
+}
+
+// FIXME: call this in appropriate places
+// Call this when the user chooses a song from the playlist
+export function updateCurrentSongAndPlayIt(song) {
+  return (dispatch) => {
+    SandboxMessenger.sendMsg({
+      type: CONSTANTS.LOAD_VIDEO,
+      videoId: song.videoId
+    });
+
+    dispatch(updateCurrentSong(song));
   }
 }
 

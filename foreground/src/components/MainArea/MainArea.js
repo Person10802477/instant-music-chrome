@@ -12,14 +12,6 @@ class MainArea extends React.Component {
     this.props.actions.fetchPlaylistIfNeeded(this.props.currentPlaylist);
   }
 
-  // check if props are different
-  // componentWillReceiveProps(nextProps) {
-  //   debugger
-  //   if (nextProps.currentPlaylist.playlistName !== this.props.currentPlaylist.playlistName) {
-  //     this.props.actions.fetchPlaylistIfNeeded(nextProps.currentPlaylist);
-  //   }
-  // }
-
   render() {
     var songs = this.props.currentPlaylist.songs || [];
 
