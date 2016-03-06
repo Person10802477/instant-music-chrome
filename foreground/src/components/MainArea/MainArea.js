@@ -19,7 +19,7 @@ class MainArea extends React.Component {
       <div className="main-area">
         <div>Main area</div>
         <Playlist
-          updateCurrentSong={this.props.actions.updateCurrentSong}
+          updateCurrentSong={this.props.actions.updateCurrentSongAndPlayIt}
           songs={songs}
           currentSong={this.props.currentSong}
         />
@@ -29,3 +29,5 @@ class MainArea extends React.Component {
 }
 
 export default MainArea;
+
+// updateCurrentSong={this.props.actions.updateCurrentSong}

@@ -33,7 +33,7 @@
     "partitions": [
       {
         "name": "static",
-        "accessible_resources": ["sandbox/sandbox.html"]
+        "accessible_resources": ["sandbox/sandbox.html", "sandbox/sandbox.js", "sandbox/sandbox.css"]
       }
     ]
   },

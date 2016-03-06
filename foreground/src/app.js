@@ -16,6 +16,8 @@ import MainAreaContainer from "./containers/MainAreaContainer/MainAreaContainer"
 import Sidebar from "./components/Sidebar/Sidebar"
 import RightColumn from "./containers/RightColumn/RightColumn"
 
+import SandboxMessenger from "./others/SandboxMessenger"
+
 // reducers
 import rootReducers from './reducers';
 
@@ -49,4 +51,9 @@ $(function() {
     </Provider>,
     document.getElementById('app')
   );
+  
+  // exposing sandboxMessenger to a global namespace
+  // so it can communicate with webview and sandbox
+  window.app = {};
+  app.sandboxMessenger = new SandboxMessenger(store, $('webview')[0]);
 });

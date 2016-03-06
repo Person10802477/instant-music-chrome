@@ -1,7 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import { CONSTANTS, PLAYLIST_DATA } from './constants';
 import YouTubeFetcher from '../../others/youtube-api';
-import SandboxMessenger from '../../others/sandbox-messenger';
 
 export function updateCurrentPlaylist(playlist) {
   return {
@@ -22,7 +21,7 @@ export function updateCurrentSong(song) {
 // Call this when the user chooses a song from the playlist
 export function updateCurrentSongAndPlayIt(song) {
   return (dispatch) => {
-    SandboxMessenger.sendMsg({
+    window.app.sandboxMessenger.sendMsg({
       type: CONSTANTS.LOAD_VIDEO,
       videoId: song.videoId
     });
