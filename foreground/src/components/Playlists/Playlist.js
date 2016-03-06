@@ -1,18 +1,29 @@
 import React from "react";
+import SongItem from "./Song/SongItem";
+
+require("./playlist.css");
 
 class Playlist extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  // FIXME: how do I make it re-render everytime currentSong is updated?
   render() {
     var songItems;
+    var currentVideoId = (this.props.currentSong ? this.props.currentSong.videoId : '')
 
     if (this.props.songs) {
       songItems = (
         this.props.songs.map((song) =>
-          <div
-            className="song-item"
-            videoId={song.videoId}
+          <SongItem
+            song={song}
             key={song.videoId}
-            onClick={this.props.updateCurrentSong.bind(this, song)}
-          >{song.rank} - {song.title} - {song.artist}</div>
+            updateCurrentSong={this.props.updateCurrentSong}
+
+            // FIXME: what if the user adds two identical songs to playlist?
+            isCurrentSong={song.videoId === currentVideoId}
+          />
         )
       )
     } else {

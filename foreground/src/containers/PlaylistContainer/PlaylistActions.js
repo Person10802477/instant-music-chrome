@@ -1,5 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import { CONSTANTS, PLAYLIST_DATA } from './constants';
+import YouTubeFetcher from '../../others/youtube-api';
 
 export function updateCurrentPlaylist(playlist) {
   return {
@@ -46,8 +47,7 @@ function extractSongsFromJson(source, json) {
   }
 }
 
-function receivePlaylist(playlist, json) {
-  const songs = extractSongsFromJson(playlist.source, json);
+function receivePlaylist(playlist, songs) {
   const updatedPlaylist = Object.assign({}, playlist,
     { songs: songs, isFetching: false, receivedAt: Date.now() }
   );
@@ -93,7 +93,15 @@ export function fetchPlaylist(playlist) {
 
     return fetch(playlist.url)
       .then(response => response.json())
-      .then(json => dispatch(receivePlaylist(playlist, json))
+      .then(json => {
+        var youTubeFetcher = new YouTubeFetcher();
+        var songs = extractSongsFromJson(playlist.source, json);
+        youTubeFetcher.fetchAndAddVideoIds(songs,
+          function(songsWithVideoIds) {
+            dispatch(receivePlaylist(playlist, songsWithVideoIds))
+          }
+        );
+      }
     );
   }
 }

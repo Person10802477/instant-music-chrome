@@ -1,0 +1,13 @@
+.song-item {
+  padding: 10px;
+}
+
+.song-item:hover {
+  padding: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.song-item:active {
+  font-weight: bold;
+}
