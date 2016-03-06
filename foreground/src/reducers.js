@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
-import { currentPlaylist, playlistsBySource } from './containers/PlaylistContainer/PlaylistReducer';
+import { currentSong, currentPlaylist, playlistsBySource } from './containers/PlaylistContainer/PlaylistReducer';
 
 const rootReducers = combineReducers({
+  currentSong,
   currentPlaylist,
   playlistsBySource,
 });

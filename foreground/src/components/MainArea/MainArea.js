@@ -27,6 +27,7 @@ class MainArea extends React.Component {
       <div className="main-area">
         <div>Main area</div>
         <Playlist
+          updateCurrentSong={this.props.actions.updateCurrentSong}
           songs={songs}
         />
       </div>

@@ -11,6 +11,7 @@ class Playlist extends React.Component {
             className="song-item"
             videoId={song.videoId}
             key={song.videoId}
+            onClick={this.props.updateCurrentSong.bind(this, song)}
           >{song.rank} - {song.title} - {song.artist}</div>
         )
       )

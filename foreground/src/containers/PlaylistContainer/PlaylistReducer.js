@@ -57,4 +57,19 @@ function playlistsBySource(state = PLAYLIST_DATA, action) {
   }
 }
 
-export { currentPlaylist, playlistsBySource };
+function currentSong(state = null, action) {
+  switch (action.type) {
+    case CONSTANTS.UPDATE_CURRENT_SONG:
+      return action.song;
+    case CONSTANTS.RECEIVE_PLAYLIST:
+      return state || action.playlist.songs[0];
+    default:
+      return state;
+  }
+}
+
+export {
+  currentSong,
+  currentPlaylist,
+  playlistsBySource
+};
