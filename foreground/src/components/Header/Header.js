@@ -1,4 +1,5 @@
 import React from "react";
+import SearchBar from "./SearchBar/SearchBar";
 
 require("./header.css");
 
@@ -6,7 +7,7 @@ class Header extends React.Component {
   render() {
     return (
       <div className="header">
-        <div>Header</div>
+        <SearchBar />
       </div>
     );
   }

@@ -9,9 +9,9 @@ class Playlist extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
+
   }
 
-  // FIXME: how do I make it re-render everytime currentSong is updated?
   render() {
     var songItems;
     var currentVideoId = (this.props.currentSong ? this.props.currentSong.videoId : '')

@@ -1,0 +1,35 @@
+.search-bar {
+  position: relative;
+  margin-left: 300px;
+  width: 250px;
+  height: 100%;
+  line-height: 100%;
+}
+
+.search-bar i.fa.fa-search.search-icon {
+  position: absolute;
+  left: 6px;
+  top: 6px;
+  z-index: 2;
+  color: #0F1624;
+  font-size: 18px;
+}
+
+.search-bar i.fa.fa-times.clear-icon {
+  position: absolute;
+  right: 10px;
+  top: 8px;
+  z-index: 2;
+  color: #e9e9e9;
+}
+
+.search-bar .search-input {
+  z-index: 0;
+  width: 250px;
+  padding-left: 30px;
+  font-size: 12px;
+  height: 28px;
+  padding: 1px 12px 1px 30px;
+  border-radius: 20px;
+  margin-top: 6px;
+}

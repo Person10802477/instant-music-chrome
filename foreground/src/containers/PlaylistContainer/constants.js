@@ -11,15 +11,15 @@ export const CONSTANTS = {
 }
 
 var PLAYLIST_DATA;
-var NUM_SONGS = 50;
+var NUM_SONGS;
 
-// if (chrome.runtime.id && chrome.runtime.id === "kpfmenmbohaoklohdhplnchfkngfhdhl") {
-//   NUM_SONGS = 50;
-// } else if (chrome.runtime.id === undefined) {
-//   NUM_SONGS = 50;
-// } else {
-//   NUM_SONGS = 50;
-// }
+if (chrome.runtime.id && chrome.runtime.id === "kpfmenmbohaoklohdhplnchfkngfhdhl") {
+  NUM_SONGS = 50;
+} else if (chrome.runtime.id === undefined) {
+  NUM_SONGS = 5;
+} else {
+  NUM_SONGS = 50;
+}
 
 // itunes: add- url+numSongs+'/explicit=true/xml
 
