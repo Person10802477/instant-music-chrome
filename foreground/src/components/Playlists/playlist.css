@@ -1,3 +1,8 @@
 .playlists__playlist-label {
   font-weight: bold;
 }
+
+.sidebar-playlist-item.active {
+  font-weight: bold;
+  color: red;
+}

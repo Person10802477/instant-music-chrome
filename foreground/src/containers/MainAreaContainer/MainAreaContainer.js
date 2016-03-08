@@ -8,7 +8,8 @@ import MainArea from '../../components/MainArea/MainArea';
 
 const mapStateToProps = (state) => {
   return {
-    currentPlaylist: state.currentPlaylist
+    currentPlaylist: state.currentPlaylist,
+    currentSong: state.currentSong
   };
 }
 

@@ -17,7 +17,9 @@ class SandboxMessenger {
 
   sendMsg(msg) {
     console.log("SANDBOX -> webview:", msg);
-    this.webview.contentWindow.postMessage(msg, "*");
+    if (this.webview.contentWindow) {
+      this.webview.contentWindow.postMessage(msg, "*");  
+    }
   }
 
   messageHandler(msg) {

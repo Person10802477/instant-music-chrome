@@ -76,7 +76,6 @@ function getTargetPlaylist(state, playlist) {
   const target = _.find(state.playlistsBySource[playlist.source], (pl) =>
     (pl.playlistName === playlist.playlistName)
   );
-  console.log("getTarget: ", target);
   return target;
 }
 

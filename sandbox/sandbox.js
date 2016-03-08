@@ -7,7 +7,6 @@ var CONSTANTS = {
 
 var messageHandler = function(rawMsg) {
   var msg = rawMsg.data;
-  console.log("WEBVIEW:", msg);
 
   switch (msg.type) {
     case CONSTANTS.LOAD_VIDEO:
@@ -60,10 +59,3 @@ document.addEventListener("DOMContentLoaded", function(event) {
   loadYouTubeAsync();
   window.addEventListener("message", messageHandler, false);
 });
-
-// $(function() {
-  // console.log("im running");
-  // registerYouTubeEvents();
-  // loadYouTubeAsync();
-  // window.addEventListener("message", messageHandler, false);  d
-// });

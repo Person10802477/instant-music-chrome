@@ -8,6 +8,7 @@
   font-weight: bold;
 }
 
-.song-item:active {
+.song-item.active {
   font-weight: bold;
+  color: red;
 }

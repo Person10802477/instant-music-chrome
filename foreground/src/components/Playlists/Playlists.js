@@ -5,6 +5,7 @@ class Playlists extends React.Component {
     super(props);
 
     this.makeSidebarPlaylists = this.makeSidebarPlaylists.bind(this);
+    this.isSamePlaylist = this.isSamePlaylist.bind(this);
   }
 
   componentWillMount() {
@@ -12,23 +13,35 @@ class Playlists extends React.Component {
     this.props.actions.updateCurrentPlaylist(null);
   }
 
-  componentWillReceiveProps(nextProps) {
-    console.log("playlists component: componentWillReceiveProps", nextProps);
-    // this.props.actions.updateCurrentPlaylist(nextProps.currentPlaylist);
+  // componentWillReceiveProps(nextProps) {
+  //   console.log("received", nextProps);
+  //   // this.props.actions.updateCurrentPlaylist(nextProps.currentPlaylist);
+  // }
+
+  isSamePlaylist(playlist1, playlist2) {
+    return (
+      playlist1.playlistName === playlist2.playlistName &&
+      playlist1.url === playlist2.url
+    );
   }
 
-  makeSidebarPlaylists(playlists, source) {
+  makeSidebarPlaylists(playlists, source, currentPlaylist) {
     return playlists[source].map(function(playlist, idx) {
+      var className = (this.isSamePlaylist(playlist, currentPlaylist) ?
+        'sidebar-playlist-item active' : 'sidebar-playlist-item');
+
       return (
-        <li className="sidebar-playlist-item"
+        <li className={className}
           url={playlist.url}
           key={idx}
-          // onClick={this.props.loadPlaylist.bind(this, playlist)}
         >
-          <a href='#'>{playlist.playlistName}</a>
+          <a href='#'
+            onClick={this.props.actions.updateCurrentPlaylist.bind(this, playlist)}>
+            {playlist.playlistName}
+          </a>
         </li>
       );
-    });
+    }, this);
   }
 
   render() {
@@ -37,9 +50,9 @@ class Playlists extends React.Component {
       return (<div>Loading...</div>)
     }
 
-    var melonPlaylists = this.makeSidebarPlaylists(playlists, 'melon');
-    var itunesPlaylists = this.makeSidebarPlaylists(playlists, 'itunes');
-    var localPlaylists = this.makeSidebarPlaylists(playlists, 'local');
+    var melonPlaylists = this.makeSidebarPlaylists(playlists, 'melon', this.props.currentPlaylist);
+    var itunesPlaylists = this.makeSidebarPlaylists(playlists, 'itunes', this.props.currentPlaylist);
+    var localPlaylists = this.makeSidebarPlaylists(playlists, 'local', this.props.currentPlaylist);
 
     return (
       <div className="playlists">
