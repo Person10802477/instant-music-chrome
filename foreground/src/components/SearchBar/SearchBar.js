@@ -14,6 +14,7 @@ class SearchBar extends React.Component {
 
     this.onSearchInput = this.onSearchInput.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
+    this.onInputClear = this.onInputClear.bind(this);
   }
 
   onSearchInput(event) {
@@ -29,6 +30,12 @@ class SearchBar extends React.Component {
     }
 
     this.setState({ searchInputQuery: q });
+  }
+
+  onInputClear() {
+    this.refs.searchInput.value = "";
+    this.setState({ searchInputQuery: "" });
+    this.props.actions.clearSearchResults();
   }
 
   render() {
@@ -57,10 +64,13 @@ class SearchBar extends React.Component {
         >
           <input className="search-input form-control truncate"
             placeholder="ex) John Lennon Imagine"
+            ref="searchInput"
             onChange={this.onInputChange}
              />
         </form>
-        <i className="fa fa-times clear-icon fa-fw"></i>
+        <i className="fa fa-times clear-icon fa-fw"
+          onClick={this.onInputClear}
+        ></i>
         <div className="search-results">
           {searchResults}
         </div>

@@ -34,7 +34,8 @@ var registerYouTubeEvents = function() {
       events: {
         'onReady': onPlayerReady,
         'onStateChange': onPlayerStateChange
-      }
+      },
+      autohide: 0
     });
   }
 

@@ -43,11 +43,6 @@ export function clearSearchResults() {
   }
 }
 
-// videoId, title, description, thumbnail
-export function addSongToPlaylist(song) {
-
-}
-
 export function fetchSearchResults(query) {
   return function (dispatch) {
     // dispatch(requestSearchResults(query));

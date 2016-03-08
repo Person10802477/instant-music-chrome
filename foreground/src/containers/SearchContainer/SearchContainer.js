@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 // FIXME: we only need fetching-related functions here
 import * as SearchActions from './SearchActions';
+import { addSongToPlaylist } from '../PlaylistContainer/PlaylistActions';
 import SearchBar from '../../components/SearchBar/SearchBar';
 
 const mapStateToProps = (state) => {
@@ -13,8 +14,12 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
+  var actions = Object.assign({}, SearchActions, {
+    addSongToPlaylist
+  });
+
   return {
-    actions: bindActionCreators(SearchActions, dispatch)
+    actions: bindActionCreators(actions, dispatch)
   };
 }
 

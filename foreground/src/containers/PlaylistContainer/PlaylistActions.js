@@ -118,3 +118,13 @@ export function fetchPlaylist(playlist) {
     );
   }
 }
+
+// videoId, title, description, thumbnail
+// FIXME: I also need to add this song to local 'favorites' playlist
+// FIXME: on add song, clear the search results
+export function addSongToPlaylist(song) {
+  return {
+    type: CONSTANTS.ADD_SONG_TO_PLAYLIST,
+    song
+  }
+}

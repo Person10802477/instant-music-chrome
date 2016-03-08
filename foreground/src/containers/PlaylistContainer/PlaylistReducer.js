@@ -7,6 +7,11 @@ function currentPlaylist(state = PLAYLIST_DATA['melon'][0], action) {
       return action.playlist || PLAYLIST_DATA['melon'][0];
     case CONSTANTS.RECEIVE_PLAYLIST:
       return action.playlist
+    case CONSTANTS.ADD_SONG_TO_PLAYLIST:
+      var playlistUpdated = Object.assign({}, state);
+      playlistUpdated.songs.push(action.song);
+
+      return playlistUpdated;
     default:
       return state;
   }

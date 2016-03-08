@@ -2,6 +2,7 @@
   font-size: 12px;
   height: 100%;
   overflow-y: scroll;
+  padding-bottom: 20px;
 }
 
 .playlist-songs .table-songs {
