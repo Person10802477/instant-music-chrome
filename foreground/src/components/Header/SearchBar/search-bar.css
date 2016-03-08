@@ -33,3 +33,21 @@
   border-radius: 20px;
   margin-top: 6px;
 }
+
+.search-bar .search-results {
+  display: none;
+  z-index: 12px;
+  height: 200px;
+  background-color: #515B70;
+  box-shadow: inset 0 0 6px #ccc;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+.search-bar .search-results .search-result-item {
+  width: 100%;
+  height: 70px;
+  background-color: #e9e9e9;
+  color: black;
+  padding: 10px;
+}
