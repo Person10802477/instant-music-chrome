@@ -16,6 +16,8 @@
   font-weight: bold;
 }
 
+// why do scrollbars have different heights?
+
 ::-webkit-scrollbar {
   -webkit-appearance: none;
   width: 7px;

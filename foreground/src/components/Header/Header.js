@@ -1,5 +1,5 @@
 import React from "react";
-import SearchBar from "./SearchBar/SearchBar";
+import SearchContainer from "../../containers/SearchContainer/SearchContainer";
 
 require("./header.css");
 
@@ -7,7 +7,7 @@ class Header extends React.Component {
   render() {
     return (
       <div className="header">
-        <SearchBar />
+        <SearchContainer />
       </div>
     );
   }
