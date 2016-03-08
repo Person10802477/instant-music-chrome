@@ -1,5 +1,7 @@
 .playlist-songs {
   font-size: 12px;
+  height: 100%;
+  overflow-y: scroll;
 }
 
 .playlist-songs .table-songs {

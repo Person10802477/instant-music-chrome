@@ -1,0 +1,10 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+  overflow: hidden;
+}
+
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -9,35 +9,15 @@ import thunk from 'redux-thunk';
 import promise from 'redux-promise';
 import createLogger from 'redux-logger';
 
-// containers
-import Header from "./containers/Header/Header"
-// import MainArea from "./components/MainArea/MainArea"
-import MainAreaContainer from "./containers/MainAreaContainer/MainAreaContainer"
-import Sidebar from "./components/Sidebar/Sidebar"
-import RightColumn from "./containers/RightColumn/RightColumn"
-
 import SandboxMessenger from "./others/SandboxMessenger"
+
+import App from "./components/App/App"
 
 // reducers
 import rootReducers from './reducers';
 
 if (process.env.NODE_ENV === 'development') {
   require('../main.html')
-}
-
-require('./app.css')
-
-class App extends React.Component {
-  render() {
-    return (
-      <div className="app">
-        <Header />
-        <MainAreaContainer />
-        <Sidebar />
-        <RightColumn />
-      </div>
-    );
-  }
 }
   
 const logger = createLogger();
