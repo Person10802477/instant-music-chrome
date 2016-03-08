@@ -21,7 +21,6 @@ class MainArea extends React.Component {
 
     return (
       <div className="main-area">
-        <div>Main area</div>
         <Playlist
           updateCurrentSong={this.props.actions.updateCurrentSongAndPlayIt}
           songs={songs}

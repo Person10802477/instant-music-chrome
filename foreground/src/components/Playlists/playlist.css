@@ -1,8 +1,30 @@
-.playlists__playlist-label {
-  font-weight: bold;
+.playlist-songs {
+  font-size: 12px;
 }
 
-.sidebar-playlist-item.active {
-  font-weight: bold;
-  color: red;
+.playlist-songs .table-songs {
+  font-size: 14px;
+  color: white;
+}
+
+.table.table-songs thead th {
+  font-weight: normal;
+  letter-spacing: 1px;
+}
+
+.playlist-songs .song-rank {
+  width: 5%;
+}
+
+.playlist-songs .song-title {
+  width: 65%;
+}
+
+.playlist-songs .song-artist {
+  width: 26%;
+}
+
+.playlist-songs .song-save,
+.playlist-songs .song-share {
+  width: 2%;
 }

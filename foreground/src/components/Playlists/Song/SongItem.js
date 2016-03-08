@@ -8,13 +8,17 @@ class SongItem extends React.Component {
     const className = (this.props.isCurrentSong ? "song-item active" : "song-item");
 
     return (
-      <div
+      <tr
         className={className}
         videoId={videoId}
         onClick={this.props.updateCurrentSong.bind(this, this.props.song)}
       >
-        {rank} - {title} - {artist}
-      </div>
+        <td className="song-rank-cell">{rank}</td>
+        <td>{title}</td>
+        <td>{artist}</td>
+        <td className="text-center"><i className="fa fa-heart-o fa-fw"></i></td>
+        <td className="text-center"><i className="fa fa-share-alt fa-fw"></i></td>
+      </tr>
     );
   }
 }

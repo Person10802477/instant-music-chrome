@@ -30,6 +30,7 @@ var registerYouTubeEvents = function() {
       width: '300',
       height: '200',
       videoId: '1TJQ6s1N1v0',
+      origin: "chrome-extension://" + chrome.runtime.id,
       events: {
         'onReady': onPlayerReady,
         'onStateChange': onPlayerStateChange

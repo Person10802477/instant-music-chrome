@@ -6,26 +6,26 @@
     }
   },
   "manifest_version": 2,
-  "name": "My App",
+  "name": "Instant Music",
   "version": "0.1",
   "default_locale": "en",
 
   // Recommended
-  "description": "A plain text description",
+  "description": "Instant Music",
   "icons": { "16": "assets/calculator-16.png", "128": "assets/calculator-128.png" },
 
   // Optional
   "author": "Howon",
-  "externally_connectable": {
-    "matches": ["*://*.example.com/*"]
-  },
   "file_system_provider_capabilities": {
     "configurable": true,
     "multiple_mounts": true,
     "source": "network"
   },
-  "offline_enabled": true,
-  "permissions": ["webview", "browser", "http://www.youtube.com/*", "https://www.youtube.com/*"],
+  "offline_enabled": false,
+  "permissions": ["webview", "browser", "http://www.youtube.com/*",
+    "https://www.youtube.com/*", "https://fonts.googleapis.com/*",
+    "storage", "webRequest", "webRequestBlocking", "notifications"
+  ],
   "sandbox": {
     "pages": ["sandbox/sandbox.html"]
   },
@@ -38,14 +38,6 @@
     ]
   },
   "short_name": "Instant Music App",
-  "sockets": {
-    "tcp": {
-      "connect": "*"
-    },
-    "udp": {
-      "send": "*"
-    }
-  },
   "update_url": "http://path/to/updateInfo.xml",
   "version_name": "Beta"
 }

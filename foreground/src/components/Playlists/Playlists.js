@@ -1,5 +1,7 @@
 import React from "react";
 
+require("./sidebar-playlists.css");
+
 class Playlists extends React.Component {
   constructor(props) {
     super(props);
@@ -34,11 +36,9 @@ class Playlists extends React.Component {
         <li className={className}
           url={playlist.url}
           key={idx}
+          onClick={this.props.actions.updateCurrentPlaylist.bind(this, playlist)}
         >
-          <a href='#'
-            onClick={this.props.actions.updateCurrentPlaylist.bind(this, playlist)}>
-            {playlist.playlistName}
-          </a>
+          <i className="fa fa-music"></i> {playlist.playlistName}
         </li>
       );
     }, this);
@@ -56,30 +56,33 @@ class Playlists extends React.Component {
 
     return (
       <div className="playlists">
-        <div className="playlists__playlist-label">Playlists</div>
-
         <ul>
           <li>
-            Melon
-            <ul>
+            <div className="playlist-label">
+              <i className="fa fa-fw fa-folder"></i> YOUR MUSIC
+            </div>
+            <ul className="chart-songs">
+              {localPlaylists}
+            </ul>
+          </li>
+
+          <li>
+            <div className="playlist-label">
+              <i className="fa fa-fw fa-folder-open"></i> MELON
+            </div>
+            <ul className="chart-songs">
               {melonPlaylists}
             </ul>
           </li>
 
           <li>
-            iTunes
-            <ul>
+            <div className="playlist-label">
+              <i className="fa fa-fw fa-folder"></i> ITUNES
+            </div>
+            <ul className="chart-songs">
               {itunesPlaylists}
             </ul>
           </li>
-
-          <li>
-            Local
-            <ul>
-              {localPlaylists}
-            </ul>
-          </li>
-
         </ul>
       </div>
     );

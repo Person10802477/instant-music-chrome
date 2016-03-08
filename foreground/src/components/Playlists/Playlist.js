@@ -8,9 +8,7 @@ class Playlist extends React.Component {
     super(props);
   }
 
-
   componentWillReceiveProps(nextProps) {
-
   }
 
   // FIXME: how do I make it re-render everytime currentSong is updated?
@@ -35,8 +33,21 @@ class Playlist extends React.Component {
     }
 
     return (
-      <div className="songs">
-        {songItems}
+      <div className="playlist-songs table-responsive">
+        <table className="table table-songs table-condensed">
+          <thead>
+            <tr>
+              <th className="song-rank">RANK</th>
+              <th className="song-title">SONG</th>
+              <th className="song-artist">ARTIST</th>
+              <th className="song-save">SAVE</th>
+              <th className="song-share">SHARE</th>
+            </tr>
+          </thead>
+          <tbody id="songitems">
+            {songItems}
+          </tbody>
+        </table>
       </div>
     );
   }

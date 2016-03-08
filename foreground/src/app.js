@@ -25,6 +25,8 @@ if (process.env.NODE_ENV === 'development') {
   require('../main.html')
 }
 
+require('./app.css')
+
 class App extends React.Component {
   render() {
     return (

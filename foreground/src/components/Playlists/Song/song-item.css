@@ -1,14 +1,29 @@
-.song-item {
-  padding: 10px;
+tr.song-item {
+  padding: 20px 10px;  
+}
+
+.song-item .song-rank-cell {
+  padding-left: 20px;
 }
 
 .song-item:hover {
-  padding: 10px;
   cursor: pointer;
-  font-weight: bold;
 }
 
-.song-item.active {
-  font-weight: bold;
-  color: red;
+table.table-songs thead th {
+  padding: 8px 10px;
+  border: 0;
+}
+
+table.table-songs tr.song-item td {
+  border-top: 1px solid #444D60;
+  padding: 10px;
+}
+
+table.table-songs tr.song-item.active td {
+  background: #0E1521;
+}
+
+table.table-songs {
+  border-bottom: 1px solid #444D60;
 }
