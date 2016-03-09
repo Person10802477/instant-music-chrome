@@ -14,8 +14,8 @@ class SongItem extends React.Component {
         onClick={this.props.updateCurrentSong.bind(this, this.props.song)}
       >
         <td className="song-rank-cell">{rank}</td>
-        <td className="truncate">{title}</td>
-        <td className="truncate">{artist}</td>
+        <td className="song-title-cell truncate">{title}</td>
+        <td className="song-artist-cell truncate">{artist}</td>
         <td className="text-center"><i className="fa fa-heart-o fa-fw"></i></td>
         <td className="text-center"><i className="fa fa-share-alt fa-fw"></i></td>
       </tr>

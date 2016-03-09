@@ -1,5 +1,4 @@
 {
-  // Required
   "app": {
     "background": {
       "scripts": ["background/background.js"]
@@ -9,12 +8,11 @@
   "name": "Instant Music",
   "version": "0.1",
   "default_locale": "en",
-
-  // Recommended
   "description": "Instant Music",
-  "icons": { "16": "assets/calculator-16.png", "128": "assets/calculator-128.png" },
-
-  // Optional
+  "icons": {
+    "16": "assets/calculator-16.png",
+    "128": "assets/calculator-128.png"
+  },
   "author": "Howon",
   "file_system_provider_capabilities": {
     "configurable": true,
@@ -24,20 +22,17 @@
   "offline_enabled": false,
   "permissions": ["webview", "browser", "http://www.youtube.com/*",
     "https://www.youtube.com/*", "https://fonts.googleapis.com/*",
-    "storage", "webRequest", "webRequestBlocking", "notifications"
+    "storage", "notifications"
   ],
   "sandbox": {
     "pages": ["sandbox/sandbox.html"]
   },
   "webview": {
-    "partitions": [
-      {
-        "name": "static",
-        "accessible_resources": ["sandbox/sandbox.html", "sandbox/sandbox.js", "sandbox/sandbox.css"]
-      }
-    ]
+    "partitions": [{
+      "name": "static",
+      "accessible_resources": ["sandbox/sandbox.html", "sandbox/sandbox.js", "sandbox/sandbox.css"]
+    }]
   },
   "short_name": "Instant Music App",
-  "update_url": "http://path/to/updateInfo.xml",
   "version_name": "Beta"
 }

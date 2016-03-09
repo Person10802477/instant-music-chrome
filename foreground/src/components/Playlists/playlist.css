@@ -5,7 +5,11 @@
   padding-bottom: 20px;
 }
 
-.playlist-songs .table-songs {
+.playlist-songs:hover {
+  cursor: pointer;
+}
+
+.playlist-songs table.table-songs {
   font-size: 14px;
   color: white;
 }
@@ -21,10 +25,12 @@
 
 .playlist-songs .song-title {
   width: 65%;
+  max-width: 65%;
 }
 
 .playlist-songs .song-artist {
   width: 26%;
+  max-width: 26%;
 }
 
 .playlist-songs .song-save,

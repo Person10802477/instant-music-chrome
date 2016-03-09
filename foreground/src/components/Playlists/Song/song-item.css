@@ -4,10 +4,7 @@ tr.song-item {
 
 .song-item .song-rank-cell {
   padding-left: 20px;
-}
-
-.song-item:hover {
-  cursor: pointer;
+  width: 50px;
 }
 
 table.table-songs thead th {
@@ -26,4 +23,18 @@ table.table-songs tr.song-item.active td {
 
 table.table-songs {
   border-bottom: 1px solid #444D60;
+}
+
+.playlist-songs .song-rank {
+  width: 5%;
+}
+
+.playlist-songs .song-title {
+  width: 65%;
+  max-width: 65%;
+}
+
+.playlist-songs .song-artist {
+  width: 26%;
+  max-width: 26%;
 }
