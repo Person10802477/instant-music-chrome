@@ -11,16 +11,9 @@
   background-color: #243761;
 }
 
-.search-result-item .result-thumbnail {
-  width: 54px;
-  height: 40px;
-  float: left;
-  padding: 0 2px;
-}
-
 .search-result-item .result-title,
 .search-result-item .result-description {
-  width: 170px;
+  width: 220px;
   padding: 4px 5px 5px 5px;
 }
 

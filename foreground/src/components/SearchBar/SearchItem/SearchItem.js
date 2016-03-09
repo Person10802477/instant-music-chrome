@@ -19,9 +19,6 @@ class SearchItem extends React.Component {
       <div className={itemClass}
         onClick={this.props.onSave.bind(this, this.props.result)}
       >
-        <div className="result-thumbnail">
-          <img src={thumbnail} />
-        </div>
         <div className="result-title truncate">
           {title}
         </div>
