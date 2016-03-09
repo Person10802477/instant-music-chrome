@@ -1,4 +1,5 @@
 import React from "react";
+window.classNames = require('classnames');
 
 // containers
 import HeaderContainer from "../../containers/HeaderContainer/HeaderContainer";

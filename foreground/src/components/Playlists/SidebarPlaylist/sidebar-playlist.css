@@ -1,0 +1,41 @@
+.playlists ul {
+  padding-left: 5px;
+}
+
+.playlists .sidebar-playlist {
+  cursor: pointer;
+  list-style: none;
+  padding: 5px;
+}
+
+.playlists .sidebar-playlist .playlist-label {
+  letter-spacing: 1px;
+}
+
+.playlists .sidebar-playlist-item i {
+  margin: 0 6px;
+}
+
+.playlists .sidebar-playlist ul.chart-songs {
+  display: none;
+}
+
+.playlists .sidebar-playlist.expanded ul.chart-songs {
+  display: block;
+}
+
+.playlists .sidebar-playlist .chart-songs .sidebar-playlist-item {
+  color: #ccc;
+  cursor: pointer;
+  list-style: none;
+  padding: 5px 0;
+}
+
+.playlists .sidebar-playlist .chart-songs .sidebar-playlist-item:hover {
+  color: white;
+}
+
+.playlists .sidebar-playlist .chart-songs .sidebar-playlist-item.active {
+  color: white;
+  font-weight: bold;
+}

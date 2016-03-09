@@ -1,13 +1,23 @@
 import React from "react";
-
-require("./sidebar-playlists.css");
+import SidebarPlaylist from "./SidebarPlaylist/SidebarPlaylist";
 
 class Playlists extends React.Component {
   constructor(props) {
     super(props);
 
+    // indices of playlists that are expanded in sidebar
+    this.state = {
+      expandedPlaylists: {
+        melon: false,
+        itunes: false,
+        local: false
+      }
+    };
+
     this.makeSidebarPlaylists = this.makeSidebarPlaylists.bind(this);
     this.isSamePlaylist = this.isSamePlaylist.bind(this);
+    this.onClickHandler = this.onClickHandler.bind(this);
+    this.onUpdateCurrentPlaylist = this.onUpdateCurrentPlaylist.bind(this);
   }
 
   componentWillMount() {
@@ -27,20 +37,28 @@ class Playlists extends React.Component {
     );
   }
 
-  makeSidebarPlaylists(playlists, source, currentPlaylist) {
-    return playlists[source].map(function(playlist, idx) {
-      var className = (this.isSamePlaylist(playlist, currentPlaylist) ?
-        'sidebar-playlist-item active' : 'sidebar-playlist-item');
+  onClickHandler(source, event) {
+    var expandedPlaylists = Object.assign({}, this.state.expandedPlaylists);
+    expandedPlaylists[source] = !expandedPlaylists[source];
+    this.setState({ expandedPlaylists: expandedPlaylists });
+  }
 
+  onUpdateCurrentPlaylist(playlist, event) {
+    this.props.actions.updateCurrentPlaylist(playlist);
+    event.stopPropagation();
+  }
+
+  makeSidebarPlaylists(playlists, source) {
+    return playlists[source].map(function(playlist, idx) {
       return (
-        <li className={className}
+        <li className="sidebar-playlist-item"
           url={playlist.url}
           key={idx}
-          onClick={this.props.actions.updateCurrentPlaylist.bind(this, playlist)}
+          onClick={this.onUpdateCurrentPlaylist.bind(this, playlist)}
         >
           <i className="fa fa-music"></i> {playlist.playlistName}
         </li>
-      );
+      );  
     }, this);
   }
 
@@ -50,39 +68,31 @@ class Playlists extends React.Component {
       return (<div>Loading...</div>)
     }
 
-    var melonPlaylists = this.makeSidebarPlaylists(playlists, 'melon', this.props.currentPlaylist);
-    var itunesPlaylists = this.makeSidebarPlaylists(playlists, 'itunes', this.props.currentPlaylist);
-    var localPlaylists = this.makeSidebarPlaylists(playlists, 'local', this.props.currentPlaylist);
+    var melonPlaylists = this.makeSidebarPlaylists(playlists, 'melon');
+    var itunesPlaylists = this.makeSidebarPlaylists(playlists, 'itunes');
+    var localPlaylists = this.makeSidebarPlaylists(playlists, 'local');
 
     return (
       <div className="playlists">
         <ul>
-          <li>
-            <div className="playlist-label">
-              <i className="fa fa-fw fa-folder"></i> YOUR MUSIC
-            </div>
-            <ul className="chart-songs">
-              {localPlaylists}
-            </ul>
-          </li>
-
-          <li>
-            <div className="playlist-label">
-              <i className="fa fa-fw fa-folder-open"></i> MELON
-            </div>
-            <ul className="chart-songs">
-              {melonPlaylists}
-            </ul>
-          </li>
-
-          <li>
-            <div className="playlist-label">
-              <i className="fa fa-fw fa-folder"></i> ITUNES
-            </div>
-            <ul className="chart-songs">
-              {itunesPlaylists}
-            </ul>
-          </li>
+          <SidebarPlaylist
+            source="local"
+            playlists={localPlaylists}
+            onClickHandler={this.onClickHandler}
+            isExpanded={this.state.expandedPlaylists["local"]}
+          />
+          <SidebarPlaylist
+            source="melon"
+            playlists={melonPlaylists}
+            onClickHandler={this.onClickHandler}
+            isExpanded={this.state.expandedPlaylists["melon"]}
+          />
+          <SidebarPlaylist
+            source="itunes"
+            playlists={itunesPlaylists}
+            onClickHandler={this.onClickHandler}
+            isExpanded={this.state.expandedPlaylists["itunes"]}
+          />
         </ul>
       </div>
     );
@@ -90,18 +100,3 @@ class Playlists extends React.Component {
 }
 
 export default Playlists;
-
-/*
-CurrentPlaylist:
-Playlists:
-  Melon:
-    Melon/playlist1
-    Melon/playlist2
-  ITunes:
-    ITUNES/playlist1
-    ITUNES/playlist2
-  Mine:
-    MINE/Playlist1
-    playlist2
-    playlist3 ...
-*/
