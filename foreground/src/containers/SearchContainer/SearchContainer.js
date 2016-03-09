@@ -6,10 +6,12 @@ import { connect } from 'react-redux';
 import * as SearchActions from './SearchActions';
 import { addSongToPlaylist } from '../PlaylistContainer/PlaylistActions';
 import SearchBar from '../../components/SearchBar/SearchBar';
+import { CONSTANTS } from './constants';
 
 const mapStateToProps = (state) => {
   return {
-    searchResults: state.searchResults
+    searchResults: state.searchResults,
+    maxResults: CONSTANTS.MAX_SEARCH_RESULTS
   };
 }
 
