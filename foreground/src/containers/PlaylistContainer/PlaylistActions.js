@@ -46,16 +46,22 @@ function requestPlaylist(playlist) {
 function extractSongsFromJson(source, json) {
   switch (source) {
     case CONSTANTS.MELON_SOURCE:
-      return json.melon.songs.song.map((song) =>
+      return json.melon.songs.song.map((song, idx) =>
         ({
           title: song.songName,
           artist: song.artists.artist[0].artistName,
-          rank: song.currentRank,
+          rank: song.currentRank || idx+1,
         })
       );
     case CONSTANTS.ITUNES_SOURCE:
-      debugger
-      return [];
+      return json.feed.entry.map((song, idx) =>
+        ({
+          title: song['im:name']['label'],
+          artist: song['im:artist']['label'],
+          rank: idx+1,
+        })
+      );
+    // FIXME: case for local playlists
     default:
       return [];
   }
@@ -104,6 +110,7 @@ export function fetchPlaylist(playlist) {
     // NOTE: We dispatch this action just to start the loading wheel
     dispatch(requestPlaylist(playlist));
 
+    
     return fetch(playlist.url)
       .then(response => response.json())
       .then(json => {
