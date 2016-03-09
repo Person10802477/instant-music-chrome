@@ -1,8 +1,8 @@
 import React from "react";
 
-require("./sidebar-playlist.css");
+require("./sidebar-playlists.css");
 
-class SidebarPlaylist extends React.Component {
+class SidebarPlaylists extends React.Component {
   constructor(props) {
     super(props);
 
@@ -49,6 +49,6 @@ class SidebarPlaylist extends React.Component {
   }
 }
 
-export default SidebarPlaylist;
+export default SidebarPlaylists;
 
 

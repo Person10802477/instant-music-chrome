@@ -1,11 +1,12 @@
 import React from "react";
-import SidebarPlaylist from "./SidebarPlaylist/SidebarPlaylist";
+import SidebarPlaylists from "./SidebarPlaylists/SidebarPlaylists";
+import SidebarPlaylistItem from "./SidebarPlaylistItem/SidebarPlaylistItem";
 
 class Playlists extends React.Component {
   constructor(props) {
     super(props);
 
-    // indices of playlists that are expanded in sidebar
+    // Playlists that are expanded in sidebar
     this.state = {
       expandedPlaylists: {
         melon: false,
@@ -14,7 +15,7 @@ class Playlists extends React.Component {
       }
     };
 
-    this.makeSidebarPlaylists = this.makeSidebarPlaylists.bind(this);
+    this.makePlaylists = this.makePlaylists.bind(this);
     this.isSamePlaylist = this.isSamePlaylist.bind(this);
     this.onClickHandler = this.onClickHandler.bind(this);
     this.onUpdateCurrentPlaylist = this.onUpdateCurrentPlaylist.bind(this);
@@ -48,16 +49,14 @@ class Playlists extends React.Component {
     event.stopPropagation();
   }
 
-  makeSidebarPlaylists(playlists, source) {
+  makePlaylists(playlists, source, currentPlaylist) {
     return playlists[source].map(function(playlist, idx) {
       return (
-        <li className="sidebar-playlist-item"
-          url={playlist.url}
-          key={idx}
-          onClick={this.onUpdateCurrentPlaylist.bind(this, playlist)}
-        >
-          <i className="fa fa-music"></i> {playlist.playlistName}
-        </li>
+        <SidebarPlaylistItem key={idx}
+          onClickHandler={this.onUpdateCurrentPlaylist}
+          playlist={playlist}
+          isActive={currentPlaylist.url === playlist.url}
+        />
       );  
     }, this);
   }
@@ -68,26 +67,26 @@ class Playlists extends React.Component {
       return (<div>Loading...</div>)
     }
 
-    var melonPlaylists = this.makeSidebarPlaylists(playlists, 'melon');
-    var itunesPlaylists = this.makeSidebarPlaylists(playlists, 'itunes');
-    var localPlaylists = this.makeSidebarPlaylists(playlists, 'local');
+    var melonPlaylists = this.makePlaylists(playlists, 'melon', this.props.currentPlaylist);
+    var itunesPlaylists = this.makePlaylists(playlists, 'itunes', this.props.currentPlaylist);
+    var localPlaylists = this.makePlaylists(playlists, 'local', this.props.currentPlaylist);
 
     return (
       <div className="playlists">
         <ul>
-          <SidebarPlaylist
+          <SidebarPlaylists
             source="local"
             playlists={localPlaylists}
             onClickHandler={this.onClickHandler}
             isExpanded={this.state.expandedPlaylists["local"]}
           />
-          <SidebarPlaylist
+          <SidebarPlaylists
             source="melon"
             playlists={melonPlaylists}
             onClickHandler={this.onClickHandler}
             isExpanded={this.state.expandedPlaylists["melon"]}
           />
-          <SidebarPlaylist
+          <SidebarPlaylists
             source="itunes"
             playlists={itunesPlaylists}
             onClickHandler={this.onClickHandler}
