@@ -23,6 +23,10 @@ class SearchBar extends React.Component {
     var query = this.state.searchInputQuery;
     this.props.actions.fetchSearchResults(query);
     event.preventDefault();
+
+    // clear the search input as soon as the data
+    // are retrieved
+    this.refs.searchInput.value = "";
   }
 
   onInputChange(event) {
