@@ -55,7 +55,6 @@ class SandboxMessenger {
         console.log("paused");
         break;
       default:
-        debugger
         // pass
         break;
     }
