@@ -16,8 +16,6 @@ export function updateCurrentSong(song) {
   }
 }
 
-// FIXME: call this in appropriate places
-// Call this when the user chooses a song from the playlist
 export function updateCurrentSongAndPlayIt(song) {
   return (dispatch) => {
     if (chrome.runtime.id) {
@@ -139,10 +137,9 @@ function getChromeSongs(playlistName, callback) {
 
 export function fetchPlaylist(playlist) {
   return function (dispatch) {
-    // NOTE: We dispatch this action just to start the loading wheel
     dispatch(requestPlaylist(playlist));
 
-    if (playlist.source === CONSTANTS.LOCAL_SOURCE) {
+    if (playlist.source === CONSTANTS.LOCAL_SOURCE && chrome.runtime.id) {
       getChromeSongs(playlist.playlistName, function(songs) {
         dispatch(receivePlaylist(playlist, songs));
       });
@@ -167,7 +164,9 @@ function isUnique(songs, song) {
   return !_.find(songs, (s) => s.videoId === song.videoId);
 }
 
-function addToChromeStorage(playlistName, songs, song) {
+function addToChromeStorage(playlist, songs, song, dispatch) {
+  var playlistName = playlist.playlistName;
+
   if (isUnique(songs, song)) {
     var songsUpdated = [...songs, song];
     var obj = {};
@@ -177,49 +176,40 @@ function addToChromeStorage(playlistName, songs, song) {
         console.log("saving failed!", err)
       } else {
         console.log("successfully added");
+        dispatch(updateLocalPlaylistAndReceiveIfNecessary(playlist, songsUpdated));
       }
     });
   }
 }
 
-function initChromeStorage(playlistName, song) {
+function initChromeStorage(playlist, song, dispatch) {
+  var playlistName = playlist.playlistName;
   var obj = {};
+
   obj[playlistName] = [song];
   chrome.storage.sync.set(obj, function(err) {
     if (err) {
       console.log("saving failed!", err)
     } else {
       console.log("successfully added");
+      dispatch(updateLocalPlaylistAndReceiveIfNecessary(playlist, songsUpdated));
     }
   });
-}
-
-function saveOnChrome(playlistName, song) {
-  getChromeSongs(playlistName, function(songs) {
-    if (_.isEmpty(songs)) {
-      initChromeStorage(playlistName, song);
-    } else {
-      addToChromeStorage(playlistName, songs, song);
-    }
-  });
-}
-
-function addSongToLocalPlaylist(playlist, song) {
-  return {
-    type: CONSTANTS.ADD_SONG_TO_LOCAL_PLAYLIST,
-    playlist,
-    song
-  }
 }
 
 export function addSongToLocalPlaylistAndChrome(playlist, song) {
   return (dispatch, getState) => {
     if (chrome.runtime.id) {
-      saveOnChrome(playlist.playlistName, song);  
+      getChromeSongs(playlist.playlistName, function(songs) {
+        if (_.isEmpty(songs)) {
+          initChromeStorage(playlist, song, dispatch);
+        } else {
+          addToChromeStorage(playlist, songs, song, dispatch);
+        }
+      });
     }
 
-    // FIXME: dispatch a notification here too
-    dispatch(addSongToPlaylist(playlist, song))
+    // FIXME: DISPATCH A NOTIFICAITON HERE?
   }
 }
 
@@ -253,14 +243,28 @@ export function playPrevSong() {
   }
 }
 
-// videoId, title, description, thumbnail
-// FIXME: I also need to add this song to local 'favorites' playlist
-// FIXME: on add song, clear the search results
-// it's more like addSongToCurrentPlaylist
-export function addSongToPlaylist(playlist, song) {
+function updateLocalPlaylist(playlist, songs) {
+  const updatedPlaylist = Object.assign({}, playlist,
+    { songs: songs, isFetching: false, receivedAt: Date.now() }
+  );
+
   return {
-    type: CONSTANTS.ADD_SONG_TO_PLAYLIST,
-    playlist,
-    song,
+    type: CONSTANTS.UPDATE_LOCAL_PLAYLIST,
+    playlist: updatedPlaylist
+  }
+}
+
+export function updateLocalPlaylistAndReceiveIfNecessary(playlist, songs) {
+  return (dispatch, getState) => {
+    var currentPlaylist = getState().currentPlaylist;
+
+    dispatch(updateLocalPlaylist(playlist, songs));
+
+    // If we are looking at the playlist that the song was just added to,
+    // we have to receive the new information
+    if (currentPlaylist.source === playlist.source &&
+      currentPlaylist.playlistName === playlist.playlistName) {
+      dispatch(receivePlaylist(playlist, songs));
+    }
   }
 }

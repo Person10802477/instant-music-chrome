@@ -7,19 +7,7 @@ function currentPlaylist(state = PLAYLIST_DATA['melon'][0], action) {
       return action.playlist || PLAYLIST_DATA['melon'][0];
     case CONSTANTS.RECEIVE_PLAYLIST:
       return action.playlist
-    case CONSTANTS.ADD_SONG_TO_PLAYLIST:
-
-      // If we just added a song to local storage,
-      // and the current playlist is tied to the same storage,
-      // update it with the new song.
-      if (action.playlist.source === state.source &&
-        action.playlist.playlistName === state.playlistName) {
-        var playlistUpdated = Object.assign({}, state);
-        playlistUpdated.songs.push(action.song);
-        return playlistUpdated;
-      } else {
-        return state;  
-      }
+      break;
     default:
       return state;
   }
@@ -36,6 +24,7 @@ function transformedPlaylist(state=[], action) {
         isFetching: true
       });
     case CONSTANTS.RECEIVE_PLAYLIST:
+    case CONSTANTS.UPDATE_LOCAL_PLAYLIST:
       return Object.assign({}, oldPlaylist, action.playlist, {
         isFetching: false,
       });
@@ -62,6 +51,7 @@ function playlistsBySource(state = PLAYLIST_DATA, action) {
     case CONSTANTS.INVALIDATE_SUBREDDIT:
     case CONSTANTS.REQUEST_PLAYLIST:
     case CONSTANTS.RECEIVE_PLAYLIST:
+    case CONSTANTS.UPDATE_LOCAL_PLAYLIST:
       var playlistUpdated = transformedPlaylist(state[action.playlist.source], action);
       return updatedPlaylists(playlistUpdated, state);
     default:

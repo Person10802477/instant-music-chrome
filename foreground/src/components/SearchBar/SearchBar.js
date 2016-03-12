@@ -38,7 +38,7 @@ class SearchBar extends React.Component {
 
   onInputClear() {
     this.refs.searchInput.value = "";
-    this.setState({ searchInputQuery: "" });
+    this.setState({ searchInputQuery: "", selectedIdx: 0 });
     this.props.actions.clearSearchResults();
   }
 
