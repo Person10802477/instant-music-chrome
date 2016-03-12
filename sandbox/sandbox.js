@@ -3,6 +3,7 @@ var APP_ID = chrome.runtime.id;
 var CONSTANTS = {
   LOAD_VIDEO: 'LOAD_VIDEO',
   PAUSE_VIDEO: 'PAUSE_VIEO',
+  ERROR_CODE: 6
 };
 
 var messageHandler = function(rawMsg) {
@@ -33,7 +34,8 @@ var registerYouTubeEvents = function() {
       origin: "chrome-extension://" + chrome.runtime.id,
       events: {
         'onReady': onPlayerReady,
-        'onStateChange': onPlayerStateChange
+        'onStateChange': onPlayerStateChange,
+        'onError': onPlayerError
       },
       autohide: 0 // how come this potion doesn't work?
     });
@@ -45,6 +47,10 @@ var registerYouTubeEvents = function() {
 
   window.onPlayerStateChange = function(event) {
     chrome.runtime.sendMessage(APP_ID, event);
+  }
+
+  window.onPlayerError = function(event) {
+    chrome.runtime.sendMessage(APP_ID, {data: CONSTANTS.ERROR_CODE});
   }
 }
 

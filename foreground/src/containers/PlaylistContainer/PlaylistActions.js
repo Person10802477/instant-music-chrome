@@ -21,7 +21,7 @@ export function updateCurrentSong(song) {
 // Call this when the user chooses a song from the playlist
 export function updateCurrentSongAndPlayIt(song) {
   return (dispatch) => {
-    window.app.sandboxMessenger.sendMsg({
+    window.app.sandboxMessenger.sendMessage({
       type: CONSTANTS.LOAD_VIDEO,
       videoId: song.videoId
     });
@@ -67,8 +67,6 @@ function extractSongsFromJson(source, json) {
 }
 
 function receivePlaylist(playlist, songs) {
-  debugger
-
   const updatedPlaylist = Object.assign({}, playlist,
     { songs: songs, isFetching: false, receivedAt: Date.now() }
   );
@@ -87,8 +85,6 @@ function getTargetPlaylist(state, playlist) {
 }
 
 function areSongsEqual(songs1, songs2) {
-  debugger
-
   if (!songs1 || !songs2 || (songs1.length !== songs2.length)) {
     return false;
   }
@@ -137,7 +133,6 @@ export function fetchPlaylist(playlist) {
 
     if (playlist.source === CONSTANTS.LOCAL_SOURCE) {
       getChromeSongs(playlist.playlistName, function(songs) {
-        debugger
         dispatch(receivePlaylist(playlist, songs));
       });
     } else {

@@ -8,7 +8,7 @@ var messageHandler = function(msg) {
   console.log(msg);
 }
 
-var sendMsg = function(webview, msg) {
+var sendMessage = function(webview, msg) {
   webview.contentWindow.postMessage(msg, "*");
 };
 
@@ -46,15 +46,10 @@ var setHttpReferer = function(webview) {
   }, filter, optParam);
 }
 
+
+
 $(function() {
   window.webview = $("#youtube-webview")[0];
   resizeWebview(webview);
   setHttpReferer(webview);
-
-  // check develoment environment
-  if (chrome.runtime.id) {
-    chrome.runtime.onMessage.addListener(function(msg) {
-      console.log(msg);
-    });
-  }
 });
