@@ -37,6 +37,7 @@ class MainArea extends React.Component {
 
   render() {
     var songs = this.props.currentPlaylist.songs || [];
+    var savedSongs = this.props.localPlaylist.songs;
 
     return (
       <div className="main-area">
@@ -44,6 +45,8 @@ class MainArea extends React.Component {
           updateCurrentSong={this.props.actions.updateCurrentSongAndPlayIt}
           songs={songs}
           currentSong={this.props.currentSong}
+          localPlaylist={this.props.localPlaylist}
+          addSongToLocalPlaylistAndChrome={this.props.actions.addSongToLocalPlaylistAndChrome}
         />
       </div>
     );

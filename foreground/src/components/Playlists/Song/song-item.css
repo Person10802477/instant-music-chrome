@@ -21,3 +21,15 @@ table.table-songs tr.song-item td {
 table.table-songs tr.song-item.active td {
   background: #0E1521;
 }
+
+.song-item td.song-saved {
+  display: none;
+}
+
+.song-item.is-saved td.song-saved {
+  display: block;
+}
+
+.song-item.is-saved td.song-not-saved {
+  display: none;
+}

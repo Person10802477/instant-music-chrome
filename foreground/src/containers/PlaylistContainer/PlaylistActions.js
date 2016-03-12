@@ -268,3 +268,10 @@ export function updateLocalPlaylistAndReceiveIfNecessary(playlist, songs) {
     }
   }
 }
+
+export function loadLocalPlaylist() {
+  return (dispatch) => {
+    var favoritesPlaylist = PLAYLIST_DATA.local[0];
+    dispatch(fetchPlaylist(favoritesPlaylist));
+  }
+}

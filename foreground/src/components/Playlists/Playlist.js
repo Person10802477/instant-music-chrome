@@ -6,14 +6,33 @@ require("./playlist.css");
 class Playlist extends React.Component {
   constructor(props) {
     super(props);
+
+    this.makeSongItems = this.makeSongItems.bind(this);
+    this.onSaveSongHandler = this.onSaveSongHandler.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    // debugger
+  onSaveSongHandler(song) {
+    this.props.addSongToLocalPlaylistAndChrome(this.props.localPlaylist, song);
+  }
+
+  makeSongItems(songs, savedSongs, currentVideoId) {
+    return (
+      songs.map((song) =>
+        <SongItem
+          song={song}
+          key={song.videoId}
+          updateCurrentSong={this.props.updateCurrentSong}
+          isCurrentSong={song.videoId === currentVideoId}
+          isSaved={!!(_.find(savedSongs, (s) => s.videoId === song.videoId))}
+          onSaveSong={this.onSaveSongHandler}
+        />
+      )
+    )
   }
 
   render() {
     var songItems;
+    var savedSongs = this.props.localPlaylist.songs;
     var currentVideoId = (this.props.currentSong ? this.props.currentSong.videoId : '')
     var playlistClass = classNames({
       "playlist-songs": true,
@@ -21,17 +40,7 @@ class Playlist extends React.Component {
     });
 
     if (!_.isEmpty(this.props.songs)) {
-      songItems = (
-        this.props.songs.map((song) =>
-          <SongItem
-            song={song}
-            key={song.videoId}
-            updateCurrentSong={this.props.updateCurrentSong}
-            // FIXME: what if the user adds two identical songs to playlist?
-            isCurrentSong={song.videoId === currentVideoId}
-          />
-        )
-      )
+      songItems = this.makeSongItems(this.props.songs, savedSongs, currentVideoId);
     }
 
     return (
