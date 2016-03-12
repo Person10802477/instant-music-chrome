@@ -15,8 +15,12 @@ class Playlist extends React.Component {
   render() {
     var songItems;
     var currentVideoId = (this.props.currentSong ? this.props.currentSong.videoId : '')
+    var playlistClass = classNames({
+      "playlist-songs": true,
+      "is-fetching": _.isEmpty(this.props.songs)
+    });
 
-    if (this.props.songs) {
+    if (!_.isEmpty(this.props.songs)) {
       songItems = (
         this.props.songs.map((song) =>
           <SongItem
@@ -28,12 +32,10 @@ class Playlist extends React.Component {
           />
         )
       )
-    } else {
-      songItems = <div>Loading...</div>
     }
 
     return (
-      <div className="playlist-songs">
+      <div className={playlistClass}>
         <table className="table table-songs table-condensed">
           <thead>
             <tr>
@@ -48,6 +50,9 @@ class Playlist extends React.Component {
             {songItems}
           </tbody>
         </table>
+        <div className="playlist-loading">
+          Loading...
+        </div>
       </div>
     );
   }

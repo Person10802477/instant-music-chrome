@@ -5,6 +5,15 @@
   padding-bottom: 20px;
 }
 
+.playlist-songs .playlist-loading {
+  display: none;
+  font-size: 30px;
+}
+
+.playlist-songs.is-fetching .playlist-loading {
+  display: block;
+}
+
 .playlist-songs table.table-songs {
   font-size: 14px;
   color: white;
