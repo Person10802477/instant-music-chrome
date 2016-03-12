@@ -2,8 +2,7 @@ var APP_ID = chrome.runtime.id;
 
 var CONSTANTS = {
   LOAD_VIDEO: 'LOAD_VIDEO',
-  TOGGLE_PLAYING: 'TOGGLE_PLAYING',
-  TOGGLE_PAUSED: 'TOGGLE_PAUSED',
+  TOGGLE_PLAY_PAUSE: 'TOGGLE_PLAY_PAUSE',
   ERROR_CODE: 6
 };
 
@@ -14,11 +13,13 @@ var messageHandler = function(rawMsg) {
     case CONSTANTS.LOAD_VIDEO:
       player.loadVideoById(msg.videoId);
       break;
-    case CONSTANTS.TOGGLE_PLAYING:
-      player.playVideo();
-      break;
-    case CONSTANTS.TOGGLE_PAUSED:
-      player.pauseVideo();
+    case CONSTANTS.TOGGLE_PLAY_PAUSE:
+      var playerState = player.getPlayerState();
+      if (playerState === YT.PlayerState.PLAYING) {
+        player.pauseVideo();
+      } else {
+        player.playVideo();
+      }
       break;
     default:
       break;

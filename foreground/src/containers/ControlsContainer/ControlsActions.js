@@ -1,37 +1,19 @@
 import { CONSTANTS } from './constants';
 
-export function togglePlaying() {
+// NOTE: this only changes the state of isPlaying without actually
+// telling the player to play/pause the song
+export function togglePlayingState() {
   return {
     type: CONSTANTS.TOGGLE_PLAYING
   }
 }
 
-export function togglePaused() {
-  return {
-    type: CONSTANTS.TOGGLE_PAUSED
-  }
-}
-
-export function playSong() {
+export function togglePlayPause() {
   return (dispatch) => {
-    if (chrome.runtime.id) {
-      window.app.sandboxMessenger.sendMessage({
-        type: CONSTANTS.TOGGLE_PLAYING
-      });
-    }
+    window.app.sandboxMessenger.sendMessage({
+      type: CONSTANTS.TOGGLE_PLAY_PAUSE
+    });
 
-    dispatch(togglePlaying());
-  }
-}
-
-export function pauseSong() {
-  return (dispatch) => {
-    if (chrome.runtime.id) {
-      window.app.sandboxMessenger.sendMessage({
-        type: CONSTANTS.TOGGLE_PAUSED
-      });
-    }
-
-    dispatch(togglePaused());
+    dispatch(togglePlayingState());
   }
 }

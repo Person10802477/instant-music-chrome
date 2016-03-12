@@ -1,17 +1,3 @@
-var playInSeries = function(webview, videoIds) {
-  var currentIdx = 0;
-  var videoUrl = "http://www.youtube.com/embed/" + videoIds[currentIdx] + "?enablejsapi=1&autoplay=1";
-  webview.src = videoUrl;
-}
-
-var messageHandler = function(msg) {
-  console.log(msg);
-}
-
-var sendMessage = function(webview, msg) {
-  webview.contentWindow.postMessage(msg, "*");
-};
-
 var resizeWebview = function(webview) {
   webview.style.width = "300px";
   webview.style.height = "200px";
@@ -45,8 +31,6 @@ var setHttpReferer = function(webview) {
 
   }, filter, optParam);
 }
-
-
 
 $(function() {
   window.webview = $("#youtube-webview")[0];

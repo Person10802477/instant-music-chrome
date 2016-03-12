@@ -32,10 +32,10 @@ class PlayerControls extends React.Component {
           onClick={this.props.actions.playPrevSong}
         ></i>
         <i className={playClass}
-          onClick={this.props.actions.playSong}
+          onClick={this.props.actions.togglePlayPause}
         ></i>
         <i className={pauseClass}
-          onClick={this.props.actions.pauseSong}
+          onClick={this.props.actions.togglePlayPause}
         ></i>
         <i className="fa fa-step-forward fa-fw"
           onClick={this.props.actions.playNextSong}

@@ -1,15 +1,6 @@
-import { updateCurrentSongAndPlayIt, playNextSong } from "../containers/PlaylistContainer/PlaylistActions";
-import { togglePlaying, togglePaused } from "../containers/ControlsContainer/ControlsActions";
-
-const PLAYER_STATES = {
-  UNSTARTED: -1,
-  ENDED: 0,
-  PLAYING: 1,
-  PAUSED: 2,
-  BUFFERING: 3,
-  VIDEO_CUED: 5,
-  ERROR: 6
-};
+import { updateCurrentSongAndPlayIt, playNextSong, playPrevSong } from "../containers/PlaylistContainer/PlaylistActions";
+import { togglePlayPause, togglePlayingState } from "../containers/ControlsContainer/ControlsActions";
+import { COMMANDS, PLAYER_STATES } from "./constants";
 
 class SandboxMessenger {
   constructor(store, webview) {
@@ -22,8 +13,12 @@ class SandboxMessenger {
 
     this.sendMessage = this.sendMessage.bind(this);
     this.messageHandler = this.messageHandler.bind(this);
+    this.commandHandler = this.commandHandler.bind(this);
 
-    chrome.runtime.onMessage.addListener(this.messageHandler);
+    if (chrome.runtime.id) {
+      chrome.runtime.onMessage.addListener(this.messageHandler);
+      chrome.commands.onCommand.addListener(this.commandHandler);
+    }
   }
 
   sendMessage(msg) {
@@ -37,17 +32,38 @@ class SandboxMessenger {
     switch (msg.data) {
       case PLAYER_STATES.ENDED:
       case PLAYER_STATES.ERROR:
-        this.store.dispatch(togglePaused());
         this.store.dispatch(playNextSong());
         break;
       case PLAYER_STATES.PLAYING:
-        this.store.dispatch(togglePlaying());
+        // Synchronize only when necessary
+        if (!this.store.getState().isPlaying) {
+          this.store.dispatch(togglePlayingState());
+        }
         break;
       case PLAYER_STATES.PAUSED:
-        this.store.dispatch(togglePaused());
+        // Synchronize only when necessary
+        if (this.store.getState().isPlaying) {
+          this.store.dispatch(togglePlayingState());
+        }
         break;
       default:
         // pass
+        break;
+    }
+  }
+
+  commandHandler(command) {
+    switch(command) {
+      case COMMANDS.TOGGLE_PLAY_PAUSE:
+        this.store.dispatch(togglePlayPause());
+        break;
+      case COMMANDS.PLAY_PREV_SONG:
+        this.store.dispatch(playPrevSong());
+        break;
+      case COMMANDS.PLAY_NEXT_SONG:
+        this.store.dispatch(playNextSong());
+        break;
+      default:
         break;
     }
   }

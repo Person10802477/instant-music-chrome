@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import {playNextSong, playPrevSong} from '../PlaylistContainer/PlaylistActions';
-import {playSong, pauseSong} from './ControlsActions';
+import {togglePlayPause} from './ControlsActions';
 import PlayerControls from '../../components/PlayerControls/PlayerControls';
 
 const mapStateToProps = (state) => {
@@ -14,8 +14,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   var actions = {
-    playSong,
-    pauseSong,
+    togglePlayPause,
     playNextSong,
     playPrevSong
   };

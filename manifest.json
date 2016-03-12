@@ -34,5 +34,25 @@
     }]
   },
   "short_name": "Instant Music App",
-  "version_name": "Beta"
+  "version_name": "Beta",
+  "commands": {
+    "TOGGLE_PLAY_PAUSE": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Down"
+      },
+      "description": "Toggle Play/Pause"
+    },
+    "PLAY_NEXT_SONG": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Right"
+      },
+      "description": "Play Next Song"
+    },
+    "PLAY_PREV_SONG": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Left"
+      },
+      "description": "Play Previous Song"
+    }
+  }
 }
