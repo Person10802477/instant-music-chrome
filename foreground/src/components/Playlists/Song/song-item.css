@@ -1,10 +1,6 @@
 tr.song-item {
-  padding: 20px 10px;  
-}
-
-.song-item .song-rank-cell {
-  padding-left: 20px;
-  width: 50px;
+  padding: 20px 10px;
+  box-sizing: border-box;
 }
 
 table.table-songs thead th {
@@ -25,16 +21,21 @@ table.table-songs {
   border-bottom: 1px solid #444D60;
 }
 
-.playlist-songs .song-rank {
+.playlist-songs .song-rank,
+.song-item .song-rank-cell {
+  padding-left: 20px;
   width: 5%;
+  box-sizing: border-box;
 }
 
-.playlist-songs .song-title {
+.playlist-songs .song-title,
+.song-item .song-title-cell {
   width: 65%;
   max-width: 65%;
 }
 
-.playlist-songs .song-artist {
+.playlist-songs .song-artist,
+.song-item .song-artist-cell {
   width: 26%;
   max-width: 26%;
 }
