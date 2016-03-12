@@ -38,7 +38,6 @@ function transformedPlaylist(state=[], action) {
     case CONSTANTS.RECEIVE_PLAYLIST:
       return Object.assign({}, oldPlaylist, action.playlist, {
         isFetching: false,
-        lastUpdated: action.receivedAt
       });
     default:
       return oldPlaylist

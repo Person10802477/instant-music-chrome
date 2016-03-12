@@ -99,6 +99,12 @@ function areSongsEqual(songs1, songs2) {
   return true;
 }
 
+function shouldInvalidate(receivedAt) {
+  var now = Date.now();
+  var hr = 1000 * 60 * 60;
+  return (now - receivedAt) > hr;
+}
+
 function shouldFetchPlaylist(state, nextPlaylist) {
   const currentPlaylist = getTargetPlaylist(state, nextPlaylist);
 
@@ -109,7 +115,7 @@ function shouldFetchPlaylist(state, nextPlaylist) {
   } else if (currentPlaylist.isFetching) {
     return false
   } else {
-    return currentPlaylist.didInvalidate;
+    shouldInvalidate(currentPlaylist.receivedAt)
   }
 }
 
