@@ -9,7 +9,6 @@ export function updateCurrentPlaylist(playlist) {
   }
 }
 
-// Call this when we automatically advance to the next video
 export function updateCurrentSong(song) {
   return {
     type: CONSTANTS.UPDATE_CURRENT_SONG,
@@ -21,10 +20,12 @@ export function updateCurrentSong(song) {
 // Call this when the user chooses a song from the playlist
 export function updateCurrentSongAndPlayIt(song) {
   return (dispatch) => {
-    window.app.sandboxMessenger.sendMessage({
-      type: CONSTANTS.LOAD_VIDEO,
-      videoId: song.videoId
-    });
+    if (chrome.runtime.id) {
+      window.app.sandboxMessenger.sendMessage({
+        type: CONSTANTS.LOAD_VIDEO,
+        videoId: song.videoId
+      });
+    }
 
     dispatch(updateCurrentSong(song));
   }
@@ -147,7 +148,7 @@ export function fetchPlaylist(playlist) {
             }
           );
         }
-      );      
+      );
     }
   }
 }
@@ -209,6 +210,36 @@ export function addSongToLocalPlaylistAndChrome(playlist, song) {
 
     // FIXME: dispatch a notification here too
     dispatch(addSongToPlaylist(playlist, song))
+  }
+}
+
+function getNextSong(currentSong, currentPlaylist) {
+  var idx = _.findIndex(currentPlaylist.songs, (song) =>
+    (song.videoId === currentSong.videoId));
+  var nextIdx = (idx === currentPlaylist.songs.length-1) ? 0 : idx+1;
+  return currentPlaylist.songs[nextIdx];
+}
+
+function getPrevSong(currentSong, currentPlaylist) {
+  var idx = _.findIndex(currentPlaylist.songs, (song) =>
+    (song.videoId === currentSong.videoId));
+  var prevIdx = (idx === 0) ? 0 : idx-1;
+  return currentPlaylist.songs[prevIdx];
+}
+
+export function playNextSong() {
+  return (dispatch, getState) => {
+    var state = getState();
+    var nextSong = getNextSong(state.currentSong, state.currentPlaylist);
+    dispatch(updateCurrentSongAndPlayIt(nextSong));
+  }
+}
+
+export function playPrevSong() {
+  return (dispatch, getState) => {
+    var state = getState();
+    var prevSong = getPrevSong(state.currentSong, state.currentPlaylist);
+    dispatch(updateCurrentSongAndPlayIt(prevSong));
   }
 }
 

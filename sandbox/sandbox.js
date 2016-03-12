@@ -2,7 +2,8 @@ var APP_ID = chrome.runtime.id;
 
 var CONSTANTS = {
   LOAD_VIDEO: 'LOAD_VIDEO',
-  PAUSE_VIDEO: 'PAUSE_VIEO',
+  TOGGLE_PLAYING: 'TOGGLE_PLAYING',
+  TOGGLE_PAUSED: 'TOGGLE_PAUSED',
   ERROR_CODE: 6
 };
 
@@ -13,8 +14,11 @@ var messageHandler = function(rawMsg) {
     case CONSTANTS.LOAD_VIDEO:
       player.loadVideoById(msg.videoId);
       break;
-    case CONSTANTS.PAUSE_VIDEO:
-      player.stopVideo();
+    case CONSTANTS.TOGGLE_PLAYING:
+      player.playVideo();
+      break;
+    case CONSTANTS.TOGGLE_PAUSED:
+      player.pauseVideo();
       break;
     default:
       break;
@@ -37,12 +41,12 @@ var registerYouTubeEvents = function() {
         'onStateChange': onPlayerStateChange,
         'onError': onPlayerError
       },
-      autohide: 0 // how come this potion doesn't work?
+      autohide: 0 // FIXME: how come this potion doesn't work?
     });
   }
 
   window.onPlayerReady = function(event) {
-    // event.target.playVideo();
+    console.log("YouTube Player is ready");
   }
 
   window.onPlayerStateChange = function(event) {

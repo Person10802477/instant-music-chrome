@@ -5,7 +5,7 @@ window.classNames = require('classnames');
 import HeaderContainer from "../../containers/HeaderContainer/HeaderContainer";
 import MainAreaContainer from "../../containers/MainAreaContainer/MainAreaContainer"
 import Sidebar from "../../components/Sidebar/Sidebar"
-import RightColumn from "../../containers/RightColumn/RightColumn"
+import RightColumn from "../../components/RightColumn/RightColumn"
 
 require('./app.css')
 
