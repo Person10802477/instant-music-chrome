@@ -3,6 +3,10 @@ tr.song-item {
   box-sizing: border-box;
 }
 
+tr.song-item:hover {
+  cursor: pointer;
+}
+
 table.table-songs thead th {
   padding: 8px 10px;
   border: 0;
