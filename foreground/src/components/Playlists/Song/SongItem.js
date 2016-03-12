@@ -7,11 +7,19 @@ class SongItem extends React.Component {
     super(props);
 
     this.onSaveClickHandler = this.onSaveClickHandler.bind(this);
+    this.onRemoveClickHandler = this.onRemoveClickHandler.bind(this);
   }
 
   onSaveClickHandler(event) {
     this.props.onSaveSong.call(this, this.props.song);
     event.stopPropagation();
+    event.preventDefault();
+  }
+
+  onRemoveClickHandler(event) {
+    this.props.onRemoveSong.call(this, this.props.song);
+    event.stopPropagation();
+    event.preventDefault();
   }
 
   render() {
@@ -34,7 +42,9 @@ class SongItem extends React.Component {
         <td className="song-not-saved text-center"
           onClick={this.onSaveClickHandler}
         ><i className="fa fa-heart-o fa-fw"></i></td>
-        <td className="song-saved text-center"><i className="fa fa-heart fa-fw"></i></td>
+        <td className="song-saved text-center"
+          onClick={this.onRemoveClickHandler}
+        ><i className="fa fa-heart fa-fw"></i></td>
         <td className="song-more-cell text-center"><i className="fa fa-share-alt fa-fw"></i></td>
       </tr>
     );

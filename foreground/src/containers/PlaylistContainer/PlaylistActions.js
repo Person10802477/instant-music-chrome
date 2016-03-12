@@ -84,17 +84,19 @@ function getTargetPlaylist(state, playlist) {
 }
 
 function areSongsEqual(songs1, songs2) {
+  var areSongsEqual = true;
+
   if (!songs1 || !songs2 || (songs1.length !== songs2.length)) {
     return false;
   }
 
   _.each(songs1, function(song, idx) {
     if (song.videoId !== songs2[idx].videoId) {
-      return false;
+      areSongsEqual = false;
     }
   });
 
-  return true;
+  return areSongsEqual;
 }
 
 function shouldInvalidate(receivedAt) {
@@ -213,6 +215,35 @@ export function addSongToLocalPlaylistAndChrome(playlist, song) {
   }
 }
 
+function removeFromChromeStorage(playlist, songs, song, dispatch) {
+  var playlistName = playlist.playlistName;
+  var songsUpdated = _.reject(songs, (s => s.videoId === song.videoId));
+  var obj = {};
+  obj[playlistName] = songsUpdated;
+
+  chrome.storage.sync.set(obj, function(err) {
+    if (err) {
+      console.log("removal failed!", err)
+    } else {
+      console.log("successfully removed");
+
+      dispatch(updateLocalPlaylistAndReceiveIfNecessary(playlist, songsUpdated));
+    }
+  });
+}
+
+export function removeSongFromLocalPlaylistAndChrome(playlist, song) {
+  return (dispatch, getState) => {
+    if (chrome.runtime.id) {
+      getChromeSongs(playlist.playlistName, function(songs) {
+        if (!_.isEmpty(songs)) {
+          removeFromChromeStorage(playlist, songs, song, dispatch);
+        }
+      });
+    }
+  }
+}
+
 function getNextSong(currentSong, currentPlaylist) {
   var idx = _.findIndex(currentPlaylist.songs, (song) =>
     (song.videoId === currentSong.videoId));
@@ -257,7 +288,6 @@ function updateLocalPlaylist(playlist, songs) {
 export function updateLocalPlaylistAndReceiveIfNecessary(playlist, songs) {
   return (dispatch, getState) => {
     var currentPlaylist = getState().currentPlaylist;
-
     dispatch(updateLocalPlaylist(playlist, songs));
 
     // If we are looking at the playlist that the song was just added to,

@@ -6,33 +6,18 @@ require("./main-area.css");
 class MainArea extends React.Component {
   constructor(props) {
     super(props);
-    this.areSongsEqual = this.areSongsEqual.bind(this);
   }
 
   componentDidMount() {
     this.props.actions.fetchPlaylistIfNeeded(this.props.currentPlaylist);
   }
 
-
-  areSongsEqual(songs1, songs2) {
-    if (songs1.length !== songs2.length) {
-      return false;
-    }
-
-    var isEqual = true;
-
-    $.each(songs1, (song, idx) => {
-      if (song.videoId !== songs2[idx].videoId) {
-        isEqual = false;
-        return false;
-      }
-    });
-
-    return isEqual;
-  }
-
   componentWillReceiveProps(nextProps) {
-    this.props.actions.fetchPlaylistIfNeeded(nextProps.currentPlaylist);  
+    // Only try to fetch if currentPlaylist was updated
+    var isCurrentPlaylistUpdated = (this.props.currentPlaylist !== nextProps.currentPlaylist);
+    if (isCurrentPlaylistUpdated) {
+      this.props.actions.fetchPlaylistIfNeeded(nextProps.currentPlaylist);
+    }
   }
 
   render() {
@@ -47,6 +32,7 @@ class MainArea extends React.Component {
           currentSong={this.props.currentSong}
           localPlaylist={this.props.localPlaylist}
           addSongToLocalPlaylistAndChrome={this.props.actions.addSongToLocalPlaylistAndChrome}
+          removeSongFromLocalPlaylistAndChrome={this.props.actions.removeSongFromLocalPlaylistAndChrome}
         />
       </div>
     );
@@ -54,5 +40,3 @@ class MainArea extends React.Component {
 }
 
 export default MainArea;
-
-// updateCurrentSong={this.props.actions.updateCurrentSong}

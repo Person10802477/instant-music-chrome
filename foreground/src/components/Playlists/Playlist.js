@@ -9,10 +9,15 @@ class Playlist extends React.Component {
 
     this.makeSongItems = this.makeSongItems.bind(this);
     this.onSaveSongHandler = this.onSaveSongHandler.bind(this);
+    this.onRemoveSongHandler = this.onRemoveSongHandler.bind(this);
   }
 
   onSaveSongHandler(song) {
     this.props.addSongToLocalPlaylistAndChrome(this.props.localPlaylist, song);
+  }
+
+  onRemoveSongHandler(song) {
+    this.props.removeSongFromLocalPlaylistAndChrome(this.props.localPlaylist, song);
   }
 
   makeSongItems(songs, savedSongs, currentVideoId) {
@@ -25,6 +30,7 @@ class Playlist extends React.Component {
           isCurrentSong={song.videoId === currentVideoId}
           isSaved={!!(_.find(savedSongs, (s) => s.videoId === song.videoId))}
           onSaveSong={this.onSaveSongHandler}
+          onRemoveSong={this.onRemoveSongHandler}
         />
       )
     )

@@ -7,14 +7,6 @@ class PlayerControls extends React.Component {
     super(props);
   }
 
-  componentDidMount() {
-    
-  }
-
-  componentWillReceiveProps(nextProps) {
-    // this.props.actions.fetchPlaylistIfNeeded(nextProps.currentPlaylist);  
-  }
-
   render() {
     var playClass = classNames({
       "fa fa-play fa-fw": true,
