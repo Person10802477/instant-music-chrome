@@ -33,7 +33,7 @@ class Playlist extends React.Component {
     }
 
     return (
-      <div className="playlist-songs table-responsive">
+      <div className="playlist-songs">
         <table className="table table-songs table-condensed">
           <thead>
             <tr>

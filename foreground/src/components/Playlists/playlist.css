@@ -19,21 +19,35 @@
   letter-spacing: 1px;
 }
 
-.playlist-songs .song-rank {
-  width: 5%;
+table.table-songs {
+  width: 100%;
+  table-layout: fixed;
+  border-bottom: 1px solid #444D60;
 }
 
-.playlist-songs .song-title {
-  width: 65%;
-  max-width: 65%;
+.table-songs th {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
 }
 
-.playlist-songs .song-artist {
-  width: 26%;
-  max-width: 26%;
+.table-songs th.song-rank {
+  width: 8%;
 }
 
-.playlist-songs .song-save,
-.playlist-songs .song-share {
-  width: 2%;
+.table-songs th.song-title {
+  width: 50%;
+}
+
+.table-songs th.song-artist {
+  width: 24%;
+}
+
+
+.table-songs th.song-save {
+  width: 8%;
+}
+
+.table-songs th.song-share {
+  width: 8%;
 }

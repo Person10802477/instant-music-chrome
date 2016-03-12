@@ -16,8 +16,8 @@ class SongItem extends React.Component {
         <td className="song-rank-cell">{rank}</td>
         <td className="song-title-cell truncate">{title}</td>
         <td className="song-artist-cell truncate">{artist}</td>
-        <td className="text-center"><i className="fa fa-heart-o fa-fw"></i></td>
-        <td className="text-center"><i className="fa fa-share-alt fa-fw"></i></td>
+        <td className="song-save-cell text-center"><i className="fa fa-heart-o fa-fw"></i></td>
+        <td className="song-more-cell text-center"><i className="fa fa-share-alt fa-fw"></i></td>
       </tr>
     );
   }

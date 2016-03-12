@@ -16,26 +16,3 @@ table.table-songs tr.song-item td {
 table.table-songs tr.song-item.active td {
   background: #0E1521;
 }
-
-table.table-songs {
-  border-bottom: 1px solid #444D60;
-}
-
-.playlist-songs .song-rank,
-.song-item .song-rank-cell {
-  padding-left: 20px;
-  width: 5%;
-  box-sizing: border-box;
-}
-
-.playlist-songs .song-title,
-.song-item .song-title-cell {
-  width: 65%;
-  max-width: 65%;
-}
-
-.playlist-songs .song-artist,
-.song-item .song-artist-cell {
-  width: 26%;
-  max-width: 26%;
-}
