@@ -35,7 +35,7 @@ var registerYouTubeEvents = function() {
         'onReady': onPlayerReady,
         'onStateChange': onPlayerStateChange
       },
-      autohide: 0
+      autohide: 0 // how come this potion doesn't work?
     });
   }
 
@@ -56,7 +56,6 @@ var loadYouTubeAsync = function() {
 }
 
 document.addEventListener("DOMContentLoaded", function(event) {
-  console.log("DOM fully loaded and parsed");
   registerYouTubeEvents();
   loadYouTubeAsync();
   window.addEventListener("message", messageHandler, false);
