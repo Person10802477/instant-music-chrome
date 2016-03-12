@@ -9,7 +9,7 @@ class Playlist extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-
+    // debugger
   }
 
   render() {

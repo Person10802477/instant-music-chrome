@@ -9,6 +9,7 @@ class SidebarPlaylists extends React.Component {
     this.getLabel = this.getLabel.bind(this);
   }
 
+  // FIXME: replace with constants
   getLabel(source) {
     switch (source) {
       case "local":

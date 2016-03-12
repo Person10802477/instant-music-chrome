@@ -61,13 +61,14 @@ function extractSongsFromJson(source, json) {
           rank: idx+1,
         })
       );
-    // FIXME: case for local playlists
     default:
       return [];
   }
 }
 
 function receivePlaylist(playlist, songs) {
+  debugger
+
   const updatedPlaylist = Object.assign({}, playlist,
     { songs: songs, isFetching: false, receivedAt: Date.now() }
   );
@@ -85,15 +86,33 @@ function getTargetPlaylist(state, playlist) {
   return target;
 }
 
-function shouldFetchPlaylist(state, playlist) {
-  const target = getTargetPlaylist(state, playlist);
+function areSongsEqual(songs1, songs2) {
+  debugger
 
-  if (!target.songs) {
+  if (!songs1 || !songs2 || (songs1.length !== songs2.length)) {
+    return false;
+  }
+
+  _.each(songs1, function(song, idx) {
+    if (song.videoId !== songs2[idx].videoId) {
+      return false;
+    }
+  });
+
+  return true;
+}
+
+function shouldFetchPlaylist(state, nextPlaylist) {
+  const currentPlaylist = getTargetPlaylist(state, nextPlaylist);
+
+  if (!currentPlaylist.songs) {
     return true;
-  } else if (target.isFetching) {
+  } else if (currentPlaylist.source === CONSTANTS.LOCAL_SOURCE) {
+    return !areSongsEqual(currentPlaylist.songs, nextPlaylist.songs);
+  } else if (currentPlaylist.isFetching) {
     return false
   } else {
-    return target.didInvalidate;
+    return currentPlaylist.didInvalidate;
   }
 }
 
@@ -105,33 +124,107 @@ export function fetchPlaylistIfNeeded(playlist) {
   }
 }
 
+function getChromeSongs(playlistName, callback) {
+  chrome.storage.sync.get(playlistName, function(keyValuePair) {
+    callback(keyValuePair[playlistName]);
+  });
+}
+
 export function fetchPlaylist(playlist) {
   return function (dispatch) {
     // NOTE: We dispatch this action just to start the loading wheel
     dispatch(requestPlaylist(playlist));
 
-    
-    return fetch(playlist.url)
-      .then(response => response.json())
-      .then(json => {
-        var youTubeFetcher = new YouTubeFetcher();
-        var songs = extractSongsFromJson(playlist.source, json);
-        youTubeFetcher.fetchAndAddVideoIds(songs,
-          function(songsWithVideoIds) {
-            dispatch(receivePlaylist(playlist, songsWithVideoIds))
-          }
-        );
+    if (playlist.source === CONSTANTS.LOCAL_SOURCE) {
+      getChromeSongs(playlist.playlistName, function(songs) {
+        debugger
+        dispatch(receivePlaylist(playlist, songs));
+      });
+    } else {
+      return fetch(playlist.url)
+        .then(response => response.json())
+        .then(json => {
+          var youTubeFetcher = new YouTubeFetcher();
+          var songs = extractSongsFromJson(playlist.source, json);
+          youTubeFetcher.fetchAndAddVideoIds(songs,
+            function(songsWithVideoIds) {
+              dispatch(receivePlaylist(playlist, songsWithVideoIds))
+            }
+          );
+        }
+      );      
+    }
+  }
+}
+
+function isUnique(songs, song) {
+  return !_.find(songs, (s) => s.videoId === song.videoId);
+}
+
+function addToChromeStorage(playlistName, songs, song) {
+  if (isUnique(songs, song)) {
+    var songsUpdated = [...songs, song];
+    var obj = {};
+    obj[playlistName] = songsUpdated;
+    chrome.storage.sync.set(obj, function(err) {
+      if (err) {
+        console.log("saving failed!", err)
+      } else {
+        console.log("successfully added");
       }
-    );
+    });
+  }
+}
+
+function initChromeStorage(playlistName, song) {
+  var obj = {};
+  obj[playlistName] = [song];
+  chrome.storage.sync.set(obj, function(err) {
+    if (err) {
+      console.log("saving failed!", err)
+    } else {
+      console.log("successfully added");
+    }
+  });
+}
+
+function saveOnChrome(playlistName, song) {
+  getChromeSongs(playlistName, function(songs) {
+    if (_.isEmpty(songs)) {
+      initChromeStorage(playlistName, song);
+    } else {
+      addToChromeStorage(playlistName, songs, song);
+    }
+  });
+}
+
+function addSongToLocalPlaylist(playlist, song) {
+  return {
+    type: CONSTANTS.ADD_SONG_TO_LOCAL_PLAYLIST,
+    playlist,
+    song
+  }
+}
+
+export function addSongToLocalPlaylistAndChrome(playlist, song) {
+  return (dispatch, getState) => {
+    if (chrome.runtime.id) {
+      saveOnChrome(playlist.playlistName, song);  
+    }
+
+    // FIXME: dispatch a notification here too
+    dispatch(addSongToPlaylist(playlist, song))
   }
 }
 
 // videoId, title, description, thumbnail
 // FIXME: I also need to add this song to local 'favorites' playlist
 // FIXME: on add song, clear the search results
-export function addSongToPlaylist(song) {
+// it's more like addSongToCurrentPlaylist
+export function addSongToPlaylist(playlist, song) {
   return {
     type: CONSTANTS.ADD_SONG_TO_PLAYLIST,
-    song
+    playlist,
+    song,
   }
 }

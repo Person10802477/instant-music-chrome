@@ -35,7 +35,6 @@ var registerEvents = function(webview) {
 var playInSeries = function(webview, videoIds) {
   var currentIdx = 0;
   var videoUrl = "http://www.youtube.com/embed/" + videoIds[currentIdx] + "?enablejsapi=1&autoplay=1";
-  console.log("START: ", videoUrl);
   webview.src = videoUrl;
 }
 

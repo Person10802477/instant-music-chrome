@@ -1,5 +1,6 @@
 import React from 'react';
 import SearchItem from './SearchItem/SearchItem';
+import { PLAYLIST_DATA } from '../../containers/PlaylistContainer/constants';
 
 require('./search-bar.css');
 
@@ -77,7 +78,11 @@ class SearchBar extends React.Component {
   }
 
   onSaveHandler(song) {
-    this.props.actions.addSongToPlaylist(song);
+    // HOWON: ADD TO CHROME
+    // this.props.actions.addSongToPlaylist(song);
+
+    // FIXME: since we only have one playlist for now...
+    this.props.actions.addSongToLocalPlaylistAndChrome(PLAYLIST_DATA.local[0], song);
     this.onInputClear();
   }
 

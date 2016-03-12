@@ -8,10 +8,18 @@ function currentPlaylist(state = PLAYLIST_DATA['melon'][0], action) {
     case CONSTANTS.RECEIVE_PLAYLIST:
       return action.playlist
     case CONSTANTS.ADD_SONG_TO_PLAYLIST:
-      var playlistUpdated = Object.assign({}, state);
-      playlistUpdated.songs.push(action.song);
 
-      return playlistUpdated;
+      // If we just added a song to local storage,
+      // and the current playlist is tied to the same storage,
+      // update it with the new song.
+      if (action.playlist.source === state.source &&
+        action.playlist.playlistName === state.playlistName) {
+        var playlistUpdated = Object.assign({}, state);
+        playlistUpdated.songs.push(action.song);
+        return playlistUpdated;
+      } else {
+        return state;  
+      }
     default:
       return state;
   }
