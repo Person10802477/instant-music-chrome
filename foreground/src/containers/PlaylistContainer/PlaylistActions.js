@@ -123,7 +123,11 @@ export function fetchPlaylistIfNeeded(playlist) {
 
 function getChromeSongs(playlistName, callback) {
   chrome.storage.sync.get(playlistName, function(keyValuePair) {
-    callback(keyValuePair[playlistName]);
+    if (_.isEmpty(keyValuePair)) {
+      callback([])
+    } else {
+      callback(keyValuePair[playlistName]);
+    }
   });
 }
 
