@@ -42,8 +42,8 @@ class Playlist extends React.Component {
               <th className="song-rank">RANK</th>
               <th className="song-title">SONG</th>
               <th className="song-artist">ARTIST</th>
-              <th className="song-save">SAVE</th>
-              <th className="song-share">SHARE</th>
+              <th className="song-save text-center">SAVE</th>
+              <th className="song-share text-center">SHARE</th>
             </tr>
           </thead>
           <tbody id="songitems">

@@ -5,6 +5,7 @@ tr.song-item {
 
 tr.song-item:hover {
   cursor: pointer;
+  background-color: #1f2d47;
 }
 
 table.table-songs thead th {

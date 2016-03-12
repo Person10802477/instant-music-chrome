@@ -26,11 +26,6 @@ class Playlists extends React.Component {
     this.props.actions.updateCurrentPlaylist(null);
   }
 
-  // componentWillReceiveProps(nextProps) {
-  //   console.log("received", nextProps);
-  //   // this.props.actions.updateCurrentPlaylist(nextProps.currentPlaylist);
-  // }
-
   isSamePlaylist(playlist1, playlist2) {
     return (
       playlist1.playlistName === playlist2.playlistName &&
@@ -50,6 +45,8 @@ class Playlists extends React.Component {
   }
 
   makePlaylists(playlists, source, currentPlaylist) {
+    var allSavedSongs = playlists['local'][0].songs;
+
     return playlists[source].map(function(playlist, idx) {
       return (
         <SidebarPlaylistItem key={idx}

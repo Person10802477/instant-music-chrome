@@ -105,7 +105,6 @@ class SearchBar extends React.Component {
     });
 
     return (
-
       <div className={searchBarClass}>
         <i className="fa fa-search search-icon fa-fw"></i>
         <form className="search-input-form"
