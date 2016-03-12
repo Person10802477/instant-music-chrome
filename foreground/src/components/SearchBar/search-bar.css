@@ -36,10 +36,18 @@
 }
 
 .search-bar .search-results {
-  // display: none;
   max-height: 400px;
   background-color: #1f2c47;
   padding: 0 5px;
   margin-top: 10px;
   box-shadow: 1px 1px 2px 1px #0f1624;
+}
+
+.search-bar .search-loading {
+  display: none;
+  line-height: 55px;
+}
+
+.search-bar.is-fetching .search-loading {
+  display: block;
 }

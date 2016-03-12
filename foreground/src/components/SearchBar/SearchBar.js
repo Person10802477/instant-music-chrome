@@ -24,9 +24,6 @@ class SearchBar extends React.Component {
     var query = this.state.searchInputQuery;
     this.props.actions.fetchSearchResults(query);
     event.preventDefault();
-
-    // clear the search input as soon as the data
-    // are retrieved
     this.refs.searchInput.value = "";
   }
 
@@ -46,7 +43,8 @@ class SearchBar extends React.Component {
   }
 
   onKeyDownHandler(event) {
-    if (this.props.searchResults.length === 0) {
+    var searchResults = this.props.searchResults;
+    if (searchResults.results.length === 0) {
       return false;
     }
 
@@ -65,7 +63,7 @@ class SearchBar extends React.Component {
         if (this.state.searchInputQuery.length === 0) {
           return false;
         }
-        var selected = this.props.searchResults[currentIdx];
+        var selected = searchResults.results[currentIdx];
         this.onSaveHandler(selected);
         event.preventDefault();
         return false;
@@ -78,21 +76,19 @@ class SearchBar extends React.Component {
   }
 
   onSaveHandler(song) {
-    // HOWON: ADD TO CHROME
-    // this.props.actions.addSongToPlaylist(song);
-
-    // FIXME: since we only have one playlist for now...
+    // NOTE: since we only have one playlist for now...
+    // TODO: Expand this to support adding songs to different local playlists than "favorites"
     this.props.actions.addSongToLocalPlaylistAndChrome(PLAYLIST_DATA.local[0], song);
     this.onInputClear();
   }
 
   render() {
-    var searchResults = [];
+    var results = [];
     var searchBarClass;
 
     // FIXME: Handle the case where there's no search result
-    if (this.props.searchResults) {
-      searchResults = this.props.searchResults.map((result, idx) =>
+    if (this.props.searchResults.results) {
+      results = this.props.searchResults.results.map((result, idx) =>
         <SearchItem
           key={idx}
           result={result}
@@ -104,7 +100,8 @@ class SearchBar extends React.Component {
 
     searchBarClass = classNames({
       "search-bar": true,
-      "active": (searchResults.length > 0)
+      "active": (results.length > 0 || this.props.searchResults.isFetching),
+      "is-fetching": this.props.searchResults.isFetching
     });
 
     return (
@@ -125,7 +122,10 @@ class SearchBar extends React.Component {
           onClick={this.onInputClear}
         ></i>
         <div className="search-results">
-          {searchResults}
+          {results}
+          <div className="search-loading">
+            Searching...
+          </div>
         </div>
       </div>
     );

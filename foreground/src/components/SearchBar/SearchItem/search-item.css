@@ -12,16 +12,12 @@
 }
 
 .search-result-item .result-title,
-.search-result-item .result-description {
+.search-result-item .result-description,
+.search-loading {
   width: 220px;
   padding: 4px 5px 5px 5px;
 }
 
 .search-result-item .result-title {
   font-weight: bold;
-}
-
-.search-result-item .result-thumbnail img {
-  width: 50px;
-  height: 40px;
 }

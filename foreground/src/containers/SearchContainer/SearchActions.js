@@ -45,9 +45,7 @@ export function clearSearchResults() {
 
 export function fetchSearchResults(query) {
   return function (dispatch) {
-    // FIXME: dispatch this action to enable loading wheel
-    // while search results are getting prepared
-    // dispatch(requestSearchResults(query));
+    dispatch(requestSearchResults(query));
     var youTubeFetcher = new YouTubeFetcher();
     youTubeFetcher.fetchSearchResults(query,
       function(searchResults) {
