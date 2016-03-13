@@ -44,7 +44,8 @@ class Playlist extends React.Component {
     var isLocal = this.props.isLocal;
     var playlistClass = classNames({
       "playlist-songs": true,
-      "is-fetching": _.isEmpty(this.props.songs),
+      // THIS IS A HACK! I BETTER CHECK isFetching
+      "is-fetching": (_.isEmpty(this.props.songs) && !isLocal),
       "is-local": isLocal
     });
     var target = this.refs.playlistLoading;
@@ -61,8 +62,6 @@ class Playlist extends React.Component {
       left: '50%', // Left position relative to parent
       position: 'absolute', // Element positioning
     }).spin(target);
-
-    // debugger
 
     if (!_.isEmpty(this.props.songs)) {
       songItems = this.makeSongItems(this.props.songs, savedSongs, currentVideoId);

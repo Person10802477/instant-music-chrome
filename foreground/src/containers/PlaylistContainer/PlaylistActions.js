@@ -38,7 +38,8 @@ export function setupPlaylists() {
 function requestPlaylist(playlist) {
   return {
     type: CONSTANTS.REQUEST_PLAYLIST,
-    playlist: playlist
+    playlist: playlist,
+    isFetching: true
   }
 }
 

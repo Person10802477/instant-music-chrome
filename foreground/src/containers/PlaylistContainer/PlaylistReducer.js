@@ -5,6 +5,7 @@ function currentPlaylist(state = PLAYLIST_DATA['melon'][0], action) {
   switch (action.type) {
     case CONSTANTS.UPDATE_CURRENT_PLAYLIST:
       return action.playlist || PLAYLIST_DATA['melon'][0];
+    case CONSTANTS.REQUEST_PLAYLIST:
     case CONSTANTS.RECEIVE_PLAYLIST:
       return action.playlist
       break;
@@ -21,7 +22,7 @@ function transformedPlaylist(state=[], action) {
   switch (action.type) {
     case CONSTANTS.REQUEST_PLAYLIST:
       return Object.assign({}, oldPlaylist, {
-        isFetching: true
+        isFetching: true // FIXME do I really need isFetching here
       });
     case CONSTANTS.RECEIVE_PLAYLIST:
     case CONSTANTS.UPDATE_LOCAL_PLAYLIST:
