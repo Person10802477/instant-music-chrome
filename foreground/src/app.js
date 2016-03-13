@@ -27,15 +27,18 @@ const store = createStore(
 );
 
 $(function() {
+  // exposing sandboxMessenger to a global namespace
+  // so it can communicate with webview and sandbox
+  window.app = {};
+  app.sandboxMessenger = new SandboxMessenger(store, $('webview')[0]);
+  if (chrome.runtime.id) {
+    window.app.userLocale = chrome.i18n.getMessage("@@ui_locale");
+  }
+
   ReactDOM.render(
     <Provider store={store}>
       <App />
     </Provider>,
     document.getElementById('app')
   );
-  
-  // exposing sandboxMessenger to a global namespace
-  // so it can communicate with webview and sandbox
-  window.app = {};
-  app.sandboxMessenger = new SandboxMessenger(store, $('webview')[0]);
 });

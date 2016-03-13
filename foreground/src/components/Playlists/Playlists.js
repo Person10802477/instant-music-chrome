@@ -69,6 +69,34 @@ class Playlists extends React.Component {
     var itunesPlaylists = this.makePlaylists(playlists, 'itunes', this.props.currentPlaylist);
     var localPlaylists = this.makePlaylists(playlists, 'local', this.props.currentPlaylist);
 
+    // Reorder charts based on user locale
+    if (chrome.runtime.id && (window.app.userLocale === "ko" || window.app.userLocale === "ko-kr")) {
+      return (
+        <div className="playlists">
+          <ul>
+            <SidebarPlaylists
+              source="local"
+              playlists={localPlaylists}
+              onClickHandler={this.onClickHandler}
+              isExpanded={this.state.expandedPlaylists["local"]}
+            />
+            <SidebarPlaylists
+              source="melon"
+              playlists={melonPlaylists}
+              onClickHandler={this.onClickHandler}
+              isExpanded={this.state.expandedPlaylists["melon"]}
+            />
+            <SidebarPlaylists
+              source="itunes"
+              playlists={itunesPlaylists}
+              onClickHandler={this.onClickHandler}
+              isExpanded={this.state.expandedPlaylists["itunes"]}
+            />
+          </ul>
+        </div>
+      );
+    }
+
     return (
       <div className="playlists">
         <ul>
@@ -79,16 +107,16 @@ class Playlists extends React.Component {
             isExpanded={this.state.expandedPlaylists["local"]}
           />
           <SidebarPlaylists
-            source="melon"
-            playlists={melonPlaylists}
-            onClickHandler={this.onClickHandler}
-            isExpanded={this.state.expandedPlaylists["melon"]}
-          />
-          <SidebarPlaylists
             source="itunes"
             playlists={itunesPlaylists}
             onClickHandler={this.onClickHandler}
             isExpanded={this.state.expandedPlaylists["itunes"]}
+          />
+          <SidebarPlaylists
+            source="melon"
+            playlists={melonPlaylists}
+            onClickHandler={this.onClickHandler}
+            isExpanded={this.state.expandedPlaylists["melon"]}
           />
         </ul>
       </div>

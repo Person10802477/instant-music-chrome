@@ -1,7 +1,14 @@
 import * as PlaylistActions from "./PlaylistActions";
 import { CONSTANTS, PLAYLIST_DATA } from "./constants";
 
-function currentPlaylist(state = PLAYLIST_DATA['melon'][0], action) {
+var initialPlaylist;
+if (chrome.runtime.id && (window.app.userLocale === "ko" || window.app.userLocale === "ko-kr")) {
+  initialPlaylist = PLAYLIST_DATA['melon'][0];
+} else {
+  initialPlaylist = PLAYLIST_DATA['itunes'][0];
+}
+
+function currentPlaylist(state = initialPlaylist, action) {
   switch (action.type) {
     case CONSTANTS.UPDATE_CURRENT_PLAYLIST:
       return action.playlist || PLAYLIST_DATA['melon'][0];

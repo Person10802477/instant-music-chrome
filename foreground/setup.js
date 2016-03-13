@@ -11,7 +11,6 @@ var setHttpReferer = function(webview) {
 
   var filter = {
     urls: ['*://*.youtube.com/embed/*' + chrome.runtime.id]
-    // urls: ['*://*.youtube.com/embed/*']
   };
   var optParam = ['blocking', 'requestHeaders'];
 
@@ -36,5 +35,4 @@ $(function() {
   window.webview = $("#youtube-webview")[0];
   resizeWebview(webview);
   setHttpReferer(webview);
-
 });
