@@ -7,7 +7,6 @@
 
 .playlist-songs .playlist-loading {
   display: none;
-  font-size: 30px;
 }
 
 .playlist-songs.is-fetching .playlist-loading {

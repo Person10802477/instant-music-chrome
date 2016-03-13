@@ -44,6 +44,20 @@ class Playlist extends React.Component {
       "playlist-songs": true,
       "is-fetching": _.isEmpty(this.props.songs)
     });
+    var target = this.refs.playlistLoading;
+    var spinner = new Spinner({
+      lines: 10, // The number of lines to draw
+      length: 0, // The length of each line
+      width: 5, // The line thickness
+      radius: 25, // The radius of the inner circle
+      scale: 1.2  , // Scales overall size of the spinner
+      color: '#fff', // #rgb or #rrggbb or array of colors
+      speed: 2.0, // Rounds per second
+      className: 'spinner', // The CSS class to assign to the spinner
+      top: '40%', // Top position relative to parent
+      left: '50%', // Left position relative to parent
+      position: 'absolute', // Element positioning
+    }).spin(target);
 
     if (!_.isEmpty(this.props.songs)) {
       songItems = this.makeSongItems(this.props.songs, savedSongs, currentVideoId);
@@ -65,8 +79,7 @@ class Playlist extends React.Component {
             {songItems}
           </tbody>
         </table>
-        <div className="playlist-loading">
-          Loading...
+        <div className="playlist-loading" ref="playlistLoading">
         </div>
       </div>
     );
