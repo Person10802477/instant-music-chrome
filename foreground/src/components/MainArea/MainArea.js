@@ -23,12 +23,14 @@ class MainArea extends React.Component {
   render() {
     var songs = this.props.currentPlaylist.songs || [];
     var savedSongs = this.props.localPlaylist.songs;
+    var isLocal = this.props.currentPlaylist && this.props.currentPlaylist.source === "local";
 
     return (
       <div className="main-area">
         <Playlist
           updateCurrentSong={this.props.actions.updateCurrentSongAndPlayIt}
           songs={songs}
+          isLocal={isLocal}
           currentSong={this.props.currentSong}
           localPlaylist={this.props.localPlaylist}
           addSongToLocalPlaylistAndChrome={this.props.actions.addSongToLocalPlaylistAndChrome}

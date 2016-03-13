@@ -10,8 +10,10 @@
   "default_locale": "en",
   "description": "Instant Music",
   "icons": {
-    "16": "assets/calculator-16.png",
-    "128": "assets/calculator-128.png"
+    "16": "assets/icons/iconx16.png",
+    "32": "assets/icons/iconx32.png",
+    "48": "assets/icons/iconx48.png",
+    "128": "assets/icons/iconx128.png"
   },
   "author": "Howon",
   "file_system_provider_capabilities": {

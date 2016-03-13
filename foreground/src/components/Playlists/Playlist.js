@@ -37,24 +37,27 @@ class Playlist extends React.Component {
   }
 
   render() {
+    // It might be better to get currentPlaylist as props
     var songItems;
     var savedSongs = this.props.localPlaylist.songs;
     var currentVideoId = (this.props.currentSong ? this.props.currentSong.videoId : '')
+    var isLocal = this.props.isLocal;
     var playlistClass = classNames({
       "playlist-songs": true,
-      "is-fetching": _.isEmpty(this.props.songs)
+      "is-fetching": _.isEmpty(this.props.songs),
+      "is-local": isLocal
     });
     var target = this.refs.playlistLoading;
     var spinner = new Spinner({
       lines: 10, // The number of lines to draw
       length: 0, // The length of each line
-      width: 5, // The line thickness
-      radius: 25, // The radius of the inner circle
-      scale: 1.2  , // Scales overall size of the spinner
+      width: 6, // The line thickness
+      radius: 30, // The radius of the inner circle
+      scale: 1.5  , // Scales overall size of the spinner
       color: '#fff', // #rgb or #rrggbb or array of colors
-      speed: 2.0, // Rounds per second
+      speed: 1.3, // Rounds per second
       className: 'spinner', // The CSS class to assign to the spinner
-      top: '40%', // Top position relative to parent
+      top: '50%', // Top position relative to parent
       left: '50%', // Left position relative to parent
       position: 'absolute', // Element positioning
     }).spin(target);

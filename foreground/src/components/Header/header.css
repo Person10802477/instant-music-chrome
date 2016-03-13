@@ -7,3 +7,21 @@
   background-color: #515B70;
   color: white;
 }
+
+.header .brand-container {
+  position: fixed;
+  left: 20px;
+  line-height: 40px;
+  color: #15181e;
+}
+
+.header .brand-container .brand-logo {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.header .brand-container .beta-logo {
+  color: white;
+  margin-left: 7px;
+  font-size: 12px;
+}

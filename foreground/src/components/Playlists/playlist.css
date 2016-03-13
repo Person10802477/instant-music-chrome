@@ -40,7 +40,7 @@ table.table-songs {
 }
 
 .table-songs th.song-title {
-  width: 50%;
+  width: 52%;
 }
 
 .table-songs th.song-artist {
@@ -54,4 +54,24 @@ table.table-songs {
 
 .table-songs th.song-share {
   width: 8%;
+}
+
+.playlist-songs.is-local .table-songs th.song-title {
+  width: 84%;
+}
+
+.playlist-songs.is-local .table-songs th.song-rank {
+  display: none;
+}
+
+.playlist-songs.is-local .table-songs th.song-artist {
+  display: none;
+}
+
+.playlist-songs.is-local .table-songs td.song-rank-cell {
+  display: none;
+}
+
+.playlist-songs.is-local .table-songs td.song-artist-cell {
+  display: none;
 }
