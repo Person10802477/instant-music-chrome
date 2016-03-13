@@ -299,6 +299,7 @@ export function updateLocalPlaylistAndReceiveIfNecessary(playlist, songs) {
   }
 }
 
+// FIXME: Supress updating currentPlaylist on initial load
 export function loadLocalPlaylist() {
   return (dispatch) => {
     var favoritesPlaylist = PLAYLIST_DATA.local[0];

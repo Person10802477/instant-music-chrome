@@ -1,11 +1,11 @@
 import { CONSTANTS } from "./constants";
 
-function isPlaying(status = false, action) {
+function isPlaying(state = false, action) {
   switch (action.type) {
     case CONSTANTS.TOGGLE_PLAYING:
-      return !status;
+      return !state;
     default:
-      return false;
+      return state;
   }
 }
 
