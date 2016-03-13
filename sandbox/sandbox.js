@@ -53,7 +53,6 @@ var registerYouTubeEvents = function() {
 
   window.onPlayerReady = function(event) {
     chrome.runtime.sendMessage(APP_ID, {data: CONSTANTS.PLAYER_READY});
-    debugger;
   }
 
   window.onPlayerStateChange = function(event) {

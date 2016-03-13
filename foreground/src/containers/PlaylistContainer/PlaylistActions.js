@@ -199,8 +199,9 @@ function addToChromeStorage(playlist, songs, song, dispatch) {
 function initChromeStorage(playlist, song, dispatch) {
   var playlistName = playlist.playlistName;
   var obj = {};
+  var songsUpdated = [song];
+  obj[playlistName] = songsUpdated;
 
-  obj[playlistName] = [song];
   chrome.storage.sync.set(obj, function(err) {
     if (err) {
       console.log("saving failed!", err)

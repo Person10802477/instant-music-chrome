@@ -48,10 +48,12 @@ class SandboxMessenger {
         break;
       case PLAYER_STATES.PLAYER_READY:
         var currentSong = this.store.getState().currentSong;
-        window.app.sandboxMessenger.sendMessage({
-          type: CONSTANTS.CUE_VIDEO,
-          videoId: currentSong.videoId
-        });
+        if (currentSong) {
+          window.app.sandboxMessenger.sendMessage({
+            type: CONSTANTS.CUE_VIDEO,
+            videoId: currentSong.videoId
+          });          
+        }
         $(window.webview).show();
         break;
       default:

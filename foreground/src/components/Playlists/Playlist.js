@@ -62,6 +62,8 @@ class Playlist extends React.Component {
       position: 'absolute', // Element positioning
     }).spin(target);
 
+    // debugger
+
     if (!_.isEmpty(this.props.songs)) {
       songItems = this.makeSongItems(this.props.songs, savedSongs, currentVideoId);
     }
