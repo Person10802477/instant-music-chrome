@@ -2,8 +2,10 @@ var APP_ID = chrome.runtime.id;
 
 var CONSTANTS = {
   LOAD_VIDEO: 'LOAD_VIDEO',
+  CUE_VIDEO: 'CUE_VIDEO',
   TOGGLE_PLAY_PAUSE: 'TOGGLE_PLAY_PAUSE',
-  ERROR_CODE: 6
+  ERROR_CODE: 6,
+  PLAYER_READY: 'PLAYER_READY'
 };
 
 var messageHandler = function(rawMsg) {
@@ -12,6 +14,9 @@ var messageHandler = function(rawMsg) {
   switch (msg.type) {
     case CONSTANTS.LOAD_VIDEO:
       player.loadVideoById(msg.videoId);
+      break;
+    case CONSTANTS.CUE_VIDEO:
+      player.cueVideoById(msg.videoId);
       break;
     case CONSTANTS.TOGGLE_PLAY_PAUSE:
       var playerState = player.getPlayerState();
@@ -35,7 +40,7 @@ var registerYouTubeEvents = function() {
     window.player = new YT.Player('player', {
       width: '300',
       height: '200',
-      videoId: '1TJQ6s1N1v0',
+      videoId: '',
       origin: "chrome-extension://" + chrome.runtime.id,
       events: {
         'onReady': onPlayerReady,
@@ -47,7 +52,8 @@ var registerYouTubeEvents = function() {
   }
 
   window.onPlayerReady = function(event) {
-    console.log("YouTube Player is ready");
+    chrome.runtime.sendMessage(APP_ID, {data: CONSTANTS.PLAYER_READY});
+    debugger;
   }
 
   window.onPlayerStateChange = function(event) {

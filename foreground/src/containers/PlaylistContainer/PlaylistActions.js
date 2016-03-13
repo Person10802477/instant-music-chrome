@@ -65,6 +65,18 @@ function extractSongsFromJson(source, json) {
   }
 }
 
+function checkCurrentSongAndReceivePlaylist(playlist, songs) {
+  return (dispatch, getState) => {
+    var currentSong = getState().currentSong;
+
+    if (!currentSong && songs) {
+      dispatch(updateCurrentSong(songs[0]));
+    }
+
+    dispatch(receivePlaylist(playlist, songs))
+  }
+}
+
 function receivePlaylist(playlist, songs) {
   const updatedPlaylist = Object.assign({}, playlist,
     { songs: songs, isFetching: false, receivedAt: Date.now() }
@@ -73,7 +85,7 @@ function receivePlaylist(playlist, songs) {
   return {
     type: CONSTANTS.RECEIVE_PLAYLIST,
     playlist: updatedPlaylist
-  }
+  }  
 }
 
 function getTargetPlaylist(state, playlist) {
@@ -153,7 +165,7 @@ export function fetchPlaylist(playlist) {
           var songs = extractSongsFromJson(playlist.source, json);
           youTubeFetcher.fetchAndAddVideoIds(songs,
             function(songsWithVideoIds) {
-              dispatch(receivePlaylist(playlist, songsWithVideoIds))
+              dispatch(checkCurrentSongAndReceivePlaylist(playlist, songsWithVideoIds))
             }
           );
         }

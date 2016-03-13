@@ -2,3 +2,20 @@ html, body {
   padding: 0;
   margin: 0;
 }
+
+.player-container .loading {
+  display: none;
+}
+
+.player-container.loading #player {
+  display: none;
+}
+
+.player-container.loading .loading {
+  position: fixed;
+  display: block;
+}
+
+.player-container #player {
+  display: block;
+}

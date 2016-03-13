@@ -35,6 +35,10 @@
       "accessible_resources": ["sandbox/sandbox.html", "sandbox/sandbox.js", "sandbox/sandbox.css"]
     }]
   },
+  "web_accessible_resources": [
+    "assets/icons/*.png",
+    "assets/images/*.png"
+  ],
   "short_name": "Instant Music App",
   "version_name": "Beta",
   "commands": {

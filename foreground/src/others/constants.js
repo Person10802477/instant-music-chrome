@@ -11,5 +11,10 @@ export const PLAYER_STATES = {
   PAUSED: 2,
   BUFFERING: 3,
   VIDEO_CUED: 5,
-  ERROR: 6
+  ERROR: 6,
+  PLAYER_READY: 'PLAYER_READY'
 };
+
+export const CONSTANTS = {
+  CUE_VIDEO: 'CUE_VIDEO'
+}

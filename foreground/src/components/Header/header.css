@@ -12,16 +12,16 @@
   position: fixed;
   left: 20px;
   line-height: 40px;
-  color: #15181e;
 }
 
 .header .brand-container .brand-logo {
   font-weight: bold;
   font-size: 14px;
+  color: white;
 }
 
 .header .brand-container .beta-logo {
-  color: white;
+  color: #ddd;
   margin-left: 7px;
   font-size: 12px;
 }

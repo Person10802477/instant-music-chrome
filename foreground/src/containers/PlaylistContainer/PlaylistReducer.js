@@ -64,7 +64,7 @@ function currentSong(state = null, action) {
     case CONSTANTS.UPDATE_CURRENT_SONG:
       return action.song;
     case CONSTANTS.RECEIVE_PLAYLIST:
-      return state || action.playlist.songs[0];
+      return state || action.playlist.songs[0] || null
     default:
       return state;
   }

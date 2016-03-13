@@ -1,6 +1,6 @@
 import { updateCurrentSongAndPlayIt, playNextSong, playPrevSong } from "../containers/PlaylistContainer/PlaylistActions";
 import { togglePlayPause, togglePlayingState } from "../containers/ControlsContainer/ControlsActions";
-import { COMMANDS, PLAYER_STATES } from "./constants";
+import { COMMANDS, PLAYER_STATES, CONSTANTS } from "./constants";
 
 class SandboxMessenger {
   constructor(store, webview) {
@@ -45,6 +45,14 @@ class SandboxMessenger {
         if (this.store.getState().isPlaying) {
           this.store.dispatch(togglePlayingState());
         }
+        break;
+      case PLAYER_STATES.PLAYER_READY:
+        var currentSong = this.store.getState().currentSong;
+        window.app.sandboxMessenger.sendMessage({
+          type: CONSTANTS.CUE_VIDEO,
+          videoId: currentSong.videoId
+        });
+        $(window.webview).show();
         break;
       default:
         // pass
