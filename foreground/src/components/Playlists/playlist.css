@@ -40,24 +40,30 @@ table.table-songs {
 }
 
 .table-songs th.song-title {
-  width: 52%;
+  // width: 52%;
+  width: 60%;
 }
 
 .table-songs th.song-artist {
   width: 24%;
 }
 
-
 .table-songs th.song-save {
   width: 8%;
 }
 
 .table-songs th.song-share {
-  width: 8%;
+  // width: 8%;
+  display: none;
+}
+
+.table-songs td.song-more-cell {
+  display: none;
 }
 
 .playlist-songs.is-local .table-songs th.song-title {
-  width: 84%;
+  // width: 84%;
+  width: 92%;
 }
 
 .playlist-songs.is-local .table-songs th.song-rank {

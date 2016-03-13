@@ -40,7 +40,7 @@ var registerYouTubeEvents = function() {
     window.player = new YT.Player('player', {
       width: '300',
       height: '200',
-      videoId: '',
+      videoId: 'XyzaMpAVm3s',
       origin: "chrome-extension://" + chrome.runtime.id,
       events: {
         'onReady': onPlayerReady,
