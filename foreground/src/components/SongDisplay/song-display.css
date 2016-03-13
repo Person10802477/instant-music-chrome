@@ -14,3 +14,7 @@
 .song-display .song-artist {
   font-size: 14px;
 }
+
+.song-title.extra-margin-top {
+  margin-top: 15px;
+}

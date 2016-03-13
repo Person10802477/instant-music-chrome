@@ -13,9 +13,14 @@ class SongDisplay extends React.Component {
       artist = "";
     }
 
+    var titleClass = classNames({
+      "song-title truncate": true,
+      "extra-margin-top": !artist
+    });
+
     return (
       <div className="song-display">
-        <div className="song-title truncate">
+        <div className={titleClass}>
           {title}
         </div>
         <div className="song-artist truncate">
