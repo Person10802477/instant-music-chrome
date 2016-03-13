@@ -10,12 +10,14 @@ class PlayerControls extends React.Component {
   render() {
     var playClass = classNames({
       "fa fa-play fa-fw": true,
-      "hidden": this.props.isPlaying
+      "hidden": this.props.isPlaying,
+      "control-center-icon": true
     });
 
     var pauseClass = classNames({
       "fa fa-pause fa-fw": true,
-      "hidden": !this.props.isPlaying
+      "hidden": !this.props.isPlaying,
+      "control-center-icon": true
     });
 
     return (

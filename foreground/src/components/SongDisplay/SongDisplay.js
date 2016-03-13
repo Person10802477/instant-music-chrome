@@ -15,10 +15,10 @@ class SongDisplay extends React.Component {
 
     return (
       <div className="song-display">
-        <div className="song-title">
+        <div className="song-title truncate">
           {title}
         </div>
-        <div className="song-artist">
+        <div className="song-artist truncate">
           {artist}
         </div>
       </div>

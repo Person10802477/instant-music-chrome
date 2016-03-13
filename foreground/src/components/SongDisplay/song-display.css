@@ -1,0 +1,16 @@
+.song-display {
+  height: 70px;
+  box-sizing: border-box;
+  padding: 10px 30px;
+  text-align: center;
+}
+
+.song-display .song-title {
+  font-size: 16px;
+  font-weight: bold;
+  padding-bottom: 10px;
+}
+
+.song-display .song-artist {
+  font-size: 14px;
+}

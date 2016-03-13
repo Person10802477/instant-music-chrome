@@ -9,8 +9,8 @@ class RightColumn extends React.Component {
     return (
       <div className="right-column">
         <div>
-          <ControlsContainer />
           <SongDisplayContainer />
+          <ControlsContainer />
         </div>
       </div>
     );
