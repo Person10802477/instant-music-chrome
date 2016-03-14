@@ -2,7 +2,7 @@ import * as PlaylistActions from "./PlaylistActions";
 import { CONSTANTS, PLAYLIST_DATA } from "./constants";
 
 var initialPlaylist;
-if (chrome.runtime.id && (window.app.userLocale === "ko" || window.app.userLocale === "ko-kr")) {
+if (chrome.runtime.id && (chrome.i18n.getMessage("@@ui_locale") === "ko" || chrome.i18n.getMessage("@@ui_locale") === "ko-kr")) {
   initialPlaylist = PLAYLIST_DATA['melon'][0];
 } else {
   initialPlaylist = PLAYLIST_DATA['itunes'][0];
@@ -11,7 +11,7 @@ if (chrome.runtime.id && (window.app.userLocale === "ko" || window.app.userLocal
 function currentPlaylist(state = initialPlaylist, action) {
   switch (action.type) {
     case CONSTANTS.UPDATE_CURRENT_PLAYLIST:
-      return action.playlist || PLAYLIST_DATA['melon'][0];
+      return action.playlist || initialPlaylist;
     case CONSTANTS.REQUEST_PLAYLIST:
     case CONSTANTS.RECEIVE_PLAYLIST:
       return action.playlist
@@ -21,7 +21,6 @@ function currentPlaylist(state = initialPlaylist, action) {
   }
 }
 
-// helper
 function transformedPlaylist(state=[], action) {
   var oldPlaylist = _.find(state, (pl) =>
     pl.playlistName === action.playlist.playlistName);

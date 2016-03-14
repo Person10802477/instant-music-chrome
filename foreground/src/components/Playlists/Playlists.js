@@ -70,7 +70,7 @@ class Playlists extends React.Component {
     var localPlaylists = this.makePlaylists(playlists, 'local', this.props.currentPlaylist);
 
     // Reorder charts based on user locale
-    if (chrome.runtime.id && (window.app.userLocale === "ko" || window.app.userLocale === "ko-kr")) {
+    if (chrome.runtime.id && (chrome.i18n.getMessage("@@ui_locale") === "ko" || chrome.i18n.getMessage("@@ui_locale") === "ko-kr")) {
       return (
         <div className="playlists">
           <ul>
