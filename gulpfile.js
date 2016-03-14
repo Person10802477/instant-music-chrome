@@ -1,12 +1,18 @@
 var gulp = require('gulp');
 var del = require('del'); // rm -rf
+var zip = require('gulp-zip');
 
-gulp.task('default', ['build'], function() {
-  console.log('Your Chrome app is inside ./built/');
+gulp.task('default', ['zip'], function() {
+  console.log('Your Chrome unpackaged app is inside ./built/');
+  console.log('Your Chrome packaged app is inside ./dist/');
 });
 
-gulp.task('clean', function() {
-    return del(['built']);
+gulp.task('clean-built', function() {
+  return del(['built']);
+});
+
+gulp.task('clean-archive', function() {
+  return del(['dist']);
 });
 
 var filesToMove = [
@@ -25,7 +31,13 @@ var filesToMove = [
   './manifest.json'
 ];
 
-gulp.task('build', ['clean'], function(){
-  gulp.src(filesToMove, { base: './' })
+gulp.task('build', ['clean-built', 'clean-archive'], function(){
+  return gulp.src(filesToMove, { base: './' })
   .pipe(gulp.dest('built'));
+});
+
+gulp.task('zip', ['build'], function() {
+  return gulp.src('built/**/*')
+    .pipe(zip('built.zip'))
+    .pipe(gulp.dest('dist'));
 });
