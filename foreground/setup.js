@@ -36,3 +36,11 @@ $(function() {
   resizeWebview(webview);
   setHttpReferer(webview);
 });
+
+if (chrome.runtime.id) {
+  chrome.runtime.onInstalled.addListener(function(details){
+    var locale = chrome.i18n.getMessage("@@ui_locale");
+    var urlToOpen = (locale == 'ko' ? "http://songhowon.com/instantmusic/kr" : "http://songhowon.com/instantmusic/");
+    chrome.tabs.create({ url: urlToOpen });
+  });  
+}

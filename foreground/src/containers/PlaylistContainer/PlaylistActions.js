@@ -1,5 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import { CONSTANTS, PLAYLIST_DATA } from './constants';
+import * as SONG_NOTIFICATIONS_ACTIONS from '../SongNotificationsContainer/SongNotificationsActions';
 import YouTubeFetcher from '../../others/youtube-api';
 
 export function updateCurrentPlaylist(playlist) {
@@ -134,6 +135,11 @@ function shouldFetchPlaylist(state, nextPlaylist) {
 
 export function fetchPlaylistIfNeeded(playlist) {
   return (dispatch, getState) => {
+    // Clear song notifications when we navigate to look at local playlist
+    if (playlist.source === CONSTANTS.LOCAL_SOURCE) {
+      dispatch(SONG_NOTIFICATIONS_ACTIONS.clearSongNotifications());
+    }
+
     if (shouldFetchPlaylist(getState(), playlist)) {
       return dispatch(fetchPlaylist(playlist))
     }
@@ -190,8 +196,8 @@ function addToChromeStorage(playlist, songs, song, dispatch) {
       if (err) {
         console.log("saving failed!", err)
       } else {
-        console.log("successfully added");
         dispatch(updateLocalPlaylistAndReceiveIfNecessary(playlist, songsUpdated));
+        dispatch(SONG_NOTIFICATIONS_ACTIONS.addSongNotifications());
       }
     });
   }
@@ -207,8 +213,8 @@ function initChromeStorage(playlist, song, dispatch) {
     if (err) {
       console.log("saving failed!", err)
     } else {
-      console.log("successfully added");
       dispatch(updateLocalPlaylistAndReceiveIfNecessary(playlist, songsUpdated));
+      dispatch(SONG_NOTIFICATIONS_ACTIONS.addSongNotifications());
     }
   });
 }

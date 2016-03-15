@@ -2,6 +2,8 @@ import React from "react";
 
 require("./sidebar-playlists.css");
 
+import SongNotificationsContainer from '../../../containers/SongNotificationsContainer/SongNotificationsContainer';
+
 class SidebarPlaylists extends React.Component {
   constructor(props) {
     super(props);
@@ -41,6 +43,7 @@ class SidebarPlaylists extends React.Component {
         onClick={this.props.onClickHandler.bind(this, this.props.source)}>
         <div className="playlist-label">
           <i className={folderIconClass}></i> {label}
+          <SongNotificationsContainer isHidden={this.props.source !== 'local'} />
         </div>
         <ul className="chart-songs">
           {this.props.playlists}
