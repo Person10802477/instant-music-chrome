@@ -1,7 +1,9 @@
 {
   "app": {
     "background": {
-      "scripts": ["background/background.js"]
+      "scripts": [
+        "background/background.js"
+      ]
     }
   },
   "manifest_version": 2,
@@ -32,7 +34,12 @@
   "webview": {
     "partitions": [{
       "name": "static",
-      "accessible_resources": ["sandbox/sandbox.html", "sandbox/sandbox.js", "sandbox/sandbox.css"]
+      "accessible_resources": [
+        "sandbox/sandbox.html",
+        "sandbox/sandbox.js",
+        "sandbox/sandbox.css",
+        "sandbox/ga.js"
+      ]
     }]
   },
   "short_name": "Instant Music App",
