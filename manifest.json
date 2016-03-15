@@ -24,7 +24,7 @@
   "offline_enabled": false,
   "permissions": ["webview", "browser", "http://www.youtube.com/*",
     "https://www.youtube.com/*", "https://fonts.googleapis.com/*",
-    "storage", "notifications"
+    "https://www.google-analytics.com/*", "storage", "notifications"
   ],
   "sandbox": {
     "pages": ["sandbox/sandbox.html"]
