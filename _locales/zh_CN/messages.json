@@ -3,25 +3,25 @@
     "message": "Instant Music"
   },
   "extDescription": {
-    "message": "Listen to the latest popular music on Chrome with just one click."
+    "message": "听在Chrome最新的流行音乐，只需点击一下."
   },
   "billboardChart": {
     "message": "Billboard"
   },
   "melon": {
-    "message": "Melon"
+    "message": "瓜"
   },
   "k_pop_new": {
-    "message": "k-pop(new)"
+    "message": "k-pop(新)"
   },
   "k_pop_trending": {
-    "message": "k-pop(hot)"
+    "message": "k-pop(流行)"
   },
   "pop_trending": {
-    "message": "pop(hot)"
+    "message": "pop(流行)"
   },
   "j_pop_trending": {
-    "message": "j-pop(hot)"
+    "message": "j-pop(流行)"
   },
   "k_pop_ost": {
     "message": "k-OST"
@@ -30,16 +30,16 @@
     "message": "pop"
   },
   "rap": {
-    "message": "rap"
+    "message": "敲击"
   },
   "electronic": {
-    "message": "electronic"
+    "message": "电子"
   },
   "club": {
-    "message": "club"
+    "message": "俱乐部"
   },
   "christian": {
-    "message": "christian"
+    "message": "基督教"
   },
   "j_pop": {
     "message": "J-pop"
@@ -48,10 +48,10 @@
     "message": "K-pop"
   },
   "rock": {
-    "message": "rock"
+    "message": "摇滚音乐"
   },
   "favorites": {
-    "message": "Favorites"
+    "message": "收藏夹"
   },
   "mixed": {
     "message": "mixed"
@@ -81,31 +81,31 @@
     "message": "UK-pop"
   },
   "hiphop": {
-    "message": "hiphop"
+    "message": "嘻哈"
   },
   "songwriter": {
-    "message": "songwriter"
+    "message": "词曲作者"
   },
   "RnB": {
     "message": "R&B"
   },
   "classic": {
-    "message": "classic"
+    "message": "经典"
   },
   "newage": {
-    "message": "newage"
+    "message": "新时代"
   },
   "jazz": {
-    "message": "jazz"
+    "message": "爵士乐"
   },
   "reggae": {
-    "message": "reggae"
+    "message": "雷鬼"
   },
   "country": {
-    "message": "country"
+    "message": "乡村歌曲"
   },
   "easy": {
-    "message": "easy-listen"
+    "message": "易听"
   },
   "restart_msg": {
     "message": "Restart Now?!"
@@ -123,21 +123,21 @@
     "message": "Added to favorites chart"
   },
   "rank": {
-    "message": "Rank"
+    "message": "秩"
   },
   "song": {
-    "message": "Song"
+    "message": "歌曲"
   },
   "artist": {
-    "message": "Artist"
+    "message": "艺术家"
   },
   "search": {
-    "message": "Search"
+    "message": "搜索"
   },
   "instant_music": {
-    "message": "Instant Music"
+    "message": "即时音乐"
   },
   "save": {
-    "message": "Save"
+    "message": "保存"
   }
 }

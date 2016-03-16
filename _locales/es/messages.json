@@ -1,18 +1,18 @@
 {
 	"extName": {
-    "message": "Instant Music"
+    "message": "Música Instantánea"
   },
   "extDescription": {
-    "message": "Listen to the latest popular music on Chrome with just one click."
+    "message": "Escuchar la última música popular en Chrome con sólo un clic."
   },
   "billboardChart": {
     "message": "Billboard"
   },
   "melon": {
-    "message": "Melon"
+    "message": "Melón"
   },
   "k_pop_new": {
-    "message": "k-pop(new)"
+    "message": "k-pop(nuevo)"
   },
   "k_pop_trending": {
     "message": "k-pop(hot)"
@@ -33,13 +33,13 @@
     "message": "rap"
   },
   "electronic": {
-    "message": "electronic"
+    "message": "electrónico"
   },
   "club": {
     "message": "club"
   },
   "christian": {
-    "message": "christian"
+    "message": "cristiano"
   },
   "j_pop": {
     "message": "J-pop"
@@ -51,7 +51,7 @@
     "message": "rock"
   },
   "favorites": {
-    "message": "Favorites"
+    "message": "favoritos"
   },
   "mixed": {
     "message": "mixed"
@@ -90,22 +90,22 @@
     "message": "R&B"
   },
   "classic": {
-    "message": "classic"
+    "message": "clásico"
   },
   "newage": {
-    "message": "newage"
+    "message": "nueva era"
   },
   "jazz": {
     "message": "jazz"
   },
   "reggae": {
-    "message": "reggae"
+    "message": "el reggae"
   },
   "country": {
     "message": "country"
   },
   "easy": {
-    "message": "easy-listen"
+    "message": "fácil de escuchar"
   },
   "restart_msg": {
     "message": "Restart Now?!"
@@ -123,21 +123,21 @@
     "message": "Added to favorites chart"
   },
   "rank": {
-    "message": "Rank"
+    "message": "Rango"
   },
   "song": {
-    "message": "Song"
+    "message": "Canción"
   },
   "artist": {
-    "message": "Artist"
+    "message": "Artista"
   },
   "search": {
-    "message": "Search"
+    "message": "Buscar"
   },
   "instant_music": {
     "message": "Instant Music"
   },
   "save": {
-    "message": "Save"
+    "message": "Archivar"
   }
 }

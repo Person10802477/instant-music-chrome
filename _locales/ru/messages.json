@@ -3,55 +3,55 @@
     "message": "Instant Music"
   },
   "extDescription": {
-    "message": "Listen to the latest popular music on Chrome with just one click."
+    "message": "Слушайте последние популярной музыки на Chrome только с одним щелчком мыши."
   },
   "billboardChart": {
     "message": "Billboard"
   },
   "melon": {
-    "message": "Melon"
+    "message": "Дыня"
   },
   "k_pop_new": {
-    "message": "k-pop(new)"
+    "message": "K-поп(новый)"
   },
   "k_pop_trending": {
-    "message": "k-pop(hot)"
+    "message": "K-поп(популярный)"
   },
   "pop_trending": {
-    "message": "pop(hot)"
+    "message": "поп(популярный)"
   },
   "j_pop_trending": {
-    "message": "j-pop(hot)"
+    "message": "j-поп(популярный)"
   },
   "k_pop_ost": {
     "message": "k-OST"
   },
   "pop": {
-    "message": "pop"
+    "message": "популярный"
   },
   "rap": {
-    "message": "rap"
+    "message": "рэп"
   },
   "electronic": {
-    "message": "electronic"
+    "message": "электронный"
   },
   "club": {
-    "message": "club"
+    "message": "клуб"
   },
   "christian": {
-    "message": "christian"
+    "message": "Кристиан"
   },
   "j_pop": {
-    "message": "J-pop"
+    "message": "J-поп"
   },
-  "k_pop": {
-    "message": "K-pop"
+  "k_поп": {
+    "message": "K-поп"
   },
   "rock": {
-    "message": "rock"
+    "message": "рок"
   },
   "favorites": {
-    "message": "Favorites"
+    "message": "Избранные"
   },
   "mixed": {
     "message": "mixed"
@@ -75,37 +75,37 @@
     "message": "iTunes"
   },
   "us_pop": {
-    "message": "US-pop"
+    "message": "US-поп"
   },
-  "uk_pop": {
-    "message": "UK-pop"
+  "uk_поп": {
+    "message": "UK-поп"
   },
   "hiphop": {
-    "message": "hiphop"
+    "message": "хип-хоп"
   },
   "songwriter": {
-    "message": "songwriter"
+    "message": "песенник"
   },
   "RnB": {
     "message": "R&B"
   },
   "classic": {
-    "message": "classic"
+    "message": "классический"
   },
   "newage": {
-    "message": "newage"
+    "message": "новый вариант"
   },
   "jazz": {
-    "message": "jazz"
+    "message": "джаз"
   },
   "reggae": {
-    "message": "reggae"
+    "message": "регги"
   },
   "country": {
-    "message": "country"
+    "message": "песня страны"
   },
   "easy": {
-    "message": "easy-listen"
+    "message": "легкий слушать"
   },
   "restart_msg": {
     "message": "Restart Now?!"
@@ -123,21 +123,21 @@
     "message": "Added to favorites chart"
   },
   "rank": {
-    "message": "Rank"
+    "message": "Ранг"
   },
   "song": {
-    "message": "Song"
+    "message": "песня"
   },
   "artist": {
-    "message": "Artist"
+    "message": "художник"
   },
   "search": {
-    "message": "Search"
+    "message": "Поиск"
   },
   "instant_music": {
     "message": "Instant Music"
   },
   "save": {
-    "message": "Save"
+    "message": "спасти"
   }
 }

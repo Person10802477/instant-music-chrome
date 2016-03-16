@@ -136,5 +136,8 @@
   },
   "instant_music": {
     "message": "인스턴트 뮤직"
+  },
+  "save": {
+    "message": "저장"
   }
 }

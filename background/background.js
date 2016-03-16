@@ -10,7 +10,8 @@ chrome.app.runtime.onLaunched.addListener(function() {
       left: 0,
       top: 0
     },
-    minWidth: appWidth,
-    minHeight: appHeight
+    // minWidth: appWidth,
+    // minHeight: appHeight,
+    resizable: true
   });
 });

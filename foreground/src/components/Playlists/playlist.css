@@ -21,6 +21,7 @@
 .table.table-songs thead th {
   font-weight: normal;
   letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 table.table-songs {

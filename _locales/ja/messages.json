@@ -136,5 +136,8 @@
   },
   "instant_music": {
     "message": "インスタントミュージック"
+  },
+  "save": {
+    "message": "セーブ"
   }
 }

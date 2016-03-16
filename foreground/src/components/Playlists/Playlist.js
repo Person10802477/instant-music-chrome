@@ -63,6 +63,20 @@ class Playlist extends React.Component {
       position: 'absolute', // Element positioning
     }).spin(target);
 
+    var rankLabel, songLabel, artistLabel, saveLabel;
+
+    if (chrome.runtime.id) {
+      rankLabel = chrome.i18n.getMessage("rank");
+      songLabel = chrome.i18n.getMessage("song");
+      artistLabel = chrome.i18n.getMessage("artist");
+      saveLabel =  chrome.i18n.getMessage("save");
+    } else {
+      rankLabel = "RANK";
+      songLabel = "SONG";
+      artistLabel = "ARTIST";
+      saveLabel = "SAVE";
+    }
+
     if (!_.isEmpty(this.props.songs)) {
       songItems = this.makeSongItems(this.props.songs, savedSongs, currentVideoId);
     }
@@ -72,10 +86,10 @@ class Playlist extends React.Component {
         <table className="table table-songs table-condensed">
           <thead>
             <tr>
-              <th className="song-rank">RANK</th>
-              <th className="song-title">SONG</th>
-              <th className="song-artist">ARTIST</th>
-              <th className="song-save text-center">SAVE</th>
+              <th className="song-rank">{rankLabel}</th>
+              <th className="song-title">{songLabel}</th>
+              <th className="song-artist">{artistLabel}</th>
+              <th className="song-save text-center">{saveLabel}</th>
               <th className="song-share text-center">SHARE</th>
             </tr>
           </thead>
