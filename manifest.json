@@ -8,7 +8,7 @@
   },
   "manifest_version": 2,
   "name": "Instant Music",
-  "version": "0.214",
+  "version": "0.215",
   "default_locale": "en",
   "description": "Instant Music",
   "icons": {
