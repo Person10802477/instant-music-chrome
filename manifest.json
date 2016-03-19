@@ -8,9 +8,9 @@
   },
   "manifest_version": 2,
   "name": "Instant Music",
-  "version": "0.215",
+  "version": "0.216",
   "default_locale": "en",
-  "description": "Instant Music",
+  "description": "Play music without effort",
   "icons": {
     "16": "assets/icons/iconx16.png",
     "32": "assets/icons/iconx32.png",
@@ -26,7 +26,8 @@
   "offline_enabled": false,
   "permissions": ["webview", "browser", "http://www.youtube.com/*",
     "https://www.youtube.com/*", "https://fonts.googleapis.com/*",
-    "https://www.google-analytics.com/*", "storage", "notifications"
+    "https://www.google-analytics.com/*", "https://ssl.google-analytics.com",
+    "storage", "notifications"
   ],
   "sandbox": {
     "pages": ["sandbox/sandbox.html"]
