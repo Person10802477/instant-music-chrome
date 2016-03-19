@@ -28,6 +28,7 @@ table.table-songs {
   width: 100%;
   table-layout: fixed;
   border-bottom: 1px solid #444D60;
+  min-width: 500px;
 }
 
 .table-songs th {
@@ -37,11 +38,10 @@ table.table-songs {
 }
 
 .table-songs th.song-rank {
-  width: 8%;
+  width: 60px;
 }
 
 .table-songs th.song-title {
-  // width: 52%;
   width: 60%;
 }
 
@@ -50,11 +50,10 @@ table.table-songs {
 }
 
 .table-songs th.song-save {
-  width: 8%;
+  width: 60px;
 }
 
 .table-songs th.song-share {
-  // width: 8%;
   display: none;
 }
 
@@ -62,9 +61,10 @@ table.table-songs {
   display: none;
 }
 
+// Local playlists dont have rank, artist
+
 .playlist-songs.is-local .table-songs th.song-title {
-  // width: 84%;
-  width: 92%;
+  width: 100%;
 }
 
 .playlist-songs.is-local .table-songs th.song-rank {
@@ -81,4 +81,26 @@ table.table-songs {
 
 .playlist-songs.is-local .table-songs td.song-artist-cell {
   display: none;
+}
+
+@media (max-width: 900px) {
+  table.table-songs {
+    min-width: 300px;
+  }
+
+  .table-songs th.song-rank,
+  .table-songs td.song-rank-cell {
+    display: none;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1199px) {
+  table.table-songs {
+    min-width: 400px;
+  }
+
+  .table-songs th.song-rank,
+  .table-songs td.song-rank-cell {
+    display: none;
+  }
 }

@@ -51,3 +51,15 @@
 .search-bar.is-fetching .search-loading {
   display: block;
 }
+
+@media (max-width: 900px) {
+  .search-bar {
+    margin-left: 50px;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1199px) {
+  .search-bar {
+    margin-left: 200px;
+  }
+}

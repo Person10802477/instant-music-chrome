@@ -11,6 +11,9 @@ class Header extends React.Component {
           <span className="brand-logo">INSTANT MUSIC</span>
           <span className="beta-logo">Beta</span>
         </div>
+        <div className="brand-container-sm">
+          IM
+        </div>
         <SearchContainer />
       </div>
     );

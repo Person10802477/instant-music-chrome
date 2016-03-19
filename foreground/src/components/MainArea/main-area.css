@@ -7,6 +7,18 @@
   color: white;
 }
 
+@media (max-width: 900px) {
+  .main-area {
+    margin-left: 50px;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1199px) {
+  .main-area {
+    margin-left: 200px;
+  }
+}
+
 ::-webkit-scrollbar {
   -webkit-appearance: none;
   width: 7px;
