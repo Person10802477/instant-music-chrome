@@ -19,7 +19,7 @@ import rootReducers from './reducers';
 if (process.env.NODE_ENV === 'development') {
   require('../main.html')
 }
-  
+
 const logger = createLogger();
 const store = createStore(
   rootReducers,
