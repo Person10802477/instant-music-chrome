@@ -14,6 +14,9 @@ var messageHandler = function(rawMsg) {
   switch (msg.type) {
     case CONSTANTS.LOAD_VIDEO:
       player.loadVideoById(msg.videoId);
+      if (ga) {
+        ga('send', 'event', 'YT', 'playVideo', msg.videoId);
+      }
       break;
     case CONSTANTS.CUE_VIDEO:
       player.cueVideoById(msg.videoId);
