@@ -1,11 +1,13 @@
 var APP_ID = chrome.runtime.id;
 
+// FIXME: merge these constants into ../others/constants.js
 var CONSTANTS = {
   LOAD_VIDEO: 'LOAD_VIDEO',
   CUE_VIDEO: 'CUE_VIDEO',
   TOGGLE_PLAY_PAUSE: 'TOGGLE_PLAY_PAUSE',
   ERROR_CODE: 6,
-  PLAYER_READY: 'PLAYER_READY'
+  PLAYER_READY: 'PLAYER_READY',
+  SET_VOLUME: 'SET_VOLUME',
 };
 
 var messageHandler = function(rawMsg) {
@@ -20,6 +22,10 @@ var messageHandler = function(rawMsg) {
       break;
     case CONSTANTS.CUE_VIDEO:
       player.cueVideoById(msg.videoId);
+      break;
+    case CONSTANTS.SET_VOLUME:
+      console.log("SETVOLUME", msg.volume);
+      player.setVolume(msg.volume);
       break;
     case CONSTANTS.TOGGLE_PLAY_PAUSE:
       var playerState = player.getPlayerState();
@@ -56,6 +62,7 @@ var registerYouTubeEvents = function() {
 
   window.onPlayerReady = function(event) {
     chrome.runtime.sendMessage(APP_ID, {data: CONSTANTS.PLAYER_READY});
+    event.target.setVolume(100);
   }
 
   window.onPlayerStateChange = function(event) {

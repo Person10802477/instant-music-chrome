@@ -264,24 +264,37 @@ export function removeSongFromLocalPlaylistAndChrome(playlist, song) {
   }
 }
 
-function getNextSong(currentSong, currentPlaylist) {
-  var idx = _.findIndex(currentPlaylist.songs, (song) =>
-    (song.videoId === currentSong.videoId));
-  var nextIdx = (idx === currentPlaylist.songs.length-1) ? 0 : idx+1;
-  return currentPlaylist.songs[nextIdx];
+function getRandomIdx(size) {
+  return Math.floor(Math.random() * size);
 }
 
-function getPrevSong(currentSong, currentPlaylist) {
-  var idx = _.findIndex(currentPlaylist.songs, (song) =>
-    (song.videoId === currentSong.videoId));
+// NOTE: Repeat is more important than shuffle
+function getNextSong(state) {
+  if (state.isRepeat) {
+    return state.currentSong;
+  } else if (state.isShuffle) {
+    var randomIdx = getRandomIdx(state.currentPlaylist.songs.length);
+    return state.currentPlaylist.songs[randomIdx];
+  } else {
+    var idx = _.findIndex(state.currentPlaylist.songs, (song) =>
+    (song.videoId === state.currentSong.videoId));
+    var nextIdx = (idx === state.currentPlaylist.songs.length-1) ? 0 : idx+1;
+    return state.currentPlaylist.songs[nextIdx];
+  }
+}
+
+// NOTE: Go with the natural flow even if shuffle/repeat is on
+function getPrevSong(state) {
+  var idx = _.findIndex(state.currentPlaylist.songs, (song) =>
+    (song.videoId === state.currentSong.videoId));
   var prevIdx = (idx === 0) ? 0 : idx-1;
-  return currentPlaylist.songs[prevIdx];
+  return state.currentPlaylist.songs[prevIdx];
 }
 
 export function playNextSong() {
   return (dispatch, getState) => {
     var state = getState();
-    var nextSong = getNextSong(state.currentSong, state.currentPlaylist);
+    var nextSong = getNextSong(state);
     dispatch(updateCurrentSongAndPlayIt(nextSong));
   }
 }
@@ -289,7 +302,7 @@ export function playNextSong() {
 export function playPrevSong() {
   return (dispatch, getState) => {
     var state = getState();
-    var prevSong = getPrevSong(state.currentSong, state.currentPlaylist);
+    var prevSong = getPrevSong(state);
     dispatch(updateCurrentSongAndPlayIt(prevSong));
   }
 }

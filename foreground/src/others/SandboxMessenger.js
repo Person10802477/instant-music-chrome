@@ -1,6 +1,6 @@
 import { updateCurrentSongAndPlayIt, playNextSong, playPrevSong } from "../containers/PlaylistContainer/PlaylistActions";
 import { togglePlayPause, togglePlayingState } from "../containers/ControlsContainer/ControlsActions";
-import { COMMANDS, PLAYER_STATES, CONSTANTS } from "./constants";
+import { PLAYER_STATES, CONSTANTS } from "./constants";
 
 class SandboxMessenger {
   constructor(store, webview) {
@@ -64,13 +64,13 @@ class SandboxMessenger {
 
   commandHandler(command) {
     switch(command) {
-      case COMMANDS.TOGGLE_PLAY_PAUSE:
+      case CONSTANTS.TOGGLE_PLAY_PAUSE:
         this.store.dispatch(togglePlayPause());
         break;
-      case COMMANDS.PLAY_PREV_SONG:
+      case CONSTANTS.PLAY_PREV_SONG:
         this.store.dispatch(playPrevSong());
         break;
-      case COMMANDS.PLAY_NEXT_SONG:
+      case CONSTANTS.PLAY_NEXT_SONG:
         this.store.dispatch(playNextSong());
         break;
       default:
