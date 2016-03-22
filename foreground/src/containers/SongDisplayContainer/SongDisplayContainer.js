@@ -4,7 +4,8 @@ import SongDisplay from '../../components/SongDisplay/SongDisplay';
 
 const mapStateToProps = (state) => {
   return {
-    currentSong: state.currentSong
+    currentSong: state.currentSong,
+    videoSize: state.videoSize
   }
 }
 

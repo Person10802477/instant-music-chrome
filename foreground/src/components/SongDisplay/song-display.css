@@ -5,6 +5,18 @@
   text-align: center;
 }
 
+.song-display.small-video {
+  margin-top: 0;
+}
+
+.song-display.big-video {
+  margin-top: 280px;
+}
+
+.song-display.full-video {
+  display: none;
+}
+
 .song-display .song-title {
   font-size: 16px;
   font-weight: bold;

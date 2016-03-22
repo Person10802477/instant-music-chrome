@@ -46,7 +46,10 @@ class Playlist extends React.Component {
       "playlist-songs": true,
       // THIS IS A HACK! I BETTER CHECK isFetching
       "is-fetching": (_.isEmpty(this.props.songs) && !isLocal),
-      "is-local": isLocal
+      "is-local": isLocal,
+      'small-video': this.props.videoSize.height === 200,
+      'big-video': this.props.videoSize.height === 480,
+      'full-video': this.props.videoSize.height > 480
     });
     var target = this.refs.playlistLoading;
     var spinner = new Spinner({

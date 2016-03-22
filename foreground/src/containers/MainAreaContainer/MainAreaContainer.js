@@ -10,7 +10,8 @@ const mapStateToProps = (state) => {
   return {
     currentPlaylist: state.currentPlaylist,
     currentSong: state.currentSong,
-    localPlaylist: state.playlistsBySource['local'][0]
+    localPlaylist: state.playlistsBySource['local'][0],
+    videoSize: state.videoSize,
   };
 }
 

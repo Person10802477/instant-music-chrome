@@ -2,19 +2,19 @@ import React from "react";
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-// FIXME: we only need fetching-related functions here
-import * as PlaylistActions from '../PlaylistContainer/PlaylistActions';
+import * as WebviewActions from './WebviewActions';
 import Webview from '../../components/Webview/Webview';
 
 const mapStateToProps = (state) => {
   return {
-    state: state
-  };
+    videoSize: state.videoSize,
+    isWebviewReady: state.isWebviewReady
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    dispatch: dispatch
+    actions: bindActionCreators(WebviewActions, dispatch)
   };
 }
 

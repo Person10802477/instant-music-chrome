@@ -5,6 +5,15 @@
   padding-bottom: 20px;
 }
 
+.playlist-songs.big-video {
+  margin-top: 500px;
+  height: calc(100% - 500px);
+}
+
+.playlist-songs.full-video {
+  display: none;
+}
+
 .playlist-songs .playlist-loading {
   display: none;
 }

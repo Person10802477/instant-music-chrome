@@ -13,13 +13,20 @@ class SongDisplay extends React.Component {
       artist = "";
     }
 
+    var songDisplayClass = classNames({
+      'song-display': true,
+      'small-video': this.props.videoSize.height === 200,
+      'big-video': this.props.videoSize.height === 480,
+      'full-video': this.props.videoSize.height > 480,
+    });
+
     var titleClass = classNames({
       "song-title truncate": true,
       "extra-margin-top": !artist
     });
 
     return (
-      <div className="song-display">
+      <div className={songDisplayClass}>
         <div className={titleClass}>
           {title}
         </div>

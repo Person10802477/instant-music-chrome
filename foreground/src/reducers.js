@@ -5,6 +5,7 @@ import { isPlaying } from './containers/ControlsContainer/ControlsReducer';
 import { numSongNotifications } from './containers/SongNotificationsContainer/SongNotificationsReducer';
 import { currentVolume } from './containers/VolumeControlContainer/VolumeControlReducer';
 import { isShuffle, isRepeat } from './containers/AuxControlsContainer/AuxControlsReducer';
+import { videoSize, isWebviewReady } from './containers/WebviewContainer/WebviewReducer';
 
 const rootReducers = combineReducers({
   currentSong,
@@ -16,6 +17,8 @@ const rootReducers = combineReducers({
   currentVolume,
   isShuffle,
   isRepeat,
+  videoSize,
+  isWebviewReady,
 });
 
 export default rootReducers;

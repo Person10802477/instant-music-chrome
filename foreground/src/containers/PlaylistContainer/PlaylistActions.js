@@ -20,7 +20,7 @@ export function updateCurrentSong(song) {
 export function updateCurrentSongAndPlayIt(song) {
   return (dispatch) => {
     if (chrome.runtime.id) {
-      window.app.sandboxMessenger.sendMessage({
+      window.IM.sandboxMessenger.sendMessage({
         type: CONSTANTS.LOAD_VIDEO,
         videoId: song.videoId
       });

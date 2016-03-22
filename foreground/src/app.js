@@ -29,8 +29,10 @@ const store = createStore(
 $(function() {
   // exposing sandboxMessenger to a global namespace
   // so it can communicate with webview and sandbox
-  window.app = {};
-  app.sandboxMessenger = new SandboxMessenger(store, $('webview')[0]);
+  window.IM = window.IM || {};
+  IM.store = store;
+
+  // app.sandboxMessenger = new SandboxMessenger(store, $('webview')[0]);
 
   ReactDOM.render(
     <Provider store={store}>

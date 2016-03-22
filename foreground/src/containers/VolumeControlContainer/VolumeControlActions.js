@@ -10,7 +10,7 @@ function _setVolume(volume) {
 export function setVolume(volume) {
   return (dispatch, getState) => {
     // Tell YouTube to change the player's volume
-    window.app.sandboxMessenger.sendMessage({
+    window.IM.sandboxMessenger.sendMessage({
       type: SANDBOX_CONSTANTS.SET_VOLUME,
       volume: volume
     });

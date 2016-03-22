@@ -1,5 +1,6 @@
 import { updateCurrentSongAndPlayIt, playNextSong, playPrevSong } from "../containers/PlaylistContainer/PlaylistActions";
 import { togglePlayPause, togglePlayingState } from "../containers/ControlsContainer/ControlsActions";
+import { webviewReady } from "../containers/WebviewContainer/WebviewActions";
 import { PLAYER_STATES, CONSTANTS } from "./constants";
 
 class SandboxMessenger {
@@ -30,6 +31,7 @@ class SandboxMessenger {
   // FIXME: handle other cases
   messageHandler(msg) {
     switch (msg.data) {
+
       case PLAYER_STATES.ENDED:
       case PLAYER_STATES.ERROR:
         this.store.dispatch(playNextSong());
@@ -49,12 +51,13 @@ class SandboxMessenger {
       case PLAYER_STATES.PLAYER_READY:
         var currentSong = this.store.getState().currentSong;
         if (currentSong) {
-          window.app.sandboxMessenger.sendMessage({
-            type: CONSTANTS.CUE_VIDEO,
+          this.sendMessage({
+            type: CONSTANTS.LOAD_VIDEO,
             videoId: currentSong.videoId
-          });          
+          });
         }
-        $(window.webview).show();
+
+        this.store.dispatch(webviewReady());
         break;
       default:
         // pass

@@ -10,7 +10,7 @@ export function togglePlayingState() {
 
 export function togglePlayPause() {
   return (dispatch) => {
-    window.app.sandboxMessenger.sendMessage({
+    window.IM.sandboxMessenger.sendMessage({
       type: CONSTANTS.TOGGLE_PLAY_PAUSE
     });
 

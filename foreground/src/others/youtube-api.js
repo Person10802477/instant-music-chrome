@@ -6,7 +6,7 @@ const YOUTUBE_SEARCH_URL = INITIAL_SEARCH_URL + "&key=" + YOUTUBE_API_KEY + "&ma
 
 export default class YouTubeFetcher {
   constructor() {
-    console.log("youtube Fetcher");
+    // console.log("youtube Fetcher");
   }
 
   makeVideoIdReq(song) {

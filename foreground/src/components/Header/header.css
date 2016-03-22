@@ -6,6 +6,7 @@
   height: 40px;
   background-color: #515B70;
   color: white;
+  z-index: 10;
 }
 
 .header .brand-container {

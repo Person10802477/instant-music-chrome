@@ -8,11 +8,15 @@ var CONSTANTS = {
   ERROR_CODE: 6,
   PLAYER_READY: 'PLAYER_READY',
   SET_VOLUME: 'SET_VOLUME',
+  SET_VIDEO_SIZE: 'SET_VIDEO_SIZE',
+  SMALL_SIZE: "SMALL_SIZE",
+  BIG_SIZE: "BIG_SIZE",
+  MAX_SIZE: "MAX_SIZE",
 };
 
 var messageHandler = function(rawMsg) {
   var msg = rawMsg.data;
-
+  console.log(msg)
   switch (msg.type) {
     case CONSTANTS.LOAD_VIDEO:
       player.loadVideoById(msg.videoId);
@@ -24,8 +28,10 @@ var messageHandler = function(rawMsg) {
       player.cueVideoById(msg.videoId);
       break;
     case CONSTANTS.SET_VOLUME:
-      console.log("SETVOLUME", msg.volume);
       player.setVolume(msg.volume);
+      break;
+    case CONSTANTS.SET_VIDEO_SIZE:
+      player.setSize(msg.width, msg.height);
       break;
     case CONSTANTS.TOGGLE_PLAY_PAUSE:
       var playerState = player.getPlayerState();
@@ -47,8 +53,6 @@ var sendMessage = function(msg) {
 var registerYouTubeEvents = function() {
   window.onYouTubeIframeAPIReady = function() {
     window.player = new YT.Player('player', {
-      width: '300',
-      height: '200',
       videoId: 'XyzaMpAVm3s',
       origin: "chrome-extension://" + chrome.runtime.id,
       events: {
@@ -56,13 +60,16 @@ var registerYouTubeEvents = function() {
         'onStateChange': onPlayerStateChange,
         'onError': onPlayerError
       },
-      autohide: 0 // FIXME: how come this potion doesn't work?
+      wmode: "transparent",
+      autohide: 0, // FIXME: how come this potion doesn't work?
+      fs: 0
     });
   }
 
   window.onPlayerReady = function(event) {
     chrome.runtime.sendMessage(APP_ID, {data: CONSTANTS.PLAYER_READY});
     event.target.setVolume(100);
+    $('#player').removeAttr("width").removeAttr("height");
   }
 
   window.onPlayerStateChange = function(event) {

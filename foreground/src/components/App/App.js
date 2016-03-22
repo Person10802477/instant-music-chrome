@@ -3,11 +3,12 @@ window.classNames = require('classnames');
 
 // containers
 import HeaderContainer from "../../containers/HeaderContainer/HeaderContainer";
-import MainAreaContainer from "../../containers/MainAreaContainer/MainAreaContainer"
-import Sidebar from "../../components/Sidebar/Sidebar"
-import RightColumn from "../../components/RightColumn/RightColumn"
+import MainAreaContainer from "../../containers/MainAreaContainer/MainAreaContainer";
+import Sidebar from "../../components/Sidebar/Sidebar";
+import RightColumn from "../../components/RightColumn/RightColumn";
+import WebviewContainer from "../../containers/WebviewContainer/WebviewContainer";
 
-require('./app.css')
+require('./app.css');
 
 class App extends React.Component {
   render() {
@@ -17,6 +18,7 @@ class App extends React.Component {
         <MainAreaContainer />
         <Sidebar />
         <RightColumn />
+        <WebviewContainer />
       </div>
     );
   }

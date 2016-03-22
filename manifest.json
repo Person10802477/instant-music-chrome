@@ -39,7 +39,8 @@
         "sandbox/sandbox.html",
         "sandbox/sandbox.js",
         "sandbox/sandbox.css",
-        "sandbox/gatrack.js"
+        "sandbox/gatrack.js",
+        "sandbox/jquery-1.12.2.js"
       ]
     }]
   },

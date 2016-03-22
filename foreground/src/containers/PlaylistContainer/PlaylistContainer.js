@@ -7,7 +7,7 @@ import Playlists from '../../components/Playlists/Playlists';
 const mapStateToProps = (state) => {
   return {
     currentPlaylist: state.currentPlaylist,
-    playlists: state.playlistsBySource
+    playlists: state.playlistsBySource,
   };
 }
 

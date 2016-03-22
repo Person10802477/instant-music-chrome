@@ -23,7 +23,6 @@ var filesToMove = [
   './background/**/*',
   './foreground/bundle/**/*',
   './foreground/main.*',
-  './foreground/setup.js',
   './node_modules/jquery/dist/jquery.js',
   './node_modules/underscore/underscore.js',
   './node_modules/bootstrap/dist/**/*',
