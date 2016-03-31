@@ -27,8 +27,14 @@
   "permissions": ["webview", "browser", "http://www.youtube.com/*",
     "https://www.youtube.com/*", "https://fonts.googleapis.com/*",
     "https://www.google-analytics.com/", "https://ssl.google-analytics.com/",
-    "storage", "notifications"
+    "storage", "notifications", "identity"
   ],
+  "oauth2": {
+    "client_id": "962679610062-bk7oatbtl15ie7qc745unrttafl7pv7e.apps.googleusercontent.com",
+    "scopes": [
+      "email"
+    ]
+  },
   "sandbox": {
     "pages": ["sandbox/sandbox.html"]
   },
