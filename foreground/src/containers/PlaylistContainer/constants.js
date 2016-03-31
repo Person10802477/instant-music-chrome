@@ -16,7 +16,7 @@ export const CONSTANTS = {
 var PLAYLIST_DATA;
 var NUM_SONGS;
 
-if (chrome.runtime.id && chrome.runtime.id === "kpfmenmbohaoklohdhplnchfkngfhdhl") {
+if (chrome.runtime.id) {
   NUM_SONGS = 50;
 } else if (chrome.runtime.id === undefined) {
   NUM_SONGS = 5;
@@ -27,15 +27,15 @@ if (chrome.runtime.id && chrome.runtime.id === "kpfmenmbohaoklohdhplnchfkngfhdhl
 if (chrome.runtime.id) {
   PLAYLIST_DATA = {
     melon: [
-      {source: 'melon', playlistName: chrome.i18n.getMessage("k_pop_trending"), url: "http://instantmusic.cloudapp.net/charts/realtime?version=1&page=1&count="+NUM_SONGS},
-      {source: 'melon', playlistName: chrome.i18n.getMessage("k_pop_new"), url: "http://instantmusic.cloudapp.net/newreleases/songs?version=1&page=1&count="+NUM_SONGS},
-      {source: 'melon', playlistName: chrome.i18n.getMessage("k_pop_ost"), url: "http://instantmusic.cloudapp.net/charts/topgenres/DP0300?version=1&page=1&count="+NUM_SONGS},
-      {source: 'melon', playlistName: chrome.i18n.getMessage("pop_trending"), url: "http://instantmusic.cloudapp.net/charts/topgenres/DP0200?version=1&page=1&count="+NUM_SONGS},
-      {source: 'melon', playlistName: chrome.i18n.getMessage("j_pop_trending"), url: "http://instantmusic.cloudapp.net/charts/topgenres/DP0400?version=1&page=1&count="+NUM_SONGS},
-      {source: 'melon', playlistName: chrome.i18n.getMessage("classic"), url: "http://instantmusic.cloudapp.net/charts/topgenres/DP0500?version=1&page=1&count="+NUM_SONGS},
-      {source: 'melon', playlistName: chrome.i18n.getMessage("newage"), url: "http://instantmusic.cloudapp.net/charts/topgenres/DP0800?version=1&page=1&count="+NUM_SONGS},
-      {source: 'melon', playlistName: chrome.i18n.getMessage("jazz"), url: "http://instantmusic.cloudapp.net/charts/topgenres/DP0900?version=1&page=1&count="+NUM_SONGS},
-      {source: 'melon', playlistName: chrome.i18n.getMessage("christian"), url: "http://instantmusic.cloudapp.net/charts/topgenres/DP0600?version=1&page=1&count="+NUM_SONGS},
+      {source: 'melon', playlistName: chrome.i18n.getMessage("k_pop_trending"), url: "http://instant-iv0npoz3.cloudapp.net/charts/realtime?version=1&page=1&count="+NUM_SONGS},
+      {source: 'melon', playlistName: chrome.i18n.getMessage("k_pop_new"), url: "http://instant-iv0npoz3.cloudapp.net/newreleases/songs?version=1&page=1&count="+NUM_SONGS},
+      {source: 'melon', playlistName: chrome.i18n.getMessage("k_pop_ost"), url: "http://instant-iv0npoz3.cloudapp.net/charts/topgenres/DP0300?version=1&page=1&count="+NUM_SONGS},
+      {source: 'melon', playlistName: chrome.i18n.getMessage("pop_trending"), url: "http://instant-iv0npoz3.cloudapp.net/charts/topgenres/DP0200?version=1&page=1&count="+NUM_SONGS},
+      {source: 'melon', playlistName: chrome.i18n.getMessage("j_pop_trending"), url: "http://instant-iv0npoz3.cloudapp.net/charts/topgenres/DP0400?version=1&page=1&count="+NUM_SONGS},
+      {source: 'melon', playlistName: chrome.i18n.getMessage("classic"), url: "http://instant-iv0npoz3.cloudapp.net/charts/topgenres/DP0500?version=1&page=1&count="+NUM_SONGS},
+      {source: 'melon', playlistName: chrome.i18n.getMessage("newage"), url: "http://instant-iv0npoz3.cloudapp.net/charts/topgenres/DP0800?version=1&page=1&count="+NUM_SONGS},
+      {source: 'melon', playlistName: chrome.i18n.getMessage("jazz"), url: "http://instant-iv0npoz3.cloudapp.net/charts/topgenres/DP0900?version=1&page=1&count="+NUM_SONGS},
+      {source: 'melon', playlistName: chrome.i18n.getMessage("christian"), url: "http://instant-iv0npoz3.cloudapp.net/charts/topgenres/DP0600?version=1&page=1&count="+NUM_SONGS},
     ],
     itunes: [
       {source: 'itunes', playlistName: chrome.i18n.getMessage("us_pop"), url: 'https://itunes.apple.com/us/rss/topsongs/limit='+NUM_SONGS+'/explicit=true/json'},
@@ -59,15 +59,15 @@ if (chrome.runtime.id) {
 } else {
   PLAYLIST_DATA = {
     melon: [
-      {source: 'melon', playlistName: "k_pop_trending", url: "http://instantmusic.cloudapp.net/charts/realtime?version=1&page=1&count="+NUM_SONGS},
-      {source: 'melon', playlistName: "k_pop_new", url: "http://instantmusic.cloudapp.net/newreleases/songs?version=1&page=1&count="+NUM_SONGS},
-      {source: 'melon', playlistName: "k_pop_ost", url: "http://instantmusic.cloudapp.net/charts/topgenres/DP0300?version=1&page=1&count="+NUM_SONGS},
-      {source: 'melon', playlistName: "pop_trending", url: "http://instantmusic.cloudapp.net/charts/topgenres/DP0200?version=1&page=1&count="+NUM_SONGS},
-      {source: 'melon', playlistName: "j_pop_trending", url: "http://instantmusic.cloudapp.net/charts/topgenres/DP0400?version=1&page=1&count="+NUM_SONGS},
-      {source: 'melon', playlistName: "classic", url: "http://instantmusic.cloudapp.net/charts/topgenres/DP0500?version=1&page=1&count="+NUM_SONGS},
-      {source: 'melon', playlistName: "newage", url: "http://instantmusic.cloudapp.net/charts/topgenres/DP0800?version=1&page=1&count="+NUM_SONGS},
-      {source: 'melon', playlistName: "jazz", url: "http://instantmusic.cloudapp.net/charts/topgenres/DP0900?version=1&page=1&count="+NUM_SONGS},
-      {source: 'melon', playlistName: "christian", url: "http://instantmusic.cloudapp.net/charts/topgenres/DP0600?version=1&page=1&count="+NUM_SONGS},
+      {source: 'melon', playlistName: "k_pop_trending", url: "http://instant-iv0npoz3.cloudapp.net/charts/realtime?version=1&page=1&count="+NUM_SONGS},
+      {source: 'melon', playlistName: "k_pop_new", url: "http://instant-iv0npoz3.cloudapp.net/newreleases/songs?version=1&page=1&count="+NUM_SONGS},
+      {source: 'melon', playlistName: "k_pop_ost", url: "http://instant-iv0npoz3.cloudapp.net/charts/topgenres/DP0300?version=1&page=1&count="+NUM_SONGS},
+      {source: 'melon', playlistName: "pop_trending", url: "http://instant-iv0npoz3.cloudapp.net/charts/topgenres/DP0200?version=1&page=1&count="+NUM_SONGS},
+      {source: 'melon', playlistName: "j_pop_trending", url: "http://instant-iv0npoz3.cloudapp.net/charts/topgenres/DP0400?version=1&page=1&count="+NUM_SONGS},
+      {source: 'melon', playlistName: "classic", url: "http://instant-iv0npoz3.cloudapp.net/charts/topgenres/DP0500?version=1&page=1&count="+NUM_SONGS},
+      {source: 'melon', playlistName: "newage", url: "http://instant-iv0npoz3.cloudapp.net/charts/topgenres/DP0800?version=1&page=1&count="+NUM_SONGS},
+      {source: 'melon', playlistName: "jazz", url: "http://instant-iv0npoz3.cloudapp.net/charts/topgenres/DP0900?version=1&page=1&count="+NUM_SONGS},
+      {source: 'melon', playlistName: "christian", url: "http://instant-iv0npoz3.cloudapp.net/charts/topgenres/DP0600?version=1&page=1&count="+NUM_SONGS},
     ],
     itunes: [
       {source: 'itunes', playlistName: "us_pop", url: 'https://itunes.apple.com/us/rss/topsongs/limit='+NUM_SONGS+'/explicit=true/json'},
