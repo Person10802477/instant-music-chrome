@@ -16,7 +16,6 @@ var CONSTANTS = {
 
 var messageHandler = function(rawMsg) {
   var msg = rawMsg.data;
-  console.log(msg)
   switch (msg.type) {
     case CONSTANTS.LOAD_VIDEO:
       player.loadVideoById(msg.videoId);

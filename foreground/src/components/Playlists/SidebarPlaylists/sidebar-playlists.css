@@ -1,4 +1,5 @@
-.playlists ul {
+.playlists .playlist-folders,
+.playlists .chart-songs {
   padding-left: 5px;
 }
 
@@ -25,10 +26,11 @@
 }
 
 .playlists .sidebar-playlist .chart-songs .sidebar-playlist-item {
+  position: relative;
   color: #ccc;
-  cursor: pointer;
   list-style: none;
   padding: 5px 0;
+  cursor: pointer;
 }
 
 .playlists .sidebar-playlist .chart-songs .sidebar-playlist-item:hover {
@@ -38,4 +40,31 @@
 .playlists .sidebar-playlist .chart-songs .sidebar-playlist-item.active {
   color: white;
   font-weight: bold;
+}
+
+.input-playlist-wrapper {
+  list-style: none;
+  padding: 5px 0;
+  color: black;
+}
+
+.input-playlist-wrapper i {
+  margin: 0 6px;
+  color: #ccc;
+}
+
+form.form-playlist {
+  display: inline;
+}
+
+input.input-playlist {
+  width: 200px;
+  border: 0;
+  border-radius: 4px;
+  padding: 2px 6px;
+  margin-left: 4px;
+}
+
+input.input-playlist:focus {
+  outline: none;
 }

@@ -13,11 +13,11 @@ class Playlist extends React.Component {
   }
 
   onSaveSongHandler(song) {
-    this.props.addSongToLocalPlaylistAndChrome(this.props.localPlaylist, song);
+    this.props.addSongToPlaylist(this.props.localSavePlaylist, song);
   }
 
   onRemoveSongHandler(song) {
-    this.props.removeSongFromLocalPlaylistAndChrome(this.props.localPlaylist, song);
+    this.props.removeSongFromLocalPlaylistAndChrome(this.props.localSavePlaylist, song);
   }
 
   makeSongItems(songs, savedSongs, currentVideoId) {
@@ -31,6 +31,10 @@ class Playlist extends React.Component {
           isSaved={!!(_.find(savedSongs, (s) => s.videoId === song.videoId))}
           onSaveSong={this.onSaveSongHandler}
           onRemoveSong={this.onRemoveSongHandler}
+          showContextMenu={this.props.showContextMenu}
+          hideContextMenu={this.props.hideContextMenu}
+          localPlaylists={this.props.localPlaylists}
+          addSongToPlaylist={this.props.addSongToPlaylist}
         />
       )
     )
@@ -39,7 +43,7 @@ class Playlist extends React.Component {
   render() {
     // It might be better to get currentPlaylist as props
     var songItems;
-    var savedSongs = this.props.localPlaylist.songs;
+    var savedSongs = this.props.localSavePlaylist ? this.props.localSavePlaylist.songs : [];
     var currentVideoId = (this.props.currentSong ? this.props.currentSong.videoId : '')
     var isLocal = this.props.isLocal;
     var playlistClass = classNames({
@@ -92,8 +96,8 @@ class Playlist extends React.Component {
               <th className="song-rank">{rankLabel}</th>
               <th className="song-title">{songLabel}</th>
               <th className="song-artist">{artistLabel}</th>
-              <th className="song-save text-center">{saveLabel}</th>
-              <th className="song-share text-center">SHARE</th>
+              <th className="song-save text-center"></th>
+              <th className="song-more text-center"></th>
             </tr>
           </thead>
           <tbody id="songitems">

@@ -6,13 +6,6 @@ import { connect } from 'react-redux';
 import * as PlaylistActions from '../PlaylistContainer/PlaylistActions';
 import Header from '../../components/Header/Header';
 
-// const mapStateToProps = (state) => {
-//   return {
-//     currentPlaylist: state.currentPlaylist,
-//     currentSong: state.currentSong
-//   };
-// }
-
 const mapDispatchToProps = (dispatch) => {
   return {
     actions: bindActionCreators(PlaylistActions, dispatch)

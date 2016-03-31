@@ -14,15 +14,13 @@ class MainArea extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     // Only try to fetch if currentPlaylist was updated
-    var isCurrentPlaylistUpdated = (this.props.currentPlaylist !== nextProps.currentPlaylist);
-    if (isCurrentPlaylistUpdated) {
+    if (this.props.currentPlaylist !== nextProps.currentPlaylist) {
       this.props.actions.fetchPlaylistIfNeeded(nextProps.currentPlaylist);
     }
   }
 
   render() {
     var songs = this.props.currentPlaylist.songs || [];
-    var savedSongs = this.props.localPlaylist.songs;
     var isLocal = this.props.currentPlaylist && this.props.currentPlaylist.source === "local";
 
     return (
@@ -32,10 +30,13 @@ class MainArea extends React.Component {
           songs={songs}
           isLocal={isLocal}
           currentSong={this.props.currentSong}
-          localPlaylist={this.props.localPlaylist}
+          localPlaylists={this.props.localPlaylists}
+          localSavePlaylist={this.props.localPlaylists[0]}
           videoSize={this.props.videoSize}
-          addSongToLocalPlaylistAndChrome={this.props.actions.addSongToLocalPlaylistAndChrome}
+          addSongToPlaylist={this.props.actions.addSongToPlaylist}
           removeSongFromLocalPlaylistAndChrome={this.props.actions.removeSongFromLocalPlaylistAndChrome}
+          showContextMenu={this.props.actions.showContextMenu}
+          hideContextMenu={this.props.actions.hideContextMenu}
         />
       </div>
     );
