@@ -8,7 +8,7 @@
   },
   "manifest_version": 2,
   "name": "Instant Music",
-  "version": "0.218",
+  "version": "0.219",
   "default_locale": "en",
   "description": "Play music without effort",
   "icons": {
