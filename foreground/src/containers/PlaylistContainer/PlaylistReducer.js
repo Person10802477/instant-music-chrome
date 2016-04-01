@@ -61,18 +61,25 @@ function playlistsBySource(state = PLAYLIST_DATA, action) {
       var playlistUpdated = transformedPlaylist(state[action.playlist.source], action);
       return updatedPlaylists(playlistUpdated, state);
     case CONSTANTS.RECEIVE_USER_PLAYLISTS:
-      var userPlaylists = action.playlists.map((pl) =>
-        ({
-          playlistName: pl.title,
-          source: 'local',
-          songs: pl.songs.map((s) => ({
+      var userPlaylists = action.playlists.map((pl) => {
+        var songs;
+        if (pl.songs) {
+          songs = pl.songs.map((s) => ({
             videoId: s.video_id,
             title: s.title
-          })),
+          }));
+        } else {
+          songs = [];
+        }
+
+        return {
+          playlistName: pl.title,
+          source: 'local',
+          songs: songs,
           receivedAt: new Date(),
           isFetching: false
-        })
-      );
+        };
+      });
       var localPlaylists = [...state.local, ...userPlaylists];
       var playlistsWithUserPlaylists = Object.assign({}, state, {
         local: localPlaylists

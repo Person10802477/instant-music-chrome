@@ -19,7 +19,7 @@ class SidebarPlaylistItem extends React.Component {
         key={this.props.key}
         onClick={this.props.onClickHandler.bind(this, this.props.playlist)}
       >
-        <i className="fa fa-music"></i> {playlistName}
+        <i className="fa fa-music fa-fw"></i> {playlistName}
       </li>
     );
   }

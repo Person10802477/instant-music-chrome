@@ -2,16 +2,13 @@ class SongsController < ApplicationController
   before_action :set_playlist
 
   def index
-    # playlist = @user.playlists.find_by(title: params[:playlist_title])
     songs = @playlist.songs
-    render json: songs, only: [:video_id, :created_at]
+    render json: songs, only: [:title, :video_id, :created_at]
   end
 
   def create
-    # playlist = @user.playlists.find_by(title: params[:playlist_title])
     song = @playlist.songs.create(song_params)
-    
-    # NOTE: is it unnecessary to do this?
+
     if song.persisted?
       render json: song
     else

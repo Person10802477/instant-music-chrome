@@ -3,6 +3,9 @@ import { CONSTANTS, PLAYLIST_DATA } from './constants';
 import * as SONG_NOTIFICATIONS_ACTIONS from '../SongNotificationsContainer/SongNotificationsActions';
 import YouTubeFetcher from '../../others/youtube-api';
 
+// FIXME: move me to somewhere appropriate
+var API_URL = "http://localhost:3000/api/";
+
 export function updateCurrentPlaylist(playlist) {
   return {
     type: CONSTANTS.UPDATE_CURRENT_PLAYLIST,
@@ -185,6 +188,7 @@ function isUnique(songs, song) {
   return !_.find(songs, (s) => s.videoId === song.videoId);
 }
 
+// FIXME: Refactor this
 function addToChromeStorage(playlist, songs, song, dispatch) {
   var playlistName = playlist.playlistName;
 
@@ -203,6 +207,37 @@ function addToChromeStorage(playlist, songs, song, dispatch) {
   }
 }
 
+// HOWON: FIXME. NEED TO REFACTOR!!
+function addSongToPlaylist(playlist, song, dispatch) {
+  if (playlist.playlistName === "favorites") {
+    return false;
+  }
+
+  chrome.identity.getAuthToken({ 'interactive': false }, function(token) {
+    $.post(API_URL+"songs", {
+      access_token: token,
+      playlist_title: playlist.playlistName,
+      video_id: song.videoId,
+      title: song.title
+    }, function(song) {
+      // FIXME: SUPPORT KOREAN
+      var params = "songs?access_token="+token+"&playlist_title="+playlist.playlistName;
+
+      $.get(API_URL+params, function(songs) {
+        if (songs) {
+          var songsUpdated = songs.map(s => ({
+            videoId: s.video_id,
+            title: s.title
+          }));
+        }
+
+        dispatch(updateLocalPlaylistAndReceiveIfNecessary(playlist, songsUpdated));
+        dispatch(SONG_NOTIFICATIONS_ACTIONS.addSongNotifications());        
+      });
+    });
+  });
+}
+
 function initChromeStorage(playlist, song, dispatch) {
   var playlistName = playlist.playlistName;
   var obj = {};
@@ -219,14 +254,21 @@ function initChromeStorage(playlist, song, dispatch) {
   });
 }
 
+// Refactor this to move away from using ChromeStorage
 export function addSongToLocalPlaylistAndChrome(playlist, song) {
   return (dispatch, getState) => {
+    var currentPlaylist = getState().currentPlaylist;
+
     if (chrome.runtime.id) {
       getChromeSongs(playlist.playlistName, function(songs) {
         if (_.isEmpty(songs)) {
           initChromeStorage(playlist, song, dispatch);
         } else {
-          addToChromeStorage(playlist, songs, song, dispatch);
+          if (currentPlaylist.playlistName === "favorites") {
+            addToChromeStorage(playlist, songs, song, dispatch);  
+          } else {
+            addSongToPlaylist(currentPlaylist, song, dispatch)  
+          }
         }
       });
     }
@@ -319,6 +361,7 @@ function updateLocalPlaylist(playlist, songs) {
 export function updateLocalPlaylistAndReceiveIfNecessary(playlist, songs) {
   return (dispatch, getState) => {
     var currentPlaylist = getState().currentPlaylist;
+
     dispatch(updateLocalPlaylist(playlist, songs));
 
     // If we are looking at the playlist that the song was just added to,
@@ -345,22 +388,26 @@ function receiveUserPlaylists(playlists) {
   }
 }
 
-var API_URL = "http://localhost:3000/api/";
 export function loadUserPlaylists() {
   return (dispatch) => {
     chrome.identity.getAuthToken({ 'interactive': false }, function(token) {
-      $.get(API_URL+"/playlists?access_token="+token, function(playlists) {
+      $.get(API_URL+"playlists?access_token="+token, function(playlists) {
         dispatch(receiveUserPlaylists(playlists));
       });
-      
-      // $.get("https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token="+token, function(data) {
-      //   // maybe just give the API the token instead of email.
-      //   // send a GET request to server to get playlists
-      //   var email = "a@test.com";
-      //   $.get(API_URL+"/playlists?email="+email, function(playlists) {
-      //     dispatch(receiveUserPlaylists(playlists));
-      //   });
-      // });
+    });
+  }
+}
+
+export function addPlaylist(title) {
+  return (dispatch, getState) => {
+    chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
+      $.post(API_URL+"/playlists", {
+        access_token: token,
+        title: title
+      }, function(playlist) {
+        // FIXME: update currentPlaylist to the playlist that's just added
+        dispatch(receiveUserPlaylists([playlist]))
+      });
     });
   }
 }

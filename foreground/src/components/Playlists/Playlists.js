@@ -51,12 +51,14 @@ class Playlists extends React.Component {
   makePlaylists(playlists, source, currentPlaylist) {
     var allSavedSongs = playlists['local'][0].songs;
 
+
+
     return playlists[source].map(function(playlist, idx) {
       return (
         <SidebarPlaylistItem key={idx}
           onClickHandler={this.onUpdateCurrentPlaylist}
           playlist={playlist}
-          isActive={currentPlaylist.url === playlist.url}
+          isActive={currentPlaylist.url === playlist.url && currentPlaylist.playlistName === playlist.playlistName}
         />
       );  
     }, this);
@@ -82,6 +84,7 @@ class Playlists extends React.Component {
               playlists={localPlaylists}
               onClickHandler={this.onClickHandler}
               isExpanded={this.state.expandedPlaylists["local"]}
+              addPlaylist={this.props.actions.addPlaylist}
             />
             <SidebarPlaylists
               source="melon"
@@ -108,6 +111,7 @@ class Playlists extends React.Component {
             playlists={localPlaylists}
             onClickHandler={this.onClickHandler}
             isExpanded={this.state.expandedPlaylists["local"]}
+            addPlaylist={this.props.actions.addPlaylist}
           />
           <SidebarPlaylists
             source="itunes"
