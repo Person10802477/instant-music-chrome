@@ -51,8 +51,10 @@ class SandboxMessenger {
       case PLAYER_STATES.PLAYER_READY:
         var currentSong = this.store.getState().currentSong;
         if (currentSong) {
+          // HOWON: Should I just CUE instead of LOAD?
+
           this.sendMessage({
-            type: CONSTANTS.LOAD_VIDEO,
+            type: CONSTANTS.CUE_VIDEO,
             videoId: currentSong.videoId
           });
         }

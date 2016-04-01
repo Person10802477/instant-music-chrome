@@ -1,15 +1,15 @@
 class SongsController < ApplicationController
+  before_action :set_playlist
+
   def index
-    user = User.find_by(email: params[:email])
-    playlist = user.playlists.find_by(title: params[:playlist_title])
-    songs = playlist.songs
+    # playlist = @user.playlists.find_by(title: params[:playlist_title])
+    songs = @playlist.songs
     render json: songs, only: [:video_id, :created_at]
   end
 
   def create
-    user = User.find_by(email: params[:email])
-    playlist = user.playlists.find_by(title: params[:playlist_title])
-    song = playlist.songs.create(song_params)
+    # playlist = @user.playlists.find_by(title: params[:playlist_title])
+    song = @playlist.songs.create(song_params)
     
     # NOTE: is it unnecessary to do this?
     if song.persisted?
@@ -22,6 +22,12 @@ class SongsController < ApplicationController
   private
 
   def song_params
-    params.require(:song).permit(:video_id)
+    params.permit(:video_id, :title)
+  end
+
+  def set_playlist
+    set_user
+    @playlist = @user.playlists.find_by(title: params[:playlist_title])
+    head :unprocessable_entity unless @playlist
   end
 end

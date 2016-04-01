@@ -1,14 +1,13 @@
 class PlaylistsController < ApplicationController
+  before_action :set_user
+
   def index
-    user = User.find_by(email: params[:email])
-    playlists = user.playlists
-    render json: playlists, include: [songs: { only: [:video_id, :created_at] }]
+    playlists = @user.playlists
+    render json: playlists, include: [songs: { only: [:video_id, :title, :created_at] }]
   end
 
   def create
-    user = User.find_by(email: params[:email])
-    playlist = user.playlists.create(playlist_params)
-
+    playlist = @user.playlists.create(playlist_params)
     if playlist.persisted?
       render json: playlist
     else
@@ -17,8 +16,7 @@ class PlaylistsController < ApplicationController
   end
 
   def destroy
-    user = User.find_by(email: params[:email])
-    playlist = user.playlists.find_by(title: params[:title])
+    playlist = @user.playlists.find_by(title: params[:title])
     if playlist.destroy
       head :ok
     else
@@ -29,6 +27,6 @@ class PlaylistsController < ApplicationController
   private
 
   def playlist_params
-    params.require(:playlist).permit(:title)
+    params.permit(:title)
   end
 end

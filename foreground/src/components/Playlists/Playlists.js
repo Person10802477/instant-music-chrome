@@ -25,6 +25,9 @@ class Playlists extends React.Component {
     this.props.actions.setupPlaylists();
     this.props.actions.loadLocalPlaylist();
     this.props.actions.updateCurrentPlaylist(null);
+
+    // HOWON: LOAD USER PLAYLISTS FIXME
+    this.props.actions.loadUserPlaylists();
   }
 
   isSamePlaylist(playlist1, playlist2) {

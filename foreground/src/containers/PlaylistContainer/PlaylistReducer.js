@@ -21,6 +21,16 @@ function currentPlaylist(state = initialPlaylist, action) {
   }
 }
 
+function updatedPlaylists(playlistUpdated, oldPlaylists) {
+  const source = playlistUpdated.source;
+  const idxToUpdate = _.findIndex(oldPlaylists[source], (pl) =>
+    pl.playlistName === playlistUpdated.playlistName
+  );
+  var playlists = Object.assign({}, oldPlaylists);
+  playlists[source][idxToUpdate] = playlistUpdated;
+  return playlists;
+}
+
 function transformedPlaylist(state=[], action) {
   var oldPlaylist = _.find(state, (pl) =>
     pl.playlistName === action.playlist.playlistName);
@@ -40,17 +50,6 @@ function transformedPlaylist(state=[], action) {
   }
 }
 
-// helper
-function updatedPlaylists(playlistUpdated, oldPlaylists) {
-  const source = playlistUpdated.source;
-  const idxToUpdate = _.findIndex(oldPlaylists[source], (pl) =>
-    pl.playlistName === playlistUpdated.playlistName
-  );
-  var playlists = Object.assign({}, oldPlaylists);
-  playlists[source][idxToUpdate] = playlistUpdated;
-  return playlists;
-}
-
 function playlistsBySource(state = PLAYLIST_DATA, action) {
   switch (action.type) {
     case CONSTANTS.SETUP_PLAYLISTS:
@@ -61,6 +60,25 @@ function playlistsBySource(state = PLAYLIST_DATA, action) {
     case CONSTANTS.UPDATE_LOCAL_PLAYLIST:
       var playlistUpdated = transformedPlaylist(state[action.playlist.source], action);
       return updatedPlaylists(playlistUpdated, state);
+    case CONSTANTS.RECEIVE_USER_PLAYLISTS:
+      var userPlaylists = action.playlists.map((pl) =>
+        ({
+          playlistName: pl.title,
+          source: 'local',
+          songs: pl.songs.map((s) => ({
+            videoId: s.video_id,
+            title: s.title
+          })),
+          receivedAt: new Date(),
+          isFetching: false
+        })
+      );
+      var localPlaylists = [...state.local, ...userPlaylists];
+      var playlistsWithUserPlaylists = Object.assign({}, state, {
+        local: localPlaylists
+      });
+
+      return playlistsWithUserPlaylists;
     default:
       return state
   }

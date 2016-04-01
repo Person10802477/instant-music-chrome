@@ -230,8 +230,6 @@ export function addSongToLocalPlaylistAndChrome(playlist, song) {
         }
       });
     }
-
-    // FIXME: DISPATCH A NOTIFICAITON HERE?
   }
 }
 
@@ -337,5 +335,32 @@ export function loadLocalPlaylist() {
   return (dispatch) => {
     var favoritesPlaylist = PLAYLIST_DATA.local[0];
     dispatch(fetchPlaylist(favoritesPlaylist));
+  }
+}
+
+function receiveUserPlaylists(playlists) {
+  return {
+    type: CONSTANTS.RECEIVE_USER_PLAYLISTS,
+    playlists: playlists
+  }
+}
+
+var API_URL = "http://localhost:3000/api/";
+export function loadUserPlaylists() {
+  return (dispatch) => {
+    chrome.identity.getAuthToken({ 'interactive': false }, function(token) {
+      $.get(API_URL+"/playlists?access_token="+token, function(playlists) {
+        dispatch(receiveUserPlaylists(playlists));
+      });
+      
+      // $.get("https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token="+token, function(data) {
+      //   // maybe just give the API the token instead of email.
+      //   // send a GET request to server to get playlists
+      //   var email = "a@test.com";
+      //   $.get(API_URL+"/playlists?email="+email, function(playlists) {
+      //     dispatch(receiveUserPlaylists(playlists));
+      //   });
+      // });
+    });
   }
 }
