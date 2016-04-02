@@ -27,7 +27,9 @@ class Playlists extends React.Component {
     this.props.actions.updateCurrentPlaylist(null);
 
     // HOWON: LOAD USER PLAYLISTS FIXME
-    this.props.actions.loadUserPlaylists();
+    if (chrome.runtime.id) {
+      this.props.actions.loadUserPlaylists();  
+    }
   }
 
   isSamePlaylist(playlist1, playlist2) {
@@ -45,7 +47,6 @@ class Playlists extends React.Component {
 
   onUpdateCurrentPlaylist(playlist, event) {
     this.props.actions.updateCurrentPlaylist(playlist);
-    event.stopPropagation();
   }
 
   makePlaylists(playlists, source, currentPlaylist) {
@@ -58,6 +59,8 @@ class Playlists extends React.Component {
           playlist={playlist}
           isActive={currentPlaylist.url === playlist.url && currentPlaylist.playlistName === playlist.playlistName}
           removePlaylist={this.props.actions.removePlaylist}
+          showContextMenu={this.props.actions.showContextMenu}
+          hideContextMenu={this.props.actions.hideContextMenu}
         />
       );  
     }, this);

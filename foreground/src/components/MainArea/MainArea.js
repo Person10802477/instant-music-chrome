@@ -36,6 +36,8 @@ class MainArea extends React.Component {
           videoSize={this.props.videoSize}
           addSongToPlaylist={this.props.actions.addSongToPlaylist}
           removeSongFromLocalPlaylistAndChrome={this.props.actions.removeSongFromLocalPlaylistAndChrome}
+          showContextMenu={this.props.actions.showContextMenu}
+          hideContextMenu={this.props.actions.hideContextMenu}
         />
       </div>
     );

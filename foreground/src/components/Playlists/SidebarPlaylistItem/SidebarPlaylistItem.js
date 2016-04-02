@@ -5,6 +5,7 @@ class SidebarPlaylistItem extends React.Component {
   constructor(props) {
     super(props);
 
+    this.onClickHandler = this.onClickHandler.bind(this);
     this.contextMenu = this.contextMenu.bind(this);
     this.onRemovePlaylist = this.onRemovePlaylist.bind(this);
   }
@@ -12,15 +13,26 @@ class SidebarPlaylistItem extends React.Component {
   contextMenu(event) {
     event.preventDefault();
 
-    // FIXME: not sure how to handle contextMenus globally...
-    // this.setState({isContextMenuVisible: true});
+    // FIXME: showContextMenu requires a unique ID globally,
+    // but not sure what can work as a unique global Id other than
+    // the playlistName. Should I just use a global counter?
+    this.props.showContextMenu(this.props.playlist.playlistName);
   }
 
   onRemovePlaylist(event) {
     event.preventDefault();
     event.stopPropagation();
     this.props.removePlaylist(this.props.playlist.playlistName);
-    // this.setState({isContextMenuVisible: false});
+    this.props.hideContextMenu();
+  }
+
+  onClickHandler(event) {
+    event.stopPropagation();
+    this.props.onClickHandler(this.props.playlist);
+
+    // FIXME: not just here, but clicking anywhere outside
+    // the target should call hideContextMenu();
+    this.props.hideContextMenu();
   }
 
   render() {
@@ -30,19 +42,18 @@ class SidebarPlaylistItem extends React.Component {
       "active": this.props.isActive
     });
     var contextMenuItems = [
-      {label: "Remove playlist", action: this.onRemovePlaylist},
-      {label: "Add playlist", action: (function(event) { console.log( "add pl")})},
+      {label: "Delete", action: this.onRemovePlaylist},
     ];
 
     return (
       <li className={itemClass}
         url={url}
         key={this.props.key}
-        onClick={this.props.onClickHandler.bind(this, this.props.playlist)}
+        onClick={this.onClickHandler}
         onContextMenu={this.contextMenu}
       >
         <i className="fa fa-music fa-fw"></i> {playlistName}
-        <ContextMenuContainer menuItems={contextMenuItems} />
+        <ContextMenuContainer menuItems={contextMenuItems} id={playlistName} />
       </li>
     );
   }

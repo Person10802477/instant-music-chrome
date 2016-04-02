@@ -160,9 +160,6 @@ export function fetchPlaylist(playlist) {
   return function (dispatch) {
     dispatch(requestPlaylist(playlist));
 
-    // HOWON FIXME: how does fetching work?
-    // debugger;
-
     if (playlist.source === CONSTANTS.LOCAL_SOURCE && chrome.runtime.id) {
       getChromeSongs(playlist.playlistName, function(songs) {
         dispatch(receivePlaylist(playlist, songs));

@@ -4,6 +4,9 @@ require("./context-menu.css");
 
 class ContextMenu extends React.Component {
   render() {
+
+    // FIXME: wtf is wrong with this
+
     var menuItems;
     if (this.props.menuItems) {
       menuItems = this.props.menuItems.map((item) =>
@@ -11,13 +14,17 @@ class ContextMenu extends React.Component {
       );
     }
 
-    return (
-      <div className="context-menu">
-        <ul>
-          {menuItems}
-        </ul>
-      </div>
-    );
+    if (this.props.id === this.props.currentContextMenu) {
+      return (
+        <div className="context-menu">
+          <ul>
+            {menuItems}
+          </ul>
+        </div>
+      );      
+    } else {
+      return null;
+    }
   }
 }
 

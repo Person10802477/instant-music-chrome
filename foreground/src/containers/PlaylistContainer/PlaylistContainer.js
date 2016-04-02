@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as PlaylistActions from './PlaylistActions';
 import Playlists from '../../components/Playlists/Playlists';
+import * as ContextMenuActions from '../ContextMenuContainer/ContextMenuActions';
 
 const mapStateToProps = (state) => {
   return {
@@ -13,7 +14,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    actions: bindActionCreators(PlaylistActions, dispatch)
+    actions: bindActionCreators(Object.assign({},
+      PlaylistActions, ContextMenuActions), dispatch)
   };
 }
 

@@ -31,6 +31,8 @@ class Playlist extends React.Component {
           isSaved={!!(_.find(savedSongs, (s) => s.videoId === song.videoId))}
           onSaveSong={this.onSaveSongHandler}
           onRemoveSong={this.onRemoveSongHandler}
+          showContextMenu={this.props.showContextMenu}
+          hideContextMenu={this.props.hideContextMenu}
         />
       )
     )
