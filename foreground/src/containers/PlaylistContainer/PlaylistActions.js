@@ -72,13 +72,10 @@ function extractSongsFromJson(source, json) {
 
 function checkCurrentSongAndReceivePlaylist(playlist, songs) {
   return (dispatch, getState) => {
-    var currentSong = getState().currentSong;
-
-    if (!currentSong && songs) {
+    if (!getState().currentSong && songs) {
       dispatch(updateCurrentSong(songs[0]));
     }
-
-    dispatch(receivePlaylist(playlist, songs))
+    dispatch(receivePlaylist(playlist, songs));
   }
 }
 
@@ -163,6 +160,9 @@ export function fetchPlaylist(playlist) {
   return function (dispatch) {
     dispatch(requestPlaylist(playlist));
 
+    // how does fetching work?
+    debugger;
+
     if (playlist.source === CONSTANTS.LOCAL_SOURCE && chrome.runtime.id) {
       getChromeSongs(playlist.playlistName, function(songs) {
         dispatch(receivePlaylist(playlist, songs));
@@ -188,92 +188,89 @@ function isUnique(songs, song) {
   return !_.find(songs, (s) => s.videoId === song.videoId);
 }
 
-// FIXME: Refactor this
-function addToChromeStorage(playlist, songs, song, dispatch) {
-  var playlistName = playlist.playlistName;
+// FIXME: HOWON - retire this code
+// function addToChromeStorage(playlist, songs, song, dispatch) {
+//   var playlistName = playlist.playlistName;
+//   if (isUnique(songs, song)) {
+//     var songsUpdated = [...songs, song];
+//     var obj = {};
+//     obj[playlistName] = songsUpdated;
+//     chrome.storage.sync.set(obj, function(err) {
+//       if (err) {
+//         console.log("saving failed!", err)
+//       } else {
+//         dispatch(updateLocalPlaylistAndReceiveIfNecessary(playlist, songsUpdated));
+//         dispatch(SONG_NOTIFICATIONS_ACTIONS.addSongNotifications());
+//       }
+//     });
+//   }
+// }
 
-  if (isUnique(songs, song)) {
-    var songsUpdated = [...songs, song];
-    var obj = {};
-    obj[playlistName] = songsUpdated;
-    chrome.storage.sync.set(obj, function(err) {
-      if (err) {
-        console.log("saving failed!", err)
-      } else {
-        dispatch(updateLocalPlaylistAndReceiveIfNecessary(playlist, songsUpdated));
-        dispatch(SONG_NOTIFICATIONS_ACTIONS.addSongNotifications());
-      }
-    });
-  }
-}
-
-// HOWON: FIXME. NEED TO REFACTOR!!
-function addSongToPlaylist(playlist, song, dispatch) {
-  if (playlist.playlistName === "favorites") {
-    return false;
-  }
-
-  chrome.identity.getAuthToken({ 'interactive': false }, function(token) {
+function _addSongToPlaylist(playlist, song, dispatch) {
+  chrome.identity.getAuthToken({'interactive': false}, function(token) {
     $.post(API_URL+"songs", {
       access_token: token,
       playlist_title: playlist.playlistName,
       video_id: song.videoId,
       title: song.title
-    }, function(song) {
+    }, function(s) {
       // FIXME: SUPPORT KOREAN
       var params = "songs?access_token="+token+"&playlist_title="+playlist.playlistName;
+      var songAdded = {
+        videoId: s.video_id,
+        title: s.title
+      };
+      var songs = [...playlist.songs, songAdded];
 
-      $.get(API_URL+params, function(songs) {
-        if (songs) {
-          var songsUpdated = songs.map(s => ({
-            videoId: s.video_id,
-            title: s.title
-          }));
-        }
-
-        dispatch(updateLocalPlaylistAndReceiveIfNecessary(playlist, songsUpdated));
-        dispatch(SONG_NOTIFICATIONS_ACTIONS.addSongNotifications());        
-      });
+      dispatch(updateLocalPlaylistAndReceiveIfNecessary(playlist, songs));
+      dispatch(SONG_NOTIFICATIONS_ACTIONS.addSongNotifications());
     });
   });
 }
 
-function initChromeStorage(playlist, song, dispatch) {
-  var playlistName = playlist.playlistName;
-  var obj = {};
-  var songsUpdated = [song];
-  obj[playlistName] = songsUpdated;
-
-  chrome.storage.sync.set(obj, function(err) {
-    if (err) {
-      console.log("saving failed!", err)
-    } else {
-      dispatch(updateLocalPlaylistAndReceiveIfNecessary(playlist, songsUpdated));
-      dispatch(SONG_NOTIFICATIONS_ACTIONS.addSongNotifications());
-    }
-  });
-}
-
-// Refactor this to move away from using ChromeStorage
-export function addSongToLocalPlaylistAndChrome(playlist, song) {
+export function addSongToPlaylist(playlist, song) {
   return (dispatch, getState) => {
     var currentPlaylist = getState().currentPlaylist;
-
-    if (chrome.runtime.id) {
-      getChromeSongs(playlist.playlistName, function(songs) {
-        if (_.isEmpty(songs)) {
-          initChromeStorage(playlist, song, dispatch);
-        } else {
-          if (currentPlaylist.playlistName === "favorites") {
-            addToChromeStorage(playlist, songs, song, dispatch);  
-          } else {
-            addSongToPlaylist(currentPlaylist, song, dispatch)  
-          }
-        }
-      });
-    }
+    _addSongToPlaylist(currentPlaylist, song, dispatch);
   }
 }
+
+// function initChromeStorage(playlist, song, dispatch) {
+//   var playlistName = playlist.playlistName;
+//   var obj = {};
+//   var songsUpdated = [song];
+//   obj[playlistName] = songsUpdated;
+
+//   chrome.storage.sync.set(obj, function(err) {
+//     if (err) {
+//       console.log("saving failed!", err)
+//     } else {
+//       dispatch(updateLocalPlaylistAndReceiveIfNecessary(playlist, songsUpdated));
+//       dispatch(SONG_NOTIFICATIONS_ACTIONS.addSongNotifications());
+//     }
+//   });
+// }
+
+// Refactor this to move away from using ChromeStorage
+// export function addSongToPlaylist(playlist, song) {
+//   return (dispatch, getState) => {
+//     var currentPlaylist = getState().currentPlaylist;
+
+//     if (chrome.runtime.id) {
+//       getChromeSongs(playlist.playlistName, function(songs) {
+//         if (_.isEmpty(songs)) {
+//           initChromeStorage(playlist, song, dispatch);
+//         } else {
+//           if (currentPlaylist.playlistName === "favorites") {
+//             addToChromeStorage(playlist, songs, song, dispatch);  
+//           } else {
+//             addSongToPlaylist(currentPlaylist, song, dispatch)  
+//           }
+//         }
+//       });
+//     }
+//   }
+// }
 
 function removeFromChromeStorage(playlist, songs, song, dispatch) {
   var playlistName = playlist.playlistName;
@@ -286,7 +283,6 @@ function removeFromChromeStorage(playlist, songs, song, dispatch) {
       console.log("removal failed!", err)
     } else {
       console.log("successfully removed");
-
       dispatch(updateLocalPlaylistAndReceiveIfNecessary(playlist, songsUpdated));
     }
   });

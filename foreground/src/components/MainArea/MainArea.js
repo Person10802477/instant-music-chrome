@@ -34,7 +34,7 @@ class MainArea extends React.Component {
           currentSong={this.props.currentSong}
           localPlaylist={this.props.localPlaylist}
           videoSize={this.props.videoSize}
-          addSongToLocalPlaylistAndChrome={this.props.actions.addSongToLocalPlaylistAndChrome}
+          addSongToPlaylist={this.props.actions.addSongToPlaylist}
           removeSongFromLocalPlaylistAndChrome={this.props.actions.removeSongFromLocalPlaylistAndChrome}
         />
       </div>

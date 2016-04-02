@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 // FIXME: we only need fetching-related functions here
 import * as SearchActions from './SearchActions';
-import { addSongToPlaylist, addSongToLocalPlaylistAndChrome } from '../PlaylistContainer/PlaylistActions';
+import { addSongToPlaylist } from '../PlaylistContainer/PlaylistActions';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import { CONSTANTS } from './constants';
 
@@ -17,8 +17,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   var actions = Object.assign({}, SearchActions, {
-    addSongToPlaylist,
-    addSongToLocalPlaylistAndChrome
+    addSongToPlaylist
   });
 
   return {

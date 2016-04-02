@@ -13,7 +13,7 @@ class Playlist extends React.Component {
   }
 
   onSaveSongHandler(song) {
-    this.props.addSongToLocalPlaylistAndChrome(this.props.localPlaylist, song);
+    this.props.addSongToPlaylist(this.props.localPlaylist, song);
   }
 
   onRemoveSongHandler(song) {
