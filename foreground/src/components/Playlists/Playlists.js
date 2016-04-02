@@ -51,14 +51,13 @@ class Playlists extends React.Component {
   makePlaylists(playlists, source, currentPlaylist) {
     var allSavedSongs = playlists['local'][0].songs;
 
-
-
     return playlists[source].map(function(playlist, idx) {
       return (
         <SidebarPlaylistItem key={idx}
           onClickHandler={this.onUpdateCurrentPlaylist}
           playlist={playlist}
           isActive={currentPlaylist.url === playlist.url && currentPlaylist.playlistName === playlist.playlistName}
+          removePlaylist={this.props.actions.removePlaylist}
         />
       );  
     }, this);

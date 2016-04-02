@@ -6,11 +6,13 @@ Rails.application.routes.draw do
   # root 'welcome#index'
 
   scope :api do
+    delete 'playlists/delete' => 'playlists#destroy'
+    delete 'songs/delete' => 'songs#destroy'
+
     resources :users
-
-    resources :playlists
-
+    resources :playlists, only: [:index, :create]
     resources :songs
+    
 
     # resources :users do
     #   resources :playlists do

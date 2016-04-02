@@ -1,0 +1,12 @@
+.context-menu {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  background-color: red;
+  padding: 10px;
+  z-index: 10;
+}
+
+.context-menu li {
+  list-style: none;
+}

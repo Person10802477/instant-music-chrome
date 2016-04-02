@@ -86,6 +86,13 @@ function playlistsBySource(state = PLAYLIST_DATA, action) {
       });
 
       return playlistsWithUserPlaylists;
+    case CONSTANTS.REMOVE_PLAYLIST:
+      var localPlaylists = _.reject(state.local, (pl) =>
+        pl.playlistName === action.title);
+      var playlists = Object.assign({}, state, {
+        local: localPlaylists
+      });
+      return playlists;
     default:
       return state
   }

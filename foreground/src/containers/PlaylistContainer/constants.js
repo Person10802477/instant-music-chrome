@@ -12,6 +12,7 @@ export const CONSTANTS = {
   PAUSE_VIDEO: 'PAUSE_VIDEO',
   UPDATE_LOCAL_PLAYLIST: 'UPDATE_LOCAL_PLAYLIST',
   RECEIVE_USER_PLAYLISTS: 'RECEIVE_USER_PLAYLISTS',
+  REMOVE_PLAYLIST: 'REMOVE_PLAYLIST',
 }
 
 var PLAYLIST_DATA;
@@ -19,11 +20,10 @@ var NUM_SONGS;
 
 if (chrome.runtime.id) {
   NUM_SONGS = 50;
-} else if (chrome.runtime.id === undefined) {
-  NUM_SONGS = 5;
 } else {
-  NUM_SONGS = 50;
+  NUM_SONGS = 5;
 }
+
 
 if (chrome.runtime.id) {
   PLAYLIST_DATA = {

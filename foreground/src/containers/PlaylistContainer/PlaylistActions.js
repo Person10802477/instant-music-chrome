@@ -4,7 +4,7 @@ import * as SONG_NOTIFICATIONS_ACTIONS from '../SongNotificationsContainer/SongN
 import YouTubeFetcher from '../../others/youtube-api';
 
 // FIXME: move me to somewhere appropriate
-var API_URL = "http://localhost:3000/api/";
+var API_URL = "http://localhost:3000/api";
 
 export function updateCurrentPlaylist(playlist) {
   return {
@@ -160,8 +160,8 @@ export function fetchPlaylist(playlist) {
   return function (dispatch) {
     dispatch(requestPlaylist(playlist));
 
-    // how does fetching work?
-    debugger;
+    // HOWON FIXME: how does fetching work?
+    // debugger;
 
     if (playlist.source === CONSTANTS.LOCAL_SOURCE && chrome.runtime.id) {
       getChromeSongs(playlist.playlistName, function(songs) {
@@ -208,7 +208,7 @@ function isUnique(songs, song) {
 
 function _addSongToPlaylist(playlist, song, dispatch) {
   chrome.identity.getAuthToken({'interactive': false}, function(token) {
-    $.post(API_URL+"songs", {
+    $.post(API_URL+"/songs", {
       access_token: token,
       playlist_title: playlist.playlistName,
       video_id: song.videoId,
@@ -255,7 +255,6 @@ export function addSongToPlaylist(playlist, song) {
 // export function addSongToPlaylist(playlist, song) {
 //   return (dispatch, getState) => {
 //     var currentPlaylist = getState().currentPlaylist;
-
 //     if (chrome.runtime.id) {
 //       getChromeSongs(playlist.playlistName, function(songs) {
 //         if (_.isEmpty(songs)) {
@@ -387,22 +386,58 @@ function receiveUserPlaylists(playlists) {
 export function loadUserPlaylists() {
   return (dispatch) => {
     chrome.identity.getAuthToken({ 'interactive': false }, function(token) {
-      $.get(API_URL+"playlists?access_token="+token, function(playlists) {
+      $.get(API_URL+"/playlists?access_token="+token, function(playlists) {
         dispatch(receiveUserPlaylists(playlists));
       });
     });
   }
 }
 
+function isPlaylistTitleUnique(title, playlists) {
+  _.every(playlists, (pl) => pl.playlistName !== title);
+}
+
+// FIXME: Let's limit it to only 3 playlists
 export function addPlaylist(title) {
   return (dispatch, getState) => {
     chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
+      // Check if there's a playlist with the same title
+      var playlists = getState().playlistsBySource.local;
+      if (!isPlaylistTitleUnique(title, playlists)) {
+        title = title + playlists.length;
+      }
+
       $.post(API_URL+"/playlists", {
         access_token: token,
-        title: title
+        title
       }, function(playlist) {
         // FIXME: update currentPlaylist to the playlist that's just added
         dispatch(receiveUserPlaylists([playlist]))
+      });
+    });
+  }
+}
+
+function _removePlaylist(title) {
+  return {
+    type: CONSTANTS.REMOVE_PLAYLIST,
+    title
+  }
+}
+
+export function removePlaylist(title) {
+  return (dispatch, getState) => {
+    chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
+      $.ajax({
+        url: API_URL+"/playlists/delete",
+        data: {
+          access_token: token,
+          title
+        },
+        type: 'DELETE',
+        success: function(result) {
+          dispatch(_removePlaylist(title));
+        }
       });
     });
   }

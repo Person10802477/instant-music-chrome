@@ -16,6 +16,16 @@ class SongsController < ApplicationController
     end
   end
 
+  def destroy
+    song = @playlist.songs.find_by(video_id: params[:videoId])
+
+    if song.destroy
+      head :ok
+    else
+      head :unprocessable_entity
+    end
+  end
+
   private
 
   def song_params
