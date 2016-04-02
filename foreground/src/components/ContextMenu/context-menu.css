@@ -1,12 +1,14 @@
 .context-menu {
   position: absolute;
-  top: 50px;
-  left: 50px;
-  background-color: red;
+  top: 30px;
+  left: 30px;
   padding: 10px;
   z-index: 10;
+  background-color: grey;
+  color: white;
 }
 
 .context-menu li {
   list-style: none;
+  padding: 5px 5px 0 0;
 }

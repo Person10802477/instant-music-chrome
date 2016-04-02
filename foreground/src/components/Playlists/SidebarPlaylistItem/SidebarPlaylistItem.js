@@ -1,14 +1,9 @@
 import React from "react";
-
-import ContextMenu from "../../ContextMenu/ContextMenu.js";
+import ContextMenuContainer from "../../../containers/ContextMenuContainer/ContextMenuContainer.js";
 
 class SidebarPlaylistItem extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      isContextMenuVisible: false
-    };
 
     this.contextMenu = this.contextMenu.bind(this);
     this.onRemovePlaylist = this.onRemovePlaylist.bind(this);
@@ -16,14 +11,16 @@ class SidebarPlaylistItem extends React.Component {
 
   contextMenu(event) {
     event.preventDefault();
-    this.setState({isContextMenuVisible: true});
+
+    // FIXME: not sure how to handle contextMenus globally...
+    // this.setState({isContextMenuVisible: true});
   }
 
   onRemovePlaylist(event) {
     event.preventDefault();
     event.stopPropagation();
     this.props.removePlaylist(this.props.playlist.playlistName);
-    console.log("Remove Playlist");
+    // this.setState({isContextMenuVisible: false});
   }
 
   render() {
@@ -45,7 +42,7 @@ class SidebarPlaylistItem extends React.Component {
         onContextMenu={this.contextMenu}
       >
         <i className="fa fa-music fa-fw"></i> {playlistName}
-        {this.state.isContextMenuVisible ? <ContextMenu menuItems={contextMenuItems} /> : null}
+        <ContextMenuContainer menuItems={contextMenuItems} />
       </li>
     );
   }

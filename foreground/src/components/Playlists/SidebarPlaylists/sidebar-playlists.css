@@ -25,10 +25,11 @@
 }
 
 .playlists .sidebar-playlist .chart-songs .sidebar-playlist-item {
+  position: relative;
   color: #ccc;
-  cursor: pointer;
   list-style: none;
   padding: 5px 0;
+  cursor: pointer;
 }
 
 .playlists .sidebar-playlist .chart-songs .sidebar-playlist-item:hover {
