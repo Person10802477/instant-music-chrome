@@ -3,8 +3,6 @@ import ContextMenuContainer from "../../../containers/ContextMenuContainer/Conte
 
 require("./song-item.css");
 
-var random = Math.ceil((Math.random() * 10000))
-
 class SongItem extends React.Component {
   constructor(props) {
     super(props);
@@ -33,8 +31,9 @@ class SongItem extends React.Component {
     console.log(event)
   }
 
-  contextMenu() {
-    this.props.showContextMenu(random);
+  contextMenu(event) {
+    event.preventDefault();
+    this.props.showContextMenu(this.props.song.videoId, event);
   }
 
   render() {
@@ -45,8 +44,11 @@ class SongItem extends React.Component {
       "is-saved": this.props.isSaved
     });
     var contextMenuItems = [
-      {label: "Add to playlist", action: this.onRemoveSong},
-      {label: "Delete", action: this.onRemoveSong},
+      {item: <span className="context-menu-item clearfix">Add to playlist 
+        <i className="fa fa-caret-right fa-fw playlist-expand"></i>
+        </span>, action: this.onRemoveSong
+      },
+      {item: <span>Delete</span>, action: this.onRemoveSong},
     ];
 
     return (
@@ -57,7 +59,10 @@ class SongItem extends React.Component {
         onContextMenu={this.contextMenu}
       >
         <td className="song-rank-cell">{rank}</td>
-        <td className="song-title-cell truncate">{title}</td>
+        <td className="song-title-cell truncate">
+          {title}
+          <ContextMenuContainer menuItems={contextMenuItems} id={videoId} key={videoId} />
+        </td>
         <td className="song-artist-cell truncate">{artist}</td>
         <td className="song-not-saved text-center"
           onClick={this.onSaveClickHandler}
@@ -66,7 +71,6 @@ class SongItem extends React.Component {
           onClick={this.onRemoveClickHandler}
         ><i className="fa fa-heart fa-fw"></i></td>
         <td className="song-more-cell text-center"><i className="fa fa-share-alt fa-fw"></i></td>
-        <td><ContextMenuContainer menuItems={contextMenuItems} id={random} key={random} /></td>
       </tr>
     );
   }

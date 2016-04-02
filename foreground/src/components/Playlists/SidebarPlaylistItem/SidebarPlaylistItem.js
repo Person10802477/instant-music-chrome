@@ -16,7 +16,7 @@ class SidebarPlaylistItem extends React.Component {
     // FIXME: showContextMenu requires a unique ID globally,
     // but not sure what can work as a unique global Id other than
     // the playlistName. Should I just use a global counter?
-    this.props.showContextMenu(this.props.playlist.playlistName);
+    this.props.showContextMenu(this.props.playlist.playlistName, event);
   }
 
   onRemovePlaylist(event) {
@@ -42,7 +42,7 @@ class SidebarPlaylistItem extends React.Component {
       "active": this.props.isActive
     });
     var contextMenuItems = [
-      {label: "Delete", action: this.onRemovePlaylist},
+      {item: <span>Remove Playlist</span>, action: this.onRemovePlaylist},
     ];
 
     return (

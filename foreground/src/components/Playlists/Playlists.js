@@ -107,7 +107,7 @@ class Playlists extends React.Component {
 
     return (
       <div className="playlists">
-        <ul>
+        <ul className="playlist-folders">
           <SidebarPlaylists
             source="local"
             playlists={localPlaylists}
