@@ -13,11 +13,11 @@ class Playlist extends React.Component {
   }
 
   onSaveSongHandler(song) {
-    this.props.addSongToPlaylist(this.props.localPlaylist, song);
+    this.props.addSongToPlaylist(this.props.localSavePlaylist, song);
   }
 
   onRemoveSongHandler(song) {
-    this.props.removeSongFromLocalPlaylistAndChrome(this.props.localPlaylist, song);
+    this.props.removeSongFromLocalPlaylistAndChrome(this.props.localSavePlaylist, song);
   }
 
   makeSongItems(songs, savedSongs, currentVideoId) {
@@ -33,6 +33,8 @@ class Playlist extends React.Component {
           onRemoveSong={this.onRemoveSongHandler}
           showContextMenu={this.props.showContextMenu}
           hideContextMenu={this.props.hideContextMenu}
+          localPlaylists={this.props.localPlaylists}
+          addSongToPlaylist={this.props.addSongToPlaylist}
         />
       )
     )
@@ -41,7 +43,7 @@ class Playlist extends React.Component {
   render() {
     // It might be better to get currentPlaylist as props
     var songItems;
-    var savedSongs = this.props.localPlaylist.songs;
+    var savedSongs = this.props.localSavePlaylist.songs;
     var currentVideoId = (this.props.currentSong ? this.props.currentSong.videoId : '')
     var isLocal = this.props.isLocal;
     var playlistClass = classNames({

@@ -22,7 +22,6 @@ class MainArea extends React.Component {
 
   render() {
     var songs = this.props.currentPlaylist.songs || [];
-    var savedSongs = this.props.localPlaylist.songs;
     var isLocal = this.props.currentPlaylist && this.props.currentPlaylist.source === "local";
 
     return (
@@ -32,7 +31,8 @@ class MainArea extends React.Component {
           songs={songs}
           isLocal={isLocal}
           currentSong={this.props.currentSong}
-          localPlaylist={this.props.localPlaylist}
+          localPlaylists={this.props.localPlaylists}
+          localSavePlaylist={this.props.localPlaylists[0]}
           videoSize={this.props.videoSize}
           addSongToPlaylist={this.props.actions.addSongToPlaylist}
           removeSongFromLocalPlaylistAndChrome={this.props.actions.removeSongFromLocalPlaylistAndChrome}

@@ -11,6 +11,7 @@ class SongItem extends React.Component {
     this.onRemoveClickHandler = this.onRemoveClickHandler.bind(this);
     this.onRemoveSong = this.onRemoveSong.bind(this);
     this.contextMenu = this.contextMenu.bind(this);
+    this.addToPlaylist = this.addToPlaylist.bind(this);
   }
 
   onSaveClickHandler(event) {
@@ -36,6 +37,11 @@ class SongItem extends React.Component {
     this.props.showContextMenu(this.props.song.videoId, event);
   }
 
+  addToPlaylist(playlist, song) {
+    // fixme
+    return true;
+  }
+
   render() {
     const { videoId, rank, title, artist } = this.props.song;
     const songClass = classNames({
@@ -44,9 +50,11 @@ class SongItem extends React.Component {
       "is-saved": this.props.isSaved
     });
     var contextMenuItems = [
-      {item: <span className="context-menu-item clearfix">Add to playlist 
-        <i className="fa fa-caret-right fa-fw playlist-expand"></i>
-        </span>, action: this.onRemoveSong
+      {
+        item: <span className="context-menu-item clearfix add-to-playlist-menu">
+          Add to playlist 
+          <i className="fa fa-caret-right fa-fw playlist-expand"></i></span>,
+        action: null
       },
       {item: <span>Delete</span>, action: this.onRemoveSong},
     ];
@@ -61,7 +69,13 @@ class SongItem extends React.Component {
         <td className="song-rank-cell">{rank}</td>
         <td className="song-title-cell truncate">
           {title}
-          <ContextMenuContainer menuItems={contextMenuItems} id={videoId} key={videoId} />
+          <ContextMenuContainer
+            menuItems={contextMenuItems}
+            id={videoId}
+            localPlaylists={this.props.localPlaylists}
+            addSongToPlaylist={this.props.addSongToPlaylist}
+            song={this.props.song}
+          />
         </td>
         <td className="song-artist-cell truncate">{artist}</td>
         <td className="song-not-saved text-center"

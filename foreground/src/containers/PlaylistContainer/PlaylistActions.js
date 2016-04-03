@@ -227,8 +227,9 @@ function _addSongToPlaylist(playlist, song, dispatch) {
 
 export function addSongToPlaylist(playlist, song) {
   return (dispatch, getState) => {
-    var currentPlaylist = getState().currentPlaylist;
-    _addSongToPlaylist(currentPlaylist, song, dispatch);
+    // HOWON: FIXME:
+    var pl = playlist || getState().currentPlaylist;
+    _addSongToPlaylist(pl, song, dispatch);
   }
 }
 

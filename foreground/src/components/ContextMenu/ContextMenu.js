@@ -3,12 +3,28 @@ import React from "react";
 require("./context-menu.css");
 
 class ContextMenu extends React.Component {
-  componentDidUpdate() {
-    // how do I get the click event? lol
-    // menuDimension.x = contextMenu.outerWidth();
-    // menuDimension.y = contextMenu.outerHeight();
-    // mousePosition.x = event.pageX;
-    // mousePosition.y = event.pageY;
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      showPlaylistsMenu: false
+    }
+
+    this.mouseEnterHandler = this.mouseEnterHandler.bind(this);
+    this.onAddSongToPlaylist = this.onAddSongToPlaylist.bind(this);
+  }
+
+  mouseEnterHandler(event) {
+    if ($(event.target.children).hasClass("add-to-playlist-menu")) {
+      this.setState({showPlaylistsMenu: true});
+    } else {
+      this.setState({showPlaylistsMenu: false});
+    }
+  }
+
+  onAddSongToPlaylist(pl, event) {
+    event.stopPropagation();
+    this.props.addSongToPlaylist(pl, this.props.song);
   }
 
   render() {
@@ -24,8 +40,22 @@ class ContextMenu extends React.Component {
     };
     var menuItems;
     if (this.props.menuItems) {
-      menuItems = this.props.menuItems.map((item, idx) =>
-        <li key={idx} onClick={item.action}>{item.item}</li>
+      menuItems = this.props.menuItems.map((item, idx) => {
+        if (item.action) {
+          return <li key={idx} onClick={item.action}>{item.item}</li>
+        } else {
+          return <li key={idx} onMouseEnter={this.mouseEnterHandler}>{item.item}</li>
+        }
+      });
+    }
+    var expandedContextMenuClass = classNames({
+      "expanded-context-menu": true,
+      "hidden": !this.state.showPlaylistsMenu
+    });
+    var localPlaylistItems;
+    if (this.props.localPlaylists) {
+      localPlaylistItems = this.props.localPlaylists.map((pl, idx) =>
+        <li key={idx} onClick={this.onAddSongToPlaylist.bind(this, pl)}>{pl.playlistName}</li>
       );
     }
 
@@ -34,6 +64,9 @@ class ContextMenu extends React.Component {
         <div className="context-menu" style={menuStyle}>
           <ul>
             {menuItems}
+          </ul>
+          <ul className={expandedContextMenuClass}>
+            {localPlaylistItems}
           </ul>
         </div>
       );      

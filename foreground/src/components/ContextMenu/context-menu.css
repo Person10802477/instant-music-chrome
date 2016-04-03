@@ -18,3 +18,16 @@
 .context-menu li:hover {
   background-color: #3B4E78; 
 }
+
+.expanded-context-menu {
+  position: absolute;
+  z-index: 10;
+  background-color: #293C66;
+  left: 150px;
+  top: 0;
+}
+
+.context-menu,
+.expanded-context-menu {
+  box-shadow: 5px 0 5px 5px #293C66; /* something that gives crisp border */
+}
