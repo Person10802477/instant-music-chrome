@@ -5,7 +5,7 @@ export function showContextMenu(id, event) {
   return {
     type: CONSTANTS.SHOW_CONTEXT_MENU,
     id: id,
-    mousePosition: {x: event.pageX, y: event.pageY}
+    mousePosition: {x: event.pageX+5, y: event.pageY+5}
   }
 }
 

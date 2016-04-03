@@ -29,5 +29,5 @@
 
 .context-menu,
 .expanded-context-menu {
-  box-shadow: 5px 0 5px 5px #293C66; /* something that gives crisp border */
+  box-shadow: 2px 2px 2px #0f1524; /* something that gives crisp border */
 }

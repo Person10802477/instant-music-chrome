@@ -10,6 +10,10 @@ class MainArea extends React.Component {
 
   componentDidMount() {
     this.props.actions.fetchPlaylistIfNeeded(this.props.currentPlaylist);
+
+    $(document).click(function(e) {
+      this.props.actions.hideContextMenu();
+    }.bind(this));
   }
 
   componentWillReceiveProps(nextProps) {

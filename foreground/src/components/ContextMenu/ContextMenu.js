@@ -25,12 +25,16 @@ class ContextMenu extends React.Component {
   onAddSongToPlaylist(pl, event) {
     event.stopPropagation();
     this.props.addSongToPlaylist(pl, this.props.song);
+    this.props.actions.hideContextMenu();
   }
 
+  // NOTE: I think might have been implemented wrong...
+  // Context Menu is attached to every song in the mainarea playlist
+  // And everytime currentContextMenuId gets updated, all of them are re-rendered
   render() {
     var currentContextMenuId = this.props.currentContextMenu ?
       this.props.currentContextMenu.id : null;
-    if (!currentContextMenuId) {
+    if (!currentContextMenuId || this.props.id !== currentContextMenuId) {
       return null;
     }
 
@@ -42,7 +46,7 @@ class ContextMenu extends React.Component {
     if (this.props.menuItems) {
       menuItems = this.props.menuItems.map((item, idx) => {
         if (item.action) {
-          return <li key={idx} onClick={item.action}>{item.item}</li>
+          return <li key={idx} onClick={item.action} onMouseEnter={this.mouseEnterHandler}>{item.item}</li>
         } else {
           return <li key={idx} onMouseEnter={this.mouseEnterHandler}>{item.item}</li>
         }
@@ -59,20 +63,16 @@ class ContextMenu extends React.Component {
       );
     }
 
-    if (this.props.id === currentContextMenuId) {
-      return (
-        <div className="context-menu" style={menuStyle}>
-          <ul>
-            {menuItems}
-          </ul>
-          <ul className={expandedContextMenuClass}>
-            {localPlaylistItems}
-          </ul>
-        </div>
-      );      
-    } else {
-      return null;
-    }
+    return (
+      <div className="context-menu" style={menuStyle}>
+        <ul>
+          {menuItems}
+        </ul>
+        <ul className={expandedContextMenuClass}>
+          {localPlaylistItems}
+        </ul>
+      </div>
+    );
   }
 }
 
