@@ -98,10 +98,14 @@ class SearchBar extends React.Component {
       )
     }
 
-    searchBarClass = classNames({
+    var searchBarClass = classNames({
       "search-bar": true,
       "active": (results.length > 0 || this.props.searchResults.isFetching),
       "is-fetching": this.props.searchResults.isFetching
+    });
+    var searchResultsClass = classNames({
+      "search-results": true,
+      "hidden": (results.length === 0)
     });
 
     return (
@@ -120,7 +124,7 @@ class SearchBar extends React.Component {
         <i className="fa fa-times clear-icon fa-fw"
           onClick={this.onInputClear}
         ></i>
-        <div className="search-results">
+        <div className={searchResultsClass}>
           {results}
           <div className="search-loading">
             Searching...
