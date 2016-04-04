@@ -11,7 +11,6 @@ class SongItem extends React.Component {
     this.onRemoveClickHandler = this.onRemoveClickHandler.bind(this);
     this.onRemoveSong = this.onRemoveSong.bind(this);
     this.contextMenu = this.contextMenu.bind(this);
-    this.addToPlaylist = this.addToPlaylist.bind(this);
   }
 
   onSaveClickHandler(event) {
@@ -34,12 +33,8 @@ class SongItem extends React.Component {
 
   contextMenu(event) {
     event.preventDefault();
+    event.stopPropagation();
     this.props.showContextMenu(this.props.song.videoId, event);
-  }
-
-  addToPlaylist(playlist, song) {
-    // fixme
-    return true;
   }
 
   render() {
@@ -52,11 +47,11 @@ class SongItem extends React.Component {
     var contextMenuItems = [
       {
         item: <span className="context-menu-item clearfix add-to-playlist-menu">
-          Add to playlist 
+          Add to Playlist
           <i className="fa fa-caret-right fa-fw playlist-expand"></i></span>,
         action: null
       },
-      {item: <span>Delete</span>, action: this.onRemoveSong},
+      {item: <span>Remove Song</span>, action: this.onRemoveSong},
     ];
 
     return (
@@ -84,7 +79,9 @@ class SongItem extends React.Component {
         <td className="song-saved text-center"
           onClick={this.onRemoveClickHandler}
         ><i className="fa fa-heart fa-fw"></i></td>
-        <td className="song-more-cell text-center"><i className="fa fa-share-alt fa-fw"></i></td>
+        <td className="song-more-cell text-center"
+          onClick={this.contextMenu}
+        ><i className="fa fa-ellipsis-h fa-fw show-song-context-menu"></i></td>
       </tr>
     );
   }

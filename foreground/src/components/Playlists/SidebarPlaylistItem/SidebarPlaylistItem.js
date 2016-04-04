@@ -12,6 +12,7 @@ class SidebarPlaylistItem extends React.Component {
 
   contextMenu(event) {
     event.preventDefault();
+    event.stopPropagation();
 
     // FIXME: showContextMenu requires a unique ID globally,
     // but not sure what can work as a unique global Id other than

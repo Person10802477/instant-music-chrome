@@ -10,16 +10,11 @@ class MainArea extends React.Component {
 
   componentDidMount() {
     this.props.actions.fetchPlaylistIfNeeded(this.props.currentPlaylist);
-
-    $(document).click(function(e) {
-      this.props.actions.hideContextMenu();
-    }.bind(this));
   }
 
   componentWillReceiveProps(nextProps) {
     // Only try to fetch if currentPlaylist was updated
-    var isCurrentPlaylistUpdated = (this.props.currentPlaylist !== nextProps.currentPlaylist);
-    if (isCurrentPlaylistUpdated) {
+    if (this.props.currentPlaylist !== nextProps.currentPlaylist) {
       this.props.actions.fetchPlaylistIfNeeded(nextProps.currentPlaylist);
     }
   }

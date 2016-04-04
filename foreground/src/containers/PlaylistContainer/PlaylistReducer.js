@@ -50,6 +50,17 @@ function transformedPlaylist(state=[], action) {
   }
 }
 
+// make "liked" playlist the head if necessary
+function _reorderPlaylists(playlists) {
+  var likedPlaylistIdx = _.findIndex(playlists, (pl) => pl.playlistName === "liked");
+  if (likedPlaylistIdx > 0) {
+    var likedPlaylist = playlists[likedPlaylistIdx];
+    playlists.splice(likedPlaylistIdx, 1);
+    playlists.unshift(likedPlaylist);
+  }
+  return playlists;
+}
+
 function playlistsBySource(state = PLAYLIST_DATA, action) {
   switch (action.type) {
     case CONSTANTS.SETUP_PLAYLISTS:
@@ -63,6 +74,8 @@ function playlistsBySource(state = PLAYLIST_DATA, action) {
     case CONSTANTS.RECEIVE_USER_PLAYLISTS:
       var userPlaylists = action.playlists.map((pl) => {
         var songs;
+
+        // don't need this step if API provided videoId instead of video_id
         if (pl.songs) {
           songs = pl.songs.map((s) => ({
             videoId: s.video_id,
@@ -80,7 +93,9 @@ function playlistsBySource(state = PLAYLIST_DATA, action) {
           isFetching: false
         };
       });
-      var localPlaylists = [...state.local, ...userPlaylists];
+
+      var localPlaylists = _reorderPlaylists([...state.local, ...userPlaylists]);
+
       var playlistsWithUserPlaylists = Object.assign({}, state, {
         local: localPlaylists
       });

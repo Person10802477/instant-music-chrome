@@ -33,3 +33,11 @@ table.table-songs tr.song-item.active td {
 .song-item.is-saved td.song-not-saved {
   display: none;
 }
+
+.show-song-context-menu {
+  display: none;
+}
+
+table.table-songs tr.song-item:hover .show-song-context-menu {
+  display: inline;
+}

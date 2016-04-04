@@ -8,8 +8,14 @@ class PlaylistsController < ApplicationController
 
   def create
     playlist = @user.playlists.create(playlist_params)
+
+    if params[:songs]
+      songs = params[:songs].map { |s| {title: s[:title], video_id: s[:videoId]}}
+      playlist.songs.create(songs)
+    end
+
     if playlist.persisted?
-      render json: playlist
+      render json: playlist, include: [songs: { only: [:video_id, :title, :created_at] }]
     else
       head :unprocessable_entity
     end

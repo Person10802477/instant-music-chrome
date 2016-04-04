@@ -23,13 +23,8 @@ class Playlists extends React.Component {
 
   componentWillMount() {
     this.props.actions.setupPlaylists();
-    this.props.actions.loadLocalPlaylist();
+    this.props.actions.loadUserPlaylists();
     this.props.actions.updateCurrentPlaylist(null);
-
-    // HOWON: LOAD USER PLAYLISTS FIXME
-    if (chrome.runtime.id) {
-      this.props.actions.loadUserPlaylists();  
-    }
   }
 
   isSamePlaylist(playlist1, playlist2) {
@@ -50,8 +45,6 @@ class Playlists extends React.Component {
   }
 
   makePlaylists(playlists, source, currentPlaylist) {
-    var allSavedSongs = playlists['local'][0].songs;
-
     return playlists[source].map(function(playlist, idx) {
       return (
         <SidebarPlaylistItem key={idx}
@@ -62,7 +55,7 @@ class Playlists extends React.Component {
           showContextMenu={this.props.actions.showContextMenu}
           hideContextMenu={this.props.actions.hideContextMenu}
         />
-      );  
+      );
     }, this);
   }
 

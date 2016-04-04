@@ -54,7 +54,7 @@ if (chrome.runtime.id) {
       {source: 'itunes', playlistName: chrome.i18n.getMessage("easy"), url: 'https://itunes.apple.com/us/rss/topsongs/genre=25/limit='+NUM_SONGS+'/explicit=true/json'},
     ],
     local: [
-      {source: 'local', playlistName: 'favorites', url: null}
+      // {source: 'local', playlistName: 'favorites', url: null}
     ]
   };
 } else {
@@ -86,7 +86,7 @@ if (chrome.runtime.id) {
       {source: 'itunes', playlistName: "easy", url: 'https://itunes.apple.com/us/rss/topsongs/genre=25/limit='+NUM_SONGS+'/explicit=true/json'},
     ],
     local: [
-      {source: 'local', playlistName: 'favorites', url: null}
+      // {source: 'local', playlistName: 'favorites', url: null}
     ]
   };
 }

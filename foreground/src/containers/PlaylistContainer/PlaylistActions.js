@@ -146,62 +146,28 @@ export function fetchPlaylistIfNeeded(playlist) {
   }
 }
 
-function getChromeSongs(playlistName, callback) {
-  chrome.storage.sync.get(playlistName, function(keyValuePair) {
-    if (_.isEmpty(keyValuePair)) {
-      callback([])
-    } else {
-      callback(keyValuePair[playlistName]);
-    }
-  });
-}
-
 export function fetchPlaylist(playlist) {
   return function (dispatch) {
     dispatch(requestPlaylist(playlist));
 
-    if (playlist.source === CONSTANTS.LOCAL_SOURCE && chrome.runtime.id) {
-      getChromeSongs(playlist.playlistName, function(songs) {
-        dispatch(receivePlaylist(playlist, songs));
-      });
-    } else {
-      return fetch(playlist.url)
-        .then(response => response.json())
-        .then(json => {
-          var youTubeFetcher = new YouTubeFetcher();
-          var songs = extractSongsFromJson(playlist.source, json);
-          youTubeFetcher.fetchAndAddVideoIds(songs,
-            function(songsWithVideoIds) {
-              dispatch(checkCurrentSongAndReceivePlaylist(playlist, songsWithVideoIds))
-            }
-          );
-        }
-      );
-    }
+    return fetch(playlist.url)
+      .then(response => response.json())
+      .then(json => {
+        var youTubeFetcher = new YouTubeFetcher();
+        var songs = extractSongsFromJson(playlist.source, json);
+        youTubeFetcher.fetchAndAddVideoIds(songs,
+          function(songsWithVideoIds) {
+            dispatch(checkCurrentSongAndReceivePlaylist(playlist, songsWithVideoIds))
+          }
+        );
+      }
+    );
   }
 }
 
 function isUnique(songs, song) {
   return !_.find(songs, (s) => s.videoId === song.videoId);
 }
-
-// FIXME: HOWON - retire this code
-// function addToChromeStorage(playlist, songs, song, dispatch) {
-//   var playlistName = playlist.playlistName;
-//   if (isUnique(songs, song)) {
-//     var songsUpdated = [...songs, song];
-//     var obj = {};
-//     obj[playlistName] = songsUpdated;
-//     chrome.storage.sync.set(obj, function(err) {
-//       if (err) {
-//         console.log("saving failed!", err)
-//       } else {
-//         dispatch(updateLocalPlaylistAndReceiveIfNecessary(playlist, songsUpdated));
-//         dispatch(SONG_NOTIFICATIONS_ACTIONS.addSongNotifications());
-//       }
-//     });
-//   }
-// }
 
 function _addSongToPlaylist(playlist, song, dispatch) {
   chrome.identity.getAuthToken({'interactive': false}, function(token) {
@@ -232,42 +198,6 @@ export function addSongToPlaylist(playlist, song) {
     _addSongToPlaylist(pl, song, dispatch);
   }
 }
-
-// function initChromeStorage(playlist, song, dispatch) {
-//   var playlistName = playlist.playlistName;
-//   var obj = {};
-//   var songsUpdated = [song];
-//   obj[playlistName] = songsUpdated;
-
-//   chrome.storage.sync.set(obj, function(err) {
-//     if (err) {
-//       console.log("saving failed!", err)
-//     } else {
-//       dispatch(updateLocalPlaylistAndReceiveIfNecessary(playlist, songsUpdated));
-//       dispatch(SONG_NOTIFICATIONS_ACTIONS.addSongNotifications());
-//     }
-//   });
-// }
-
-// Refactor this to move away from using ChromeStorage
-// export function addSongToPlaylist(playlist, song) {
-//   return (dispatch, getState) => {
-//     var currentPlaylist = getState().currentPlaylist;
-//     if (chrome.runtime.id) {
-//       getChromeSongs(playlist.playlistName, function(songs) {
-//         if (_.isEmpty(songs)) {
-//           initChromeStorage(playlist, song, dispatch);
-//         } else {
-//           if (currentPlaylist.playlistName === "favorites") {
-//             addToChromeStorage(playlist, songs, song, dispatch);  
-//           } else {
-//             addSongToPlaylist(currentPlaylist, song, dispatch)  
-//           }
-//         }
-//       });
-//     }
-//   }
-// }
 
 function removeFromChromeStorage(playlist, songs, song, dispatch) {
   var playlistName = playlist.playlistName;
@@ -366,14 +296,6 @@ export function updateLocalPlaylistAndReceiveIfNecessary(playlist, songs) {
   }
 }
 
-// FIXME: Supress updating currentPlaylist on initial load
-export function loadLocalPlaylist() {
-  return (dispatch) => {
-    var favoritesPlaylist = PLAYLIST_DATA.local[0];
-    dispatch(fetchPlaylist(favoritesPlaylist));
-  }
-}
-
 function receiveUserPlaylists(playlists) {
   return {
     type: CONSTANTS.RECEIVE_USER_PLAYLISTS,
@@ -381,10 +303,34 @@ function receiveUserPlaylists(playlists) {
   }
 }
 
+function getChromeSongs(playlistName, callback) {
+  chrome.storage.sync.get(playlistName, function(keyValuePair) {
+    if (_.isEmpty(keyValuePair)) {
+      callback([])
+    } else {
+      callback(keyValuePair[playlistName]);
+    }
+  });
+}
+
+// Make a playlist called "liked", which is the playlist
+// where all the liked songs go. For the users who already have
+// stored songs in Chrome storage, let's save these songs gracefully
+// this will do it asynchronously
+function initLikedPlaylist(dispatch) {
+  getChromeSongs("favorites", function(songs) {
+    dispatch(addPlaylist("liked", songs));
+  });
+}
+
 export function loadUserPlaylists() {
   return (dispatch) => {
     chrome.identity.getAuthToken({ 'interactive': false }, function(token) {
       $.get(API_URL+"/playlists?access_token="+token, function(playlists) {
+        if (!_.find(playlists, (pl) => pl.title === "liked")) {
+          initLikedPlaylist(dispatch);
+        }
+
         dispatch(receiveUserPlaylists(playlists));
       });
     });
@@ -392,11 +338,10 @@ export function loadUserPlaylists() {
 }
 
 function isPlaylistTitleUnique(title, playlists) {
-  _.every(playlists, (pl) => pl.playlistName !== title);
+  return _.every(playlists, (pl) => pl.playlistName !== title);
 }
 
-// FIXME: Let's limit it to only 3 playlists
-export function addPlaylist(title) {
+export function addPlaylist(title, songs=[]) {
   return (dispatch, getState) => {
     chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
       // Check if there's a playlist with the same title
@@ -405,12 +350,19 @@ export function addPlaylist(title) {
         title = title + playlists.length;
       }
 
-      $.post(API_URL+"/playlists", {
-        access_token: token,
-        title
-      }, function(playlist) {
-        // FIXME: update currentPlaylist to the playlist that's just added
-        dispatch(receiveUserPlaylists([playlist]))
+      $.ajax({
+        type: "POST",
+        url: API_URL+"/playlists",
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify({
+          access_token: token,
+          title,
+          songs
+        }),
+        success: function(playlist) {
+          dispatch(receiveUserPlaylists([playlist]))
+        }
       });
     });
   }

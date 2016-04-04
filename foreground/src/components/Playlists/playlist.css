@@ -55,19 +55,19 @@ table.table-songs {
 }
 
 .table-songs th.song-artist {
-  width: 24%;
+  width: 20%;
 }
 
 .table-songs th.song-save {
-  width: 60px;
+  width: 40px;
 }
 
-.table-songs th.song-share {
-  display: none;
+.table-songs th.song-more {
+  width: 40px;
 }
 
-.table-songs td.song-more-cell {
-  display: none;
+.table-songs .song-more-cell {
+
 }
 
 // Local playlists dont have rank, artist
