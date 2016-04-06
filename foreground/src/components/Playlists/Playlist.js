@@ -9,15 +9,15 @@ class Playlist extends React.Component {
 
     this.makeSongItems = this.makeSongItems.bind(this);
     this.onSaveSongHandler = this.onSaveSongHandler.bind(this);
-    this.onRemoveSongHandler = this.onRemoveSongHandler.bind(this);
+    this.onRemoveSongFromSavedPlaylist = this.onRemoveSongFromSavedPlaylist.bind(this);
   }
 
   onSaveSongHandler(song) {
-    this.props.addSongToPlaylist(this.props.localSavePlaylist, song);
+    this.props.addSongToPlaylist(this.props.localPlaylists[0], song);
   }
 
-  onRemoveSongHandler(song) {
-    this.props.removeSongFromLocalPlaylistAndChrome(this.props.localSavePlaylist, song);
+  onRemoveSongFromSavedPlaylist(song) {
+    this.props.removeSongFromPlaylist(this.props.localPlaylists[0], song);
   }
 
   makeSongItems(songs, savedSongs, currentVideoId) {
@@ -26,30 +26,38 @@ class Playlist extends React.Component {
         <SongItem
           song={song}
           key={song.videoId}
+          currentPlaylist={this.props.currentPlaylist}
           updateCurrentSong={this.props.updateCurrentSong}
           isCurrentSong={song.videoId === currentVideoId}
           isSaved={!!(_.find(savedSongs, (s) => s.videoId === song.videoId))}
           onSaveSong={this.onSaveSongHandler}
-          onRemoveSong={this.onRemoveSongHandler}
+          onRemoveSongFromSavedPlaylist={this.onRemoveSongFromSavedPlaylist}
           showContextMenu={this.props.showContextMenu}
           hideContextMenu={this.props.hideContextMenu}
           localPlaylists={this.props.localPlaylists}
           addSongToPlaylist={this.props.addSongToPlaylist}
+          removeSongFromPlaylist={this.props.removeSongFromPlaylist}
         />
       )
     )
   }
 
   render() {
-    // It might be better to get currentPlaylist as props
+    var songs = this.props.currentPlaylist.songs;
     var songItems;
-    var savedSongs = this.props.localSavePlaylist ? this.props.localSavePlaylist.songs : [];
+
+    // HOWON: NOTE: this relies on the fact that in PlaylistReducer
+    // I always reorder the playlists so that "saved" playlist is the first playlist
+    // seems error-prone -- should change the way it's implemented later
+    var localSavePlaylist = this.props.localPlaylists[0];
+
+    var savedSongs = localSavePlaylist ? localSavePlaylist.songs : [];
     var currentVideoId = (this.props.currentSong ? this.props.currentSong.videoId : '')
     var isLocal = this.props.isLocal;
     var playlistClass = classNames({
       "playlist-songs": true,
       // THIS IS A HACK! I BETTER CHECK isFetching
-      "is-fetching": (_.isEmpty(this.props.songs) && !isLocal),
+      "is-fetching": (_.isEmpty(songs) && !isLocal),
       "is-local": isLocal,
       'small-video': this.props.videoSize.height === 200,
       'big-video': this.props.videoSize.height === 480,
@@ -84,8 +92,9 @@ class Playlist extends React.Component {
       saveLabel = "SAVE";
     }
 
-    if (!_.isEmpty(this.props.songs)) {
-      songItems = this.makeSongItems(this.props.songs, savedSongs, currentVideoId);
+    // HOWON FIXME: if empty, show "No song is available in this playlist"
+    if (!_.isEmpty(songs)) {
+      songItems = this.makeSongItems(songs, savedSongs, currentVideoId);
     }
 
     return (

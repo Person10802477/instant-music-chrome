@@ -27,14 +27,13 @@ class MainArea extends React.Component {
       <div className="main-area">
         <Playlist
           updateCurrentSong={this.props.actions.updateCurrentSongAndPlayIt}
-          songs={songs}
+          currentPlaylist={this.props.currentPlaylist}
           isLocal={isLocal}
           currentSong={this.props.currentSong}
           localPlaylists={this.props.localPlaylists}
-          localSavePlaylist={this.props.localPlaylists[0]}
           videoSize={this.props.videoSize}
           addSongToPlaylist={this.props.actions.addSongToPlaylist}
-          removeSongFromLocalPlaylistAndChrome={this.props.actions.removeSongFromLocalPlaylistAndChrome}
+          removeSongFromPlaylist={this.props.actions.removeSongFromPlaylist}
           showContextMenu={this.props.actions.showContextMenu}
           hideContextMenu={this.props.actions.hideContextMenu}
         />

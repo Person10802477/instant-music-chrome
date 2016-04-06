@@ -13,6 +13,7 @@ const mapStateToProps = (state) => {
     currentPlaylist: state.currentPlaylist,
     currentSong: state.currentSong,
     localPlaylists: state.playlistsBySource['local'],
+    playlists: state.playlistsBySource, // http://stackoverflow.com/questions/36458948/redux-not-re-rendering-when-nested-object-gets-updated
     videoSize: state.videoSize,
   };
 }

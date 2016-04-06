@@ -194,8 +194,26 @@ function _addSongToPlaylist(playlist, song, dispatch) {
 export function addSongToPlaylist(playlist, song) {
   return (dispatch, getState) => {
     // HOWON: FIXME:
-    var pl = playlist || getState().currentPlaylist;
-    _addSongToPlaylist(pl, song, dispatch);
+    playlist = playlist || getState().currentPlaylist;
+    chrome.identity.getAuthToken({'interactive': true}, function(token) {
+      $.post(API_URL+"/songs", {
+        access_token: token,
+        playlist_title: playlist.playlistName,
+        video_id: song.videoId,
+        title: song.title
+      }, function(s) {
+        // FIXME: SUPPORT KOREAN
+        var params = "songs?access_token="+token+"&playlist_title="+playlist.playlistName;
+        var songAdded = {
+          videoId: s.video_id,
+          title: s.title
+        };
+        var songs = [...playlist.songs, songAdded];
+
+        dispatch(updateLocalPlaylistAndReceiveIfNecessary(playlist, songs));
+        dispatch(SONG_NOTIFICATIONS_ACTIONS.addSongNotifications());
+      });
+    });
   }
 }
 
@@ -215,15 +233,23 @@ function removeFromChromeStorage(playlist, songs, song, dispatch) {
   });
 }
 
-export function removeSongFromLocalPlaylistAndChrome(playlist, song) {
+export function removeSongFromPlaylist(playlist, song) {
   return (dispatch, getState) => {
-    if (chrome.runtime.id) {
-      getChromeSongs(playlist.playlistName, function(songs) {
-        if (!_.isEmpty(songs)) {
-          removeFromChromeStorage(playlist, songs, song, dispatch);
+    chrome.identity.getAuthToken({'interactive': true}, function(token) {
+      $.ajax({
+        url: API_URL+"/songs/delete",
+        data: {
+          access_token: token,
+          playlist_title: playlist.playlistName,
+          videoId: song.videoId
+        },
+        type: 'DELETE',
+        success: function() {
+          var updatedSongs = _.reject(playlist.songs, (s) => s.videoId === song.videoId);
+          dispatch(updateLocalPlaylistAndReceiveIfNecessary(playlist, updatedSongs))
         }
       });
-    }
+    });
   }
 }
 
@@ -284,7 +310,6 @@ function updateLocalPlaylist(playlist, songs) {
 export function updateLocalPlaylistAndReceiveIfNecessary(playlist, songs) {
   return (dispatch, getState) => {
     var currentPlaylist = getState().currentPlaylist;
-
     dispatch(updateLocalPlaylist(playlist, songs));
 
     // If we are looking at the playlist that the song was just added to,

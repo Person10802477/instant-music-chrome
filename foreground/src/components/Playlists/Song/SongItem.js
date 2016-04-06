@@ -8,27 +8,28 @@ class SongItem extends React.Component {
     super(props);
 
     this.onSaveClickHandler = this.onSaveClickHandler.bind(this);
-    this.onRemoveClickHandler = this.onRemoveClickHandler.bind(this);
-    this.onRemoveSong = this.onRemoveSong.bind(this);
+    this.onUnsaveClickHandler = this.onUnsaveClickHandler.bind(this);
+    this.onRemoveSongHandler = this.onRemoveSongHandler.bind(this);
     this.contextMenu = this.contextMenu.bind(this);
   }
 
   onSaveClickHandler(event) {
-    this.props.onSaveSong.call(this, this.props.song);
     event.stopPropagation();
     event.preventDefault();
+    this.props.onSaveSong.call(this, this.props.song);
   }
 
   // removes from "Saved" playlist
-  onRemoveClickHandler(event) {
-    this.props.onRemoveSong.call(this, this.props.song);
+  onUnsaveClickHandler(event) {
     event.stopPropagation();
     event.preventDefault();
+    this.props.onRemoveSongFromSavedPlaylist.call(this, this.props.song);
   }
 
-  // removes from current playlist
-  onRemoveSong(event) {
-    console.log(event)
+  onRemoveSongHandler(event) {
+    event.stopPropagation();
+    event.preventDefault();
+    this.props.removeSongFromPlaylist.call(this, this.props.currentPlaylist, this.props.song);
   }
 
   contextMenu(event) {
@@ -51,7 +52,7 @@ class SongItem extends React.Component {
           <i className="fa fa-caret-right fa-fw playlist-expand"></i></span>,
         action: null
       },
-      {item: <span>Remove Song</span>, action: this.onRemoveSong},
+      {item: <span>Remove Song</span>, action: this.onRemoveSongHandler},
     ];
 
     return (
@@ -69,6 +70,7 @@ class SongItem extends React.Component {
             id={videoId}
             localPlaylists={this.props.localPlaylists}
             addSongToPlaylist={this.props.addSongToPlaylist}
+            removeSongFromPlaylist={this.onRemoveSongHandler}
             song={this.props.song}
           />
         </td>
@@ -77,7 +79,7 @@ class SongItem extends React.Component {
           onClick={this.onSaveClickHandler}
         ><i className="fa fa-heart-o fa-fw"></i></td>
         <td className="song-saved text-center"
-          onClick={this.onRemoveClickHandler}
+          onClick={this.onUnsaveClickHandler}
         ><i className="fa fa-heart fa-fw"></i></td>
         <td className="song-more-cell text-center"
           onClick={this.contextMenu}

@@ -105,7 +105,7 @@ class SearchBar extends React.Component {
     });
     var searchResultsClass = classNames({
       "search-results": true,
-      "hidden": (results.length === 0)
+      "hidden": (!this.props.searchResults.isFetching && results.length === 0)
     });
 
     return (
