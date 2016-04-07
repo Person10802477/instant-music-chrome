@@ -137,7 +137,7 @@ export function fetchPlaylistIfNeeded(playlist) {
   return (dispatch, getState) => {
     // Clear song notifications when we navigate to look at local playlist
     if (playlist.source === CONSTANTS.LOCAL_SOURCE) {
-      dispatch(SONG_NOTIFICATIONS_ACTIONS.clearSongNotifications());
+      dispatch(SONG_NOTIFICATIONS_ACTIONS.clearSongNotifications(playlist.playlistName));
     }
 
     if (shouldFetchPlaylist(getState(), playlist)) {
@@ -169,32 +169,8 @@ function isUnique(songs, song) {
   return !_.find(songs, (s) => s.videoId === song.videoId);
 }
 
-function _addSongToPlaylist(playlist, song, dispatch) {
-  chrome.identity.getAuthToken({'interactive': false}, function(token) {
-    $.post(API_URL+"/songs", {
-      access_token: token,
-      playlist_title: playlist.playlistName,
-      video_id: song.videoId,
-      title: song.title
-    }, function(s) {
-      // FIXME: SUPPORT KOREAN
-      var params = "songs?access_token="+token+"&playlist_title="+playlist.playlistName;
-      var songAdded = {
-        videoId: s.video_id,
-        title: s.title
-      };
-      var songs = [...playlist.songs, songAdded];
-
-      dispatch(updateLocalPlaylistAndReceiveIfNecessary(playlist, songs));
-      dispatch(SONG_NOTIFICATIONS_ACTIONS.addSongNotifications());
-    });
-  });
-}
-
 export function addSongToPlaylist(playlist, song) {
   return (dispatch, getState) => {
-    // HOWON: FIXME:
-    playlist = playlist || getState().currentPlaylist;
     chrome.identity.getAuthToken({'interactive': true}, function(token) {
       $.post(API_URL+"/songs", {
         access_token: token,
@@ -202,7 +178,6 @@ export function addSongToPlaylist(playlist, song) {
         video_id: song.videoId,
         title: song.title
       }, function(s) {
-        // FIXME: SUPPORT KOREAN
         var params = "songs?access_token="+token+"&playlist_title="+playlist.playlistName;
         var songAdded = {
           videoId: s.video_id,
@@ -211,7 +186,7 @@ export function addSongToPlaylist(playlist, song) {
         var songs = [...playlist.songs, songAdded];
 
         dispatch(updateLocalPlaylistAndReceiveIfNecessary(playlist, songs));
-        dispatch(SONG_NOTIFICATIONS_ACTIONS.addSongNotifications());
+        dispatch(SONG_NOTIFICATIONS_ACTIONS.addSongNotifications(playlist.playlistName));
       });
     });
   }

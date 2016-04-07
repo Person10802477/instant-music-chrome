@@ -1,13 +1,15 @@
 import { CONSTANTS } from './constants';
 
-export function clearSongNotifications() {
+export function clearSongNotifications(playlistName) {
   return {
-    type: CONSTANTS.CLEAR_SONG_NOTIFICATIONS
+    type: CONSTANTS.CLEAR_SONG_NOTIFICATIONS,
+    playlistName: playlistName
   }
 }
 
-export function addSongNotifications() {
+export function addSongNotifications(playlistName) {
   return {
-    type: CONSTANTS.ADD_SONG_NOTIFICATION
+    type: CONSTANTS.ADD_SONG_NOTIFICATION,
+    playlistName: playlistName
   }
 }

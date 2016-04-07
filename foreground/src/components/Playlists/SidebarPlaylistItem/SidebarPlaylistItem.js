@@ -1,16 +1,17 @@
 import React from "react";
 import ContextMenuContainer from "../../../containers/ContextMenuContainer/ContextMenuContainer.js";
+import SongNotificationsContainer from '../../../containers/SongNotificationsContainer/SongNotificationsContainer';
 
 class SidebarPlaylistItem extends React.Component {
   constructor(props) {
     super(props);
 
     this.onClickHandler = this.onClickHandler.bind(this);
-    this.contextMenu = this.contextMenu.bind(this);
+    this.showContextMenu = this.showContextMenu.bind(this);
     this.onRemovePlaylist = this.onRemovePlaylist.bind(this);
   }
 
-  contextMenu(event) {
+  showContextMenu(event) {
     event.preventDefault();
     event.stopPropagation();
 
@@ -45,16 +46,21 @@ class SidebarPlaylistItem extends React.Component {
     var contextMenuItems = [
       {item: <span>Remove Playlist</span>, action: this.onRemovePlaylist},
     ];
+    var songNoti = this.props.playlist.source === "local" ?
+      <SongNotificationsContainer playlistName={this.props.playlist.playlistName} /> : null;
+    var contextMenu = this.props.playlist.source === "local" ?
+      <ContextMenuContainer menuItems={contextMenuItems} id={playlistName} /> : null;
 
     return (
       <li className={itemClass}
         url={url}
         key={this.props.key}
         onClick={this.onClickHandler}
-        onContextMenu={this.contextMenu}
+        onContextMenu={this.showContextMenu}
       >
         <i className="fa fa-music fa-fw"></i> {playlistName}
-        <ContextMenuContainer menuItems={contextMenuItems} id={playlistName} />
+        {songNoti}
+        {contextMenu}
       </li>
     );
   }

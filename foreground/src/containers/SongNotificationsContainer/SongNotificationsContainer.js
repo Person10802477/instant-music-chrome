@@ -5,7 +5,7 @@ import SongNotifications from '../../components/SongNotifications/SongNotificati
 
 const mapStateToProps = (state) => {
   return {
-    numSongNotifications: state.numSongNotifications
+    songNotifications: state.songNotifications
   };
 }
 

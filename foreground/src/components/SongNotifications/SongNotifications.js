@@ -4,15 +4,16 @@ require("./song-notifications.css");
 
 class SongNotifications extends React.Component {
   render() {
-    var numSongNotifications = this.props.numSongNotifications;
+    var songNotifications = this.props.songNotifications;
+    var numNotis = songNotifications[this.props.playlistName]
     var notiClass = classNames({
       "song-notifications": true,
-      "hidden": (this.props.isHidden || numSongNotifications === 0)
+      "hidden": !(numNotis && numNotis > 0)
     });
 
     return (
       <div className={notiClass}>
-        {numSongNotifications}
+        {songNotifications[this.props.playlistName]}
       </div>
     );
   }

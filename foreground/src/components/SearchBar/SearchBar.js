@@ -76,9 +76,11 @@ class SearchBar extends React.Component {
   }
 
   onSaveHandler(song) {
-    // NOTE: since we only have one playlist for now...
-    // TODO: Expand this to support adding songs to different local playlists than "favorites"
-    this.props.actions.addSongToPlaylist(PLAYLIST_DATA.local[0], song);
+    if (this.props.currentPlaylist && this.props.currentPlaylist.source === "local") {
+      this.props.actions.addSongToPlaylist(this.props.currentPlaylist, song);
+    } else {
+      this.props.actions.addSongToPlaylist(this.props.localSavePlaylist, song);
+    }
     this.onInputClear();
   }
 

@@ -27,6 +27,22 @@ class Playlists extends React.Component {
     this.props.actions.updateCurrentPlaylist(null);
   }
 
+  componentWillReceiveProps(props) {
+    var songNotifications = props.songNotifications;
+    var wasSongAdded = false;
+    for (var pl in songNotifications) {
+      if (songNotifications[pl] > 0) {
+        wasSongAdded = true;
+      }
+    }
+
+    if (wasSongAdded) {
+      this.setState({expandedPlaylists: Object.assign({},
+        this.state.expandedPlaylists, { local: true }
+      )});
+    }
+  }
+
   isSamePlaylist(playlist1, playlist2) {
     return (
       playlist1.playlistName === playlist2.playlistName &&

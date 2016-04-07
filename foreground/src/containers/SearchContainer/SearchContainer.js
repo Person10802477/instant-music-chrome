@@ -10,6 +10,8 @@ import { CONSTANTS } from './constants';
 
 const mapStateToProps = (state) => {
   return {
+    currentPlaylist: state.currentPlaylist,
+    localSavePlaylist: state.playlistsBySource.local[0],
     searchResults: state.searchResults,
     maxResults: CONSTANTS.MAX_SEARCH_RESULTS
   };

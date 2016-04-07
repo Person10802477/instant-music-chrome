@@ -1,7 +1,6 @@
 import { CONSTANTS } from './constants';
 
 export function showContextMenu(id, event) {
-  // FIXME: DOESNT WORK FOR SONGS
   return {
     type: CONSTANTS.SHOW_CONTEXT_MENU,
     id: id,

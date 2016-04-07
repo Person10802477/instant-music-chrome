@@ -9,6 +9,7 @@ const mapStateToProps = (state) => {
   return {
     currentPlaylist: state.currentPlaylist,
     playlists: state.playlistsBySource,
+    songNotifications: state.songNotifications
   };
 }
 
