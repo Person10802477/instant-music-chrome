@@ -5,6 +5,7 @@ import YouTubeFetcher from '../../others/youtube-api';
 
 // FIXME: move me to somewhere appropriate
 var API_URL = "http://instant-iv0npoz3.cloudapp.net/api";
+// var API_URL = "http://localhost:3000/api";
 
 export function updateCurrentPlaylist(playlist) {
   return {
