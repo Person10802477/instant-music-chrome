@@ -60,7 +60,7 @@ if (chrome.runtime.id) {
       {source: 'spotify', playlistName: "U.S.", url: "http://instant-iv0npoz3.cloudapp.net/spotify/?country=us&recurrence=daily&date=latest&type=regional"},
       {source: 'spotify', playlistName: "U.K.", url: "http://instant-iv0npoz3.cloudapp.net/spotify/?country=gb&recurrence=daily&date=latest&type=regional"},
       {source: 'spotify', playlistName: "France", url: "http://instant-iv0npoz3.cloudapp.net/spotify/?country=fr&recurrence=daily&date=latest&type=regional"},
-      {source: 'spotify', playlistName: "Spain", url: "http://instant-iv0npoz3.cloudapp.net/spotify/?country=es&recurrence=daily&date=latest&type=regional"},
+      {source: 'spotify', playlistName: "Spain", url: "http://instant-iv0npoz3.cloudapp.net/spotify/?country=es&recurrence=daily&date=latest&type=regional"}
     ],
     local: [
       // {source: 'local', playlistName: 'favorites', url: null}
