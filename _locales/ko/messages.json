@@ -139,5 +139,23 @@
   },
   "save": {
     "message": "저장"
+  },
+  "us": {
+    "message": "U.S."
+  },
+  "uk": {
+    "message": "U.K."
+  },
+  "france": {
+    "message": "프랑스"
+  },
+  "spain": {
+    "message": "스페인"
+  },
+  "global": {
+    "message": "세계"
+  },
+  "viral": {
+    "message": "급상승"
   }
 }

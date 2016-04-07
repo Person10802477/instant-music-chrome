@@ -2,6 +2,7 @@
 server 'instant-iv0npoz3.cloudapp.net', port: 22, roles: [:web, :app, :db], primary: true
 
 set :repo_url,        'git@github.com:woniesong92/instant-music-chrome.git'
+set :repo_tree,       'api-server'
 set :application,     'instantMusicChrome'
 set :user,            'howon'
 set :puma_threads,    [4, 16]

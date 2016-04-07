@@ -4,7 +4,7 @@ import * as SONG_NOTIFICATIONS_ACTIONS from '../SongNotificationsContainer/SongN
 import YouTubeFetcher from '../../others/youtube-api';
 
 // FIXME: move me to somewhere appropriate
-var API_URL = "http://localhost:3000/api";
+var API_URL = "http://instant-iv0npoz3.cloudapp.net/api";
 
 export function updateCurrentPlaylist(playlist) {
   return {

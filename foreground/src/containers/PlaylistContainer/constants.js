@@ -55,12 +55,12 @@ if (chrome.runtime.id) {
       {source: 'itunes', playlistName: chrome.i18n.getMessage("easy"), url: 'https://itunes.apple.com/us/rss/topsongs/genre=25/limit='+NUM_SONGS+'/explicit=true/json'},
     ],
     spotify: [
-      {source: 'spotify', playlistName: "viral", url: "http://instant-iv0npoz3.cloudapp.net/spotify/?country=global&recurrence=daily&date=latest&type=viral"},
-      {source: 'spotify', playlistName: "global", url: "http://instant-iv0npoz3.cloudapp.net/spotify/?country=global&recurrence=daily&date=latest&type=regional"},
-      {source: 'spotify', playlistName: "U.S.", url: "http://instant-iv0npoz3.cloudapp.net/spotify/?country=us&recurrence=daily&date=latest&type=regional"},
-      {source: 'spotify', playlistName: "U.K.", url: "http://instant-iv0npoz3.cloudapp.net/spotify/?country=gb&recurrence=daily&date=latest&type=regional"},
-      {source: 'spotify', playlistName: "France", url: "http://instant-iv0npoz3.cloudapp.net/spotify/?country=fr&recurrence=daily&date=latest&type=regional"},
-      {source: 'spotify', playlistName: "Spain", url: "http://instant-iv0npoz3.cloudapp.net/spotify/?country=es&recurrence=daily&date=latest&type=regional"}
+      {source: 'spotify', playlistName: chrome.i18n.getMessage("viral"), url: "http://instant-iv0npoz3.cloudapp.net/spotify/?country=global&recurrence=daily&date=latest&type=viral"},
+      {source: 'spotify', playlistName: chrome.i18n.getMessage("global"), url: "http://instant-iv0npoz3.cloudapp.net/spotify/?country=global&recurrence=daily&date=latest&type=regional"},
+      {source: 'spotify', playlistName: chrome.i18n.getMessage("us"), url: "http://instant-iv0npoz3.cloudapp.net/spotify/?country=us&recurrence=daily&date=latest&type=regional"},
+      {source: 'spotify', playlistName: chrome.i18n.getMessage("uk"), url: "http://instant-iv0npoz3.cloudapp.net/spotify/?country=gb&recurrence=daily&date=latest&type=regional"},
+      {source: 'spotify', playlistName: chrome.i18n.getMessage("france"), url: "http://instant-iv0npoz3.cloudapp.net/spotify/?country=fr&recurrence=daily&date=latest&type=regional"},
+      {source: 'spotify', playlistName: chrome.i18n.getMessage("spain"), url: "http://instant-iv0npoz3.cloudapp.net/spotify/?country=es&recurrence=daily&date=latest&type=regional"}
     ],
     local: [
       // {source: 'local', playlistName: 'favorites', url: null}
