@@ -332,9 +332,10 @@ function initLikedPlaylist(dispatch) {
   });
 }
 
-export function loadUserPlaylists() {
-  return (dispatch) => {
-    chrome.identity.getAuthToken({ 'interactive': false }, function(token) {
+// FIXME: dirty -- refactor
+export function loadUserPlaylists(token) {
+  return (dispatch) => { 
+    if (token) {
       $.get(API_URL+"/playlists?access_token="+token, function(playlists) {
         if (!_.find(playlists, (pl) => pl.title === "liked")) {
           initLikedPlaylist(dispatch);
@@ -342,7 +343,17 @@ export function loadUserPlaylists() {
 
         dispatch(receiveUserPlaylists(playlists));
       });
-    });
+    } else {
+      chrome.identity.getAuthToken({ 'interactive': false }, function(token) {
+        $.get(API_URL+"/playlists?access_token="+token, function(playlists) {
+          if (!_.find(playlists, (pl) => pl.title === "liked")) {
+            initLikedPlaylist(dispatch);
+          }
+
+          dispatch(receiveUserPlaylists(playlists));
+        });
+      });
+    }
   }
 }
 
@@ -355,6 +366,15 @@ export function addPlaylist(title, songs=[]) {
     chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
       // Check if there's a playlist with the same title
       var playlists = getState().playlistsBySource.local;
+
+      // Check if this is the first time adding a playlist
+      // if the "liked" playlist isnt initialized yet,
+      // initialize it.
+      if (_.isEmpty(playlists)) {
+        dispatch(loadUserPlaylists(token));
+        return;
+      }
+
       if (!isPlaylistTitleUnique(title, playlists)) {
         title = title + playlists.length;
       }
