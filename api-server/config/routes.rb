@@ -12,7 +12,6 @@ Rails.application.routes.draw do
     resources :users
     resources :playlists, only: [:index, :create]
     resources :songs
-    
 
     # resources :users do
     #   resources :playlists do
