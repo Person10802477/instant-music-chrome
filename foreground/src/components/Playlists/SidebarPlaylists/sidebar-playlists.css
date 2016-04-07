@@ -68,3 +68,11 @@ input.input-playlist {
 input.input-playlist:focus {
   outline: none;
 }
+
+@media (min-width: 901px) and (max-width: 1199px) {
+  input.input-playlist {
+    width: 120px;
+  }
+}
+
+

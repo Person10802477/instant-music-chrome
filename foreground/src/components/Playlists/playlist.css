@@ -1,7 +1,7 @@
 .playlist-songs {
   font-size: 12px;
   height: 100%;
-  overflow-y: scroll;
+  overflow-y: overlay;
   padding-bottom: 20px;
 }
 

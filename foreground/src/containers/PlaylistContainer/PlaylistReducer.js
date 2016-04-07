@@ -22,11 +22,15 @@ function currentPlaylist(state = initialPlaylist, action) {
 }
 
 function updatedPlaylists(playlistUpdated, oldPlaylists) {
+  // should be immutable
   const source = playlistUpdated.source;
   const idxToUpdate = _.findIndex(oldPlaylists[source], (pl) =>
     pl.playlistName === playlistUpdated.playlistName
   );
-  var playlists = Object.assign({}, oldPlaylists);
+
+  // NOTE: using $ to deep copy playlists
+  // http://stackoverflow.com/questions/36458948/redux-not-re-rendering-when-nested-object-gets-updated
+  var playlists = $.extend(true, {}, oldPlaylists);
   playlists[source][idxToUpdate] = playlistUpdated;
   return playlists;
 }
