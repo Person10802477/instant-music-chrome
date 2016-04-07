@@ -65,6 +65,14 @@ function extractSongsFromJson(source, json) {
           rank: idx+1,
         })
       );
+    case CONSTANTS.SPOTIFY_SOURCE:
+      return json.entries.items.map((song, idx) =>
+        ({
+          title: song['track']['name'],
+          artist: song['track']['artists'][0]['name'],
+          rank: song['current_position']
+        })
+      );
     default:
       return [];
   }

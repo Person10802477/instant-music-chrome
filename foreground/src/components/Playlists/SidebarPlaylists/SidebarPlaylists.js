@@ -25,6 +25,8 @@ class SidebarPlaylists extends React.Component {
         return "MELON";
       case "itunes":
         return "ITUNES";
+      case "spotify":
+        return "SPOTIFY";
       default:
         return "";
     }

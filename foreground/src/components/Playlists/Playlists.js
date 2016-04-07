@@ -11,7 +11,8 @@ class Playlists extends React.Component {
       expandedPlaylists: {
         melon: false,
         itunes: false,
-        local: false
+        local: false,
+        spotify: false
       }
     };
 
@@ -83,6 +84,7 @@ class Playlists extends React.Component {
 
     var melonPlaylists = this.makePlaylists(playlists, 'melon', this.props.currentPlaylist);
     var itunesPlaylists = this.makePlaylists(playlists, 'itunes', this.props.currentPlaylist);
+    var spotifyPlaylists = this.makePlaylists(playlists, 'spotify', this.props.currentPlaylist);
     var localPlaylists = this.makePlaylists(playlists, 'local', this.props.currentPlaylist);
 
     // Reorder charts based on user locale
@@ -104,6 +106,12 @@ class Playlists extends React.Component {
               isExpanded={this.state.expandedPlaylists["melon"]}
             />
             <SidebarPlaylists
+              source="spotify"
+              playlists={spotifyPlaylists}
+              onClickHandler={this.onClickHandler}
+              isExpanded={this.state.expandedPlaylists["spotify"]}
+            />
+            <SidebarPlaylists
               source="itunes"
               playlists={itunesPlaylists}
               onClickHandler={this.onClickHandler}
@@ -123,6 +131,12 @@ class Playlists extends React.Component {
             onClickHandler={this.onClickHandler}
             isExpanded={this.state.expandedPlaylists["local"]}
             addPlaylist={this.props.actions.addPlaylist}
+          />
+          <SidebarPlaylists
+            source="spotify"
+            playlists={spotifyPlaylists}
+            onClickHandler={this.onClickHandler}
+            isExpanded={this.state.expandedPlaylists["spotify"]}
           />
           <SidebarPlaylists
             source="itunes"
