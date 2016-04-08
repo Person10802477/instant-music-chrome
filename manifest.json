@@ -8,7 +8,7 @@
   },
   "manifest_version": 2,
   "name": "Instant Music",
-  "version": "0.300",
+  "version": "0.301",
   "default_locale": "en",
   "description": "Play music without effort",
   "icons": {
@@ -31,6 +31,7 @@
   ],
   "oauth2": {
     "client_id": "962679610062-g98hk06dc820d1egmabhcht7a7l8v1tq.apps.googleusercontent.com",
+    // "client_id": "962679610062-hs01ssioiq81lgqa34us84ufbn57ur6h.apps.googleusercontent.com",
     "scopes": [
       "email"
     ]

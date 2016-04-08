@@ -14,6 +14,7 @@ class SidebarPlaylists extends React.Component {
     this.endAddingPlaylist = this.endAddingPlaylist.bind(this);
     this.onInputClick = this.onInputClick.bind(this);
     this.onAddPlaylist = this.onAddPlaylist.bind(this);
+    this.onSignInAndLoadUserPlaylists = this.onSignInAndLoadUserPlaylists.bind(this);
   }
 
   // FIXME: replace with constants
@@ -35,6 +36,11 @@ class SidebarPlaylists extends React.Component {
   startAddingPlaylist(event) {
     event.stopPropagation();
     this.setState({isAddingPlaylist: true});
+  }
+
+  onSignInAndLoadUserPlaylists(event) {
+    event.stopPropagation();
+    this.props.loadUserPlaylists(null, false);
   }
 
   endAddingPlaylist() {
@@ -75,11 +81,15 @@ class SidebarPlaylists extends React.Component {
     var addPlaylistClass = classNames({
       'add-playlist': true,
       'sidebar-playlist-item': true,
-      'hidden': this.props.source !== 'local'
+      'hidden': this.props.source !== 'local' || _.isEmpty(this.props.playlists)
     });
     var addInputClass = classNames({
       'input-playlist-wrapper': true,
       'hidden': !this.state.isAddingPlaylist
+    });
+    var signInClass = classNames({
+      'sidebar-playlist-item': true,
+      'hidden': ((this.props.source !== 'local') || !_.isEmpty(this.props.playlists))
     });
     var label = this.getLabel(this.props.source);
 
@@ -105,6 +115,10 @@ class SidebarPlaylists extends React.Component {
 
           <li className={addPlaylistClass} onClick={this.startAddingPlaylist}>
             <i className="fa fa-plus fa-fw"></i> Add Playlist
+          </li>
+
+          <li className={signInClass} onClick={this.onSignInAndLoadUserPlaylists}>
+            Sign In to add playlists
           </li>
         </ul>
       </li>

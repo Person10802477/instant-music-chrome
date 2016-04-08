@@ -6,6 +6,9 @@ import YouTubeFetcher from '../../others/youtube-api';
 // FIXME: move me to somewhere appropriate
 var API_URL = "http://instant-iv0npoz3.cloudapp.net/api";
 // var API_URL = "http://localhost:3000/api";
+// chrome.management.getSelf(function(result) {
+//   result.installType === "development"
+// })
 
 export function updateCurrentPlaylist(playlist) {
   return {
@@ -332,26 +335,34 @@ function initLikedPlaylist(dispatch) {
   });
 }
 
-// FIXME: dirty -- refactor
-export function loadUserPlaylists(token) {
+function getUserPlaylists(token, dispatch) {
+  $.ajax({
+    url: API_URL+"/playlists?access_token="+token,
+    type: 'GET',
+    success: function(playlists) {
+      if (!_.find(playlists, (pl) => pl.title === "liked")) {
+        initLikedPlaylist(dispatch);
+      }
+
+      dispatch(receiveUserPlaylists(playlists));
+    },
+    error: function(err) {
+      debugger
+    }
+  });
+}
+
+export function loadUserPlaylists(token, isSlient=true) {
   return (dispatch) => { 
     if (token) {
-      $.get(API_URL+"/playlists?access_token="+token, function(playlists) {
-        if (!_.find(playlists, (pl) => pl.title === "liked")) {
-          initLikedPlaylist(dispatch);
-        }
-
-        dispatch(receiveUserPlaylists(playlists));
-      });
+      getUserPlaylists(token, dispatch);
     } else {
-      chrome.identity.getAuthToken({ 'interactive': false }, function(token) {
-        $.get(API_URL+"/playlists?access_token="+token, function(playlists) {
-          if (!_.find(playlists, (pl) => pl.title === "liked")) {
-            initLikedPlaylist(dispatch);
-          }
-
-          dispatch(receiveUserPlaylists(playlists));
-        });
+      chrome.identity.getAuthToken({ 'interactive': !isSlient }, function(token) {
+        if ((chrome.runtime.lastError && chrome.runtime.lastError.message) || !token) {
+          console.log("user is not logged in");
+          return false;
+        }
+        getUserPlaylists(token, dispatch);
       });
     }
   }
