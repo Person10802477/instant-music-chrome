@@ -347,7 +347,7 @@ function getUserPlaylists(token, dispatch) {
       dispatch(receiveUserPlaylists(playlists));
     },
     error: function(err) {
-      debugger
+      console.log(err);
     }
   });
 }

@@ -40,7 +40,6 @@ class SidebarPlaylists extends React.Component {
 
   onSignInAndLoadUserPlaylists(event) {
     event.stopPropagation();
-    debugger
     this.props.loadUserPlaylists(null, false);
   }
 

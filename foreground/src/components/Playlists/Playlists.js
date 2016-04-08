@@ -103,6 +103,7 @@ class Playlists extends React.Component {
         onClickHandler={this.onClickHandler}
         isExpanded={this.state.expandedPlaylists["local"]}
         addPlaylist={this.props.actions.addPlaylist}
+        loadUserPlaylists={this.props.actions.loadUserPlaylists}
       />
     );
 

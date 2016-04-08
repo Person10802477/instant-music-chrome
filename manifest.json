@@ -30,7 +30,9 @@
     "storage", "notifications", "identity"
   ],
   "oauth2": {
+    // PRODUCTION
     "client_id": "962679610062-g98hk06dc820d1egmabhcht7a7l8v1tq.apps.googleusercontent.com",
+    // DEVELOPMENT
     // "client_id": "962679610062-hs01ssioiq81lgqa34us84ufbn57ur6h.apps.googleusercontent.com",
     "scopes": [
       "email"
