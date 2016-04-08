@@ -358,13 +358,30 @@ export function loadUserPlaylists(token, isSlient=true) {
       getUserPlaylists(token, dispatch);
     } else {
       chrome.identity.getAuthToken({ 'interactive': !isSlient }, function(token) {
-        if ((chrome.runtime.lastError && chrome.runtime.lastError.message) || !token) {
-          console.log("user is not logged in");
+        if (!token) {
+          console.log("token missing: user is not logged in");
           return false;
         }
+
+        if ((chrome.runtime.lastError && chrome.runtime.lastError.message)) {
+          console.log("ERROR:", chrome.runtime.lastError.message);
+        }
+
         getUserPlaylists(token, dispatch);
       });
     }
+  }
+}
+
+function _clearUserPlaylists() {
+  return {
+    type: CONSTANTS.CLEAR_USER_PLAYLISTS
+  }
+}
+
+export function clearUserPlaylists() {
+  return (dispatch) => {
+    dispatch(_clearUserPlaylists());
   }
 }
 

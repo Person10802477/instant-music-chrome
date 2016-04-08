@@ -27,12 +27,12 @@
   "permissions": ["webview", "browser", "http://www.youtube.com/*",
     "https://www.youtube.com/*", "https://fonts.googleapis.com/*",
     "https://www.google-analytics.com/", "https://ssl.google-analytics.com/",
-    "storage", "notifications", "identity"
+    "storage", "notifications", "identity", "background"
   ],
   "oauth2": {
-    // PRODUCTION
+    // PRODUCTION: 
     "client_id": "962679610062-g98hk06dc820d1egmabhcht7a7l8v1tq.apps.googleusercontent.com",
-    // DEVELOPMENT
+    // DEVELOPMENT: kpfmenmbohaoklohdhplnchfkngfhdhl
     // "client_id": "962679610062-hs01ssioiq81lgqa34us84ufbn57ur6h.apps.googleusercontent.com",
     "scopes": [
       "email"

@@ -111,6 +111,11 @@ function playlistsBySource(state = PLAYLIST_DATA, action) {
         local: localPlaylists
       });
       return playlists;
+    case CONSTANTS.CLEAR_USER_PLAYLISTS:
+      var playlists = Object.assign({}, state, {
+        local: []
+      });
+      return playlists;
     default:
       return state
   }

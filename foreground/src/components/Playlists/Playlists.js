@@ -32,6 +32,16 @@ class Playlists extends React.Component {
     this.props.actions.updateCurrentPlaylist(null);
   }
 
+  componentDidMount() {
+    chrome.identity.onSignInChanged.addListener(function(account, signedIn) {
+      if (signedIn) {
+        // 
+      } else {
+        this.props.actions.clearUserPlaylists();
+      }
+    }.bind(this))
+  }
+
   componentWillReceiveProps(props) {
     var songNotifications = props.songNotifications;
     var wasSongAdded = false;
