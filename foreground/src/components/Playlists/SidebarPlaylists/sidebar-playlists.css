@@ -75,4 +75,6 @@ input.input-playlist:focus {
   }
 }
 
-
+.folder-label {
+  text-transform: uppercase;
+}

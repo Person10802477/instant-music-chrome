@@ -139,5 +139,11 @@
   },
   "save": {
     "message": "セーブ"
+  },
+  "local": {
+    "message": "私の音楽"
+  },
+  "spotify": {
+    "message": "Spotifyは"
   }
 }

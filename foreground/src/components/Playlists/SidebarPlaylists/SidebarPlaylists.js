@@ -21,13 +21,13 @@ class SidebarPlaylists extends React.Component {
   getLabel(source) {
     switch (source) {
       case "local":
-        return "YOUR MUSIC";
+        return chrome.i18n.getMessage("local");
       case "melon":
-        return "MELON";
+        return chrome.i18n.getMessage("melon");
       case "itunes":
-        return "ITUNES";
+        return chrome.i18n.getMessage("itunes");
       case "spotify":
-        return "SPOTIFY";
+        return chrome.i18n.getMessage("spotify");
       default:
         return "";
     }
@@ -40,6 +40,7 @@ class SidebarPlaylists extends React.Component {
 
   onSignInAndLoadUserPlaylists(event) {
     event.stopPropagation();
+    debugger
     this.props.loadUserPlaylists(null, false);
   }
 
@@ -97,7 +98,7 @@ class SidebarPlaylists extends React.Component {
       <li className={parentClass}
         onClick={this.props.onClickHandler.bind(this, this.props.source)}>
         <div className="playlist-label">
-          <i className={folderIconClass}></i> {label}
+          <i className={folderIconClass}></i> <span className="folder-label">{label}</span>
         </div>
         <ul className="chart-songs">
           {this.props.playlists}
@@ -118,7 +119,7 @@ class SidebarPlaylists extends React.Component {
           </li>
 
           <li className={signInClass} onClick={this.onSignInAndLoadUserPlaylists}>
-            Sign In to add playlists
+            {chrome.i18n.getMessage("sign_in_for_playlists")}
           </li>
         </ul>
       </li>

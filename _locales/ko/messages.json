@@ -157,5 +157,14 @@
   },
   "viral": {
     "message": "급상승"
+  },
+  "sign_in_for_playlists": {
+    "message": "로그인이 필요해요"
+  },
+  "local": {
+    "message": "내 음악"
+  },
+  "spotify": {
+    "message": "스파티파이"
   }
 }

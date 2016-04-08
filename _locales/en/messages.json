@@ -157,5 +157,14 @@
   },
   "viral": {
     "message": "Viral"
+  },
+  "sign_in_for_playlists": {
+    "message": "Sign in to see playlists"
+  },
+  "local": {
+    "message": "your music"
+  },
+  "spotify": {
+    "message": "spotify"
   }
 }

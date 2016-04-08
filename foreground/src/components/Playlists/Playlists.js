@@ -2,6 +2,10 @@ import React from "react";
 import SidebarPlaylists from "./SidebarPlaylists/SidebarPlaylists";
 import SidebarPlaylistItem from "./SidebarPlaylistItem/SidebarPlaylistItem";
 
+function isKorean() {
+  return chrome.runtime.id && (chrome.i18n.getMessage("@@ui_locale") === "ko" || chrome.i18n.getMessage("@@ui_locale") === "ko-kr");
+}
+
 class Playlists extends React.Component {
   constructor(props) {
     super(props);
@@ -82,76 +86,77 @@ class Playlists extends React.Component {
       return (<div>Loading...</div>)
     }
 
+    var sidebarPlaylistsClass = classNames({
+      "playlist-folders": true
+    });
     var melonPlaylists = this.makePlaylists(playlists, 'melon', this.props.currentPlaylist);
     var itunesPlaylists = this.makePlaylists(playlists, 'itunes', this.props.currentPlaylist);
     var spotifyPlaylists = this.makePlaylists(playlists, 'spotify', this.props.currentPlaylist);
     var localPlaylists = this.makePlaylists(playlists, 'local', this.props.currentPlaylist);
+    var sidebarPlaylists;
+
+
+    var localSidebarPlaylists = (
+      <SidebarPlaylists
+        source="local"
+        playlists={localPlaylists}
+        onClickHandler={this.onClickHandler}
+        isExpanded={this.state.expandedPlaylists["local"]}
+        addPlaylist={this.props.actions.addPlaylist}
+      />
+    );
+
+    var melonSidebarPlaylists = (
+      <SidebarPlaylists
+        source="melon"
+        playlists={melonPlaylists}
+        onClickHandler={this.onClickHandler}
+        isExpanded={this.state.expandedPlaylists["melon"]}
+      />
+    );
+
+    var spotifySidebarPlaylists = (
+      <SidebarPlaylists
+        source="spotify"
+        playlists={spotifyPlaylists}
+        onClickHandler={this.onClickHandler}
+        isExpanded={this.state.expandedPlaylists["spotify"]}
+      />
+    )
+
+    var itunesSidebarPlaylists = (
+      <SidebarPlaylists
+        source="itunes"
+        playlists={itunesPlaylists}
+        onClickHandler={this.onClickHandler}
+        isExpanded={this.state.expandedPlaylists["itunes"]}
+      />
+    )
 
     // Reorder charts based on user locale
-    if (chrome.runtime.id && (chrome.i18n.getMessage("@@ui_locale") === "ko" || chrome.i18n.getMessage("@@ui_locale") === "ko-kr")) {
-      return (
-        <div className="playlists">
-          <ul>
-            <SidebarPlaylists
-              source="local"
-              playlists={localPlaylists}
-              onClickHandler={this.onClickHandler}
-              isExpanded={this.state.expandedPlaylists["local"]}
-              addPlaylist={this.props.actions.addPlaylist}
-            />
-            <SidebarPlaylists
-              source="melon"
-              playlists={melonPlaylists}
-              onClickHandler={this.onClickHandler}
-              isExpanded={this.state.expandedPlaylists["melon"]}
-            />
-            <SidebarPlaylists
-              source="spotify"
-              playlists={spotifyPlaylists}
-              onClickHandler={this.onClickHandler}
-              isExpanded={this.state.expandedPlaylists["spotify"]}
-            />
-            <SidebarPlaylists
-              source="itunes"
-              playlists={itunesPlaylists}
-              onClickHandler={this.onClickHandler}
-              isExpanded={this.state.expandedPlaylists["itunes"]}
-            />
-          </ul>
-        </div>
+    if (isKorean()) {
+      sidebarPlaylists = (
+        <ul className={sidebarPlaylistsClass}>
+          {localSidebarPlaylists}
+          {melonSidebarPlaylists}
+          {spotifySidebarPlaylists}
+          {itunesSidebarPlaylists}
+        </ul>
+      );
+    } else {
+      sidebarPlaylists = (
+        <ul className={sidebarPlaylistsClass}>
+          {localSidebarPlaylists}
+          {spotifySidebarPlaylists}
+          {itunesSidebarPlaylists}
+          {melonSidebarPlaylists}
+        </ul>
       );
     }
 
     return (
       <div className="playlists">
-        <ul className="playlist-folders">
-          <SidebarPlaylists
-            source="local"
-            playlists={localPlaylists}
-            onClickHandler={this.onClickHandler}
-            isExpanded={this.state.expandedPlaylists["local"]}
-            addPlaylist={this.props.actions.addPlaylist}
-            loadUserPlaylists={this.props.actions.loadUserPlaylists}
-          />
-          <SidebarPlaylists
-            source="spotify"
-            playlists={spotifyPlaylists}
-            onClickHandler={this.onClickHandler}
-            isExpanded={this.state.expandedPlaylists["spotify"]}
-          />
-          <SidebarPlaylists
-            source="itunes"
-            playlists={itunesPlaylists}
-            onClickHandler={this.onClickHandler}
-            isExpanded={this.state.expandedPlaylists["itunes"]}
-          />
-          <SidebarPlaylists
-            source="melon"
-            playlists={melonPlaylists}
-            onClickHandler={this.onClickHandler}
-            isExpanded={this.state.expandedPlaylists["melon"]}
-          />
-        </ul>
+        {sidebarPlaylists}
       </div>
     );
   }
