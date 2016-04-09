@@ -12,6 +12,7 @@ var CONSTANTS = {
   SMALL_SIZE: "SMALL_SIZE",
   BIG_SIZE: "BIG_SIZE",
   MAX_SIZE: "MAX_SIZE",
+  REPORT_TO_GA: "REPORT_TO_GA",
 };
 
 var messageHandler = function(rawMsg) {
@@ -19,9 +20,7 @@ var messageHandler = function(rawMsg) {
   switch (msg.type) {
     case CONSTANTS.LOAD_VIDEO:
       player.loadVideoById(msg.videoId);
-      if (ga) {
-        ga('send', 'event', 'YT', 'playVideo', msg.videoId);
-      }
+      ga('send', 'event', 'YT', 'playVideo', msg.videoId);
       break;
     case CONSTANTS.CUE_VIDEO:
       player.cueVideoById(msg.videoId);
@@ -39,6 +38,9 @@ var messageHandler = function(rawMsg) {
       } else {
         player.playVideo();
       }
+      break;
+    case CONSTANTS.REPORT_TO_GA:
+      ga('send', 'event', msg.category, msg.action, msg.label);
       break;
     default:
       break;

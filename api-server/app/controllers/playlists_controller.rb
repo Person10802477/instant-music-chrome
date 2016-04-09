@@ -15,8 +15,6 @@ class PlaylistsController < ApplicationController
     end
 
     if playlist.persisted?
-      tracker = Staccato.tracker('UA-75139981-5')
-      tracker.event(category: 'playlist', action: 'add', label: @user.email, value: playlist.title)
       render json: playlist, include: [songs: { only: [:video_id, :title, :created_at] }]
     else
       head :unprocessable_entity

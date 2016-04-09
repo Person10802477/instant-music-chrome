@@ -32,8 +32,6 @@ $(function() {
   window.IM = window.IM || {};
   IM.store = store;
 
-  // app.sandboxMessenger = new SandboxMessenger(store, $('webview')[0]);
-
   ReactDOM.render(
     <Provider store={store}>
       <App />

@@ -17,6 +17,7 @@ export const CONSTANTS = {
   CLEAR_USER_PLAYLISTS: 'CLEAR_USER_PLAYLISTS',
   PRELOAD_LOCAL_PLAYLIST: 'PRELOAD_LOCAL_PLAYLIST',
   LIKED: (chrome.runtime.id ? chrome.i18n.getMessage("liked") : "liked"),
+  REPORT_TO_GA: "REPORT_TO_GA",
 }
 
 var PLAYLIST_DATA;

@@ -337,6 +337,30 @@ function initLikedPlaylist(dispatch) {
   });
 }
 
+function getUserEmail(token, callback) {
+  var url = "https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token="+token;
+  if (window.IM.userEmail) {
+    callback(window.IM.userEmail);
+    return;
+  }
+
+  $.ajax({
+    type: "GET",
+    url: url,
+    dataType: 'json',
+    contentType: 'application/json',
+    success: function(data) {
+      // FIXME: not sure if it's the best place to store it
+      // store user email so we can re-use it for reporting
+      window.IM.userEmail = data.email;
+      callback(data.email);
+    },
+    error: function() {
+      console.log("reportUserEmail failed");
+    }
+  });
+}
+
 function getUserPlaylists(token, dispatch) {
   $.ajax({
     url: API_URL+"/playlists?access_token="+token,
@@ -354,13 +378,51 @@ function getUserPlaylists(token, dispatch) {
   });
 }
 
+function reportUserEmail(token) {
+  getUserEmail(token, function(email) {
+    window.IM.sandboxMessenger.sendMessage({
+      type: CONSTANTS.REPORT_TO_GA,
+      category: 'User',
+      action: 'signIn',
+      label: email
+    });
+  });
+}
+
+function reportAddPlaylist(token, playlistName) {
+  getUserEmail(token, function(email) {
+    window.IM.sandboxMessenger.sendMessage({
+      type: CONSTANTS.REPORT_TO_GA,
+      category: 'User',
+      action: 'addPlaylist',
+      label: playlistName
+    });
+  });
+}
+
+function reportRemovePlaylist(token, playlistName) {
+  getUserEmail(token, function(email) {
+    window.IM.sandboxMessenger.sendMessage({
+      type: CONSTANTS.REPORT_TO_GA,
+      category: 'User',
+      action: 'removePlaylist',
+      label: playlistName
+    });
+  });
+}
+
 export function loadUserPlaylists(token, isSlient=true) {
   return (dispatch) => { 
     if (token) {
       getUserPlaylists(token, dispatch);
     } else {
       chrome.identity.getAuthToken({ 'interactive': !isSlient }, function(token) {
+        if (!token) {
+          console.log("getAuthToken failed");
+          return false;
+        }
         getUserPlaylists(token, dispatch);
+        reportUserEmail(token);
       });
     }
   }
@@ -417,6 +479,7 @@ export function addPlaylist(title, songs=[]) {
         }),
         success: function(playlist) {
           dispatch(receiveUserPlaylists([playlist]))
+          reportAddPlaylist(token, playlist.title);
         },
         error: function() {
           dispatch()
@@ -445,6 +508,7 @@ export function removePlaylist(title) {
         type: 'DELETE',
         success: function(result) {
           dispatch(_removePlaylist(title));
+          reportRemovePlaylist(token, title);
         }
       });
     });
