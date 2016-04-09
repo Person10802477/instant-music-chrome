@@ -358,15 +358,6 @@ export function loadUserPlaylists(token, isSlient=true) {
       getUserPlaylists(token, dispatch);
     } else {
       chrome.identity.getAuthToken({ 'interactive': !isSlient }, function(token) {
-        if (!token) {
-          console.log("token missing: user is not logged in");
-          return false;
-        }
-
-        if ((chrome.runtime.lastError && chrome.runtime.lastError.message)) {
-          console.log("ERROR:", chrome.runtime.lastError.message);
-        }
-
         getUserPlaylists(token, dispatch);
       });
     }
@@ -394,14 +385,6 @@ export function addPlaylist(title, songs=[]) {
     chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
       // Check if there's a playlist with the same title
       var playlists = getState().playlistsBySource.local;
-
-      // Check if this is the first time adding a playlist
-      // if the "liked" playlist isnt initialized yet,
-      // initialize it.
-      if (_.isEmpty(playlists)) {
-        dispatch(loadUserPlaylists(token));
-        return;
-      }
 
       if (!isPlaylistTitleUnique(title, playlists)) {
         title = title + playlists.length;

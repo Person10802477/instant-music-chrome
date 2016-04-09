@@ -28,15 +28,13 @@ class Playlists extends React.Component {
 
   componentWillMount() {
     this.props.actions.setupPlaylists();
-    this.props.actions.loadUserPlaylists();
+    this.props.actions.loadUserPlaylists(null);
     this.props.actions.updateCurrentPlaylist(null);
   }
 
   componentDidMount() {
     chrome.identity.onSignInChanged.addListener(function(account, signedIn) {
-      if (signedIn) {
-        // 
-      } else {
+      if (!signedIn) {
         this.props.actions.clearUserPlaylists();
       }
     }.bind(this))
