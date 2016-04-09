@@ -37,7 +37,7 @@ class Playlists extends React.Component {
       if (!signedIn) {
         this.props.actions.clearUserPlaylists();
       }
-    }.bind(this))
+    }.bind(this));
   }
 
   componentWillReceiveProps(props) {

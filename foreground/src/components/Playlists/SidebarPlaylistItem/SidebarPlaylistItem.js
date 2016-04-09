@@ -30,6 +30,10 @@ class SidebarPlaylistItem extends React.Component {
 
   onClickHandler(event) {
     event.stopPropagation();
+    if (this.props.playlist.isFetching) {
+      return false;
+    }
+
     this.props.onClickHandler(this.props.playlist);
 
     // FIXME: not just here, but clicking anywhere outside
@@ -41,6 +45,7 @@ class SidebarPlaylistItem extends React.Component {
     const {playlistName, url} = this.props.playlist;
     var itemClass = classNames({
       "sidebar-playlist-item": true,
+      "is-loading": this.props.playlist.isFetching,
       "active": this.props.isActive
     });
     var contextMenuItems = [

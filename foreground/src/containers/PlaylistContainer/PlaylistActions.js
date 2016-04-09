@@ -380,15 +380,28 @@ function isPlaylistTitleUnique(title, playlists) {
   return _.every(playlists, (pl) => pl.playlistName !== title);
 }
 
+function preloadLocalPlaylist(playlist) {
+  return {
+    type: CONSTANTS.PRELOAD_LOCAL_PLAYLIST,
+    playlist: playlist,
+    isFetching: true
+  }
+}
+
 export function addPlaylist(title, songs=[]) {
   return (dispatch, getState) => {
     chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
       // Check if there's a playlist with the same title
       var playlists = getState().playlistsBySource.local;
-
       if (!isPlaylistTitleUnique(title, playlists)) {
-        title = title + playlists.length;
+        title += playlists.length;
       }
+
+      dispatch(preloadLocalPlaylist({
+        source: "local",
+        playlistName: title,
+        isFetching: true
+      }));
 
       $.ajax({
         type: "POST",
@@ -402,6 +415,9 @@ export function addPlaylist(title, songs=[]) {
         }),
         success: function(playlist) {
           dispatch(receiveUserPlaylists([playlist]))
+        },
+        error: function() {
+          dispatch()
         }
       });
     });
@@ -417,7 +433,7 @@ function _removePlaylist(title) {
 
 export function removePlaylist(title) {
   return (dispatch, getState) => {
-    chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
+    chrome.identity.getAuthToken({ 'interactive': false }, function(token) {
       $.ajax({
         url: API_URL+"/playlists/delete",
         data: {

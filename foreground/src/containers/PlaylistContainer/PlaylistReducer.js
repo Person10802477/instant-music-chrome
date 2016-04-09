@@ -65,6 +65,14 @@ function _reorderPlaylists(playlists) {
   return playlists;
 }
 
+function filterPreloadedPlaylists(pastPlaylists, newPlaylists) {
+  var newPlaylistsNames = _.map(newPlaylists, (pl) => pl.playlistName);
+  var filteredPlaylists = _.reject(pastPlaylists, (pl) =>
+    _.contains(newPlaylistsNames, pl.playlistName)
+  )
+  return filteredPlaylists;
+}
+
 function playlistsBySource(state = PLAYLIST_DATA, action) {
   switch (action.type) {
     case CONSTANTS.SETUP_PLAYLISTS:
@@ -98,9 +106,11 @@ function playlistsBySource(state = PLAYLIST_DATA, action) {
         };
       });
 
-      var localPlaylists = _reorderPlaylists([...state.local, ...userPlaylists]);
+      var localPlaylists = filterPreloadedPlaylists(state.local, userPlaylists);
+      // FIXME: this will take a lot of time everytime I do this.
+      var orderedPlaylists = _reorderPlaylists([...localPlaylists, ...userPlaylists]);
       var playlistsWithUserPlaylists = Object.assign({}, state, {
-        local: localPlaylists
+        local: orderedPlaylists
       });
 
       return playlistsWithUserPlaylists;
@@ -114,6 +124,12 @@ function playlistsBySource(state = PLAYLIST_DATA, action) {
     case CONSTANTS.CLEAR_USER_PLAYLISTS:
       var playlists = Object.assign({}, state, {
         local: []
+      });
+      return playlists;
+    case CONSTANTS.PRELOAD_LOCAL_PLAYLIST:
+      var localPlaylists = [...state.local, action.playlist];
+      var playlists = Object.assign({}, state, {
+        local: localPlaylists
       });
       return playlists;
     default:
