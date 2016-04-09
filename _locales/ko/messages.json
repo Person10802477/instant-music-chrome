@@ -166,5 +166,11 @@
   },
   "spotify": {
     "message": "스파티파이"
+  },
+  "liked": {
+    "message": "좋아함"
+  },
+  "add_playlist": {
+    "message": "재생목록 추가"
   }
 }

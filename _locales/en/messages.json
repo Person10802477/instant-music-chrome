@@ -166,5 +166,11 @@
   },
   "spotify": {
     "message": "spotify"
+  },
+  "liked": {
+    "message": "liked"
+  },
+  "add_playlist": {
+    "message": "Add Playlist"
   }
 }

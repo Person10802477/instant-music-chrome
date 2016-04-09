@@ -56,7 +56,7 @@ function transformedPlaylist(state=[], action) {
 
 // make "liked" playlist the head if necessary
 function _reorderPlaylists(playlists) {
-  var likedPlaylistIdx = _.findIndex(playlists, (pl) => pl.playlistName === "liked");
+  var likedPlaylistIdx = _.findIndex(playlists, (pl) => pl.playlistName === CONSTANTS.LIKED);
   if (likedPlaylistIdx > 0) {
     var likedPlaylist = playlists[likedPlaylistIdx];
     playlists.splice(likedPlaylistIdx, 1);

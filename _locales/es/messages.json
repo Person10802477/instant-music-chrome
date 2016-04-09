@@ -139,5 +139,38 @@
   },
   "save": {
     "message": "Archivar"
+  },
+  "us": {
+    "message": "U.S."
+  },
+  "uk": {
+    "message": "U.K."
+  },
+  "france": {
+    "message": "Francia"
+  },
+  "spain": {
+    "message": "España"
+  },
+  "global": {
+    "message": "Global"
+  },
+  "viral": {
+    "message": "Viral"
+  },
+  "sign_in_for_playlists": {
+    "message": "Inicia sesión para listas"
+  },
+  "local": {
+    "message": "tu musica"
+  },
+  "spotify": {
+    "message": "spotify"
+  },
+  "liked": {
+    "message": "gustó"
+  },
+  "add_playlist": {
+    "message": "añadir lista de reproducción"
   }
 }

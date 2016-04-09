@@ -10,6 +10,8 @@ var API_URL = "http://instant-iv0npoz3.cloudapp.net/api";
 //   result.installType === "development"
 // })
 
+var LIKED = chrome.i18n.getMessage("song");
+
 export function updateCurrentPlaylist(playlist) {
   return {
     type: CONSTANTS.UPDATE_CURRENT_PLAYLIST,
@@ -331,7 +333,7 @@ function getChromeSongs(playlistName, callback) {
 // this will do it asynchronously
 function initLikedPlaylist(dispatch) {
   getChromeSongs("favorites", function(songs) {
-    dispatch(addPlaylist("liked", songs));
+    dispatch(addPlaylist(CONSTANTS.LIKED, songs));
   });
 }
 
@@ -340,7 +342,7 @@ function getUserPlaylists(token, dispatch) {
     url: API_URL+"/playlists?access_token="+token,
     type: 'GET',
     success: function(playlists) {
-      if (!_.find(playlists, (pl) => pl.title === "liked")) {
+      if (!_.find(playlists, (pl) => pl.title === CONSTANTS.LIKED)) {
         initLikedPlaylist(dispatch);
       }
 

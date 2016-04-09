@@ -16,6 +16,7 @@ export const CONSTANTS = {
   REMOVE_PLAYLIST: 'REMOVE_PLAYLIST',
   CLEAR_USER_PLAYLISTS: 'CLEAR_USER_PLAYLISTS',
   PRELOAD_LOCAL_PLAYLIST: 'PRELOAD_LOCAL_PLAYLIST',
+  LIKED: (chrome.runtime.id ? chrome.i18n.getMessage("liked") : "liked"),
 }
 
 var PLAYLIST_DATA;

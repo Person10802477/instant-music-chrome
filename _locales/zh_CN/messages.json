@@ -139,5 +139,38 @@
   },
   "save": {
     "message": "保存"
+  },
+  "us": {
+    "message": "美国"
+  },
+  "uk": {
+    "message": "英国"
+  },
+  "france": {
+    "message": "法国"
+  },
+  "spain": {
+    "message": "西班牙"
+  },
+  "global": {
+    "message": "全球"
+  },
+  "viral": {
+    "message": "病毒"
+  },
+  "sign_in_for_playlists": {
+    "message": "登录查看播放列表"
+  },
+  "local": {
+    "message": "音乐"
+  },
+  "spotify": {
+    "message": "Spotify"
+  },
+  "liked": {
+    "message": "喜欢"
+  },
+  "add_playlist": {
+    "message": "添加播放列表"
   }
 }

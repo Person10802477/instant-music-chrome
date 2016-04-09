@@ -1,6 +1,10 @@
 import { CONSTANTS } from "./constants";
+import { CONSTANTS as PLAYLIST_CONSTANTS } from "../PlaylistContainer/constants";
 
-export function songNotifications(state = {"liked": 0}, action) {
+var initialState = {};
+initialState[PLAYLIST_CONSTANTS.LIKED] = 0;
+
+export function songNotifications(state = initialState, action) {
   switch (action.type) {
     case CONSTANTS.CLEAR_SONG_NOTIFICATIONS:
       var notis = $.extend(true, {}, state);

@@ -1,5 +1,7 @@
 import React from "react";
 
+var ADD_PLAYLIST = (chrome.runtime.id ? chrome.i18n.getMessage("add_playlist") : "Add Playlist");
+
 require("./sidebar-playlists.css");
 
 class SidebarPlaylists extends React.Component {
@@ -114,7 +116,7 @@ class SidebarPlaylists extends React.Component {
           </li>
 
           <li className={addPlaylistClass} onClick={this.startAddingPlaylist}>
-            <i className="fa fa-plus fa-fw"></i> Add Playlist
+            <i className="fa fa-plus fa-fw"></i> {ADD_PLAYLIST}
           </li>
 
           <li className={signInClass} onClick={this.onSignInAndLoadUserPlaylists}>

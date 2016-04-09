@@ -140,10 +140,37 @@
   "save": {
     "message": "セーブ"
   },
+  "us": {
+    "message": "U.S."
+  },
+  "uk": {
+    "message": "U.K."
+  },
+  "france": {
+    "message": "フランス"
+  },
+  "spain": {
+    "message": "スペイン"
+  },
+  "global": {
+    "message": "グローバル"
+  },
+  "viral": {
+    "message": "ウイルスの"
+  },
+  "sign_in_for_playlists": {
+    "message": "ログインが必要です"
+  },
   "local": {
     "message": "私の音楽"
   },
   "spotify": {
-    "message": "Spotifyは"
+    "message": "Spotify"
+  },
+  "liked": {
+    "message": "気に入りました"
+  },
+  "add_playlist": {
+    "message": "プレイリストを追加"
   }
 }

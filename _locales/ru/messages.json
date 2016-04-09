@@ -139,5 +139,38 @@
   },
   "save": {
     "message": "спасти"
+  },
+  "us": {
+    "message": "U.S."
+  },
+  "uk": {
+    "message": "U.K."
+  },
+  "france": {
+    "message": "Франция"
+  },
+  "spain": {
+    "message": "Испания"
+  },
+  "global": {
+    "message": "Глобальный"
+  },
+  "viral": {
+    "message": "вирусный"
+  },
+  "sign_in_for_playlists": {
+    "message": "войти в систему"
+  },
+  "local": {
+    "message": "Ваша музыка"
+  },
+  "spotify": {
+    "message": "spotify"
+  },
+  "liked": {
+    "message": "понравилось"
+  },
+  "add_playlist": {
+    "message": "добавить плейлист"
   }
 }
