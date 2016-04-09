@@ -6,6 +6,7 @@
       ]
     }
   },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAildyw0aqh30SgFKo8hvOz5Hp3rB298RCdIdyuJyFZlbXRMDZp7WZ/nBiDqcTfQlbD4pyL0lTQLOg78XBdQLzg5v1B/noIyBzeG8xRGaUJbxHJd/u1p1XypKbyxGz7rf///3Nu54x8g8O9fzd96mpMj39kW/rdpgW0QhtMWu2JRYV6lN3BaR1WAzui7MkXmM1Tni1w+Fkdl/jk8nPtEqArzgIhXHNcmv9kkAlsVWG7ZGIK+i1LAVvmALUcvd/B1EstRkCaKcPB0NPJrdpZ0RHm92HDDreBIxYBc+rlW/3JlM/Xd7ZYMdY4U/EXXBjJsv1lgzT7ZM3aIcwQJKrQxoXcQIDAQAB",
   "manifest_version": 2,
   "name": "Instant Music",
   "version": "0.303",
@@ -27,7 +28,7 @@
   "permissions": ["webview", "browser", "http://www.youtube.com/*",
     "https://www.youtube.com/*", "https://fonts.googleapis.com/*",
     "https://www.google-analytics.com/", "https://ssl.google-analytics.com/",
-    "storage", "notifications", "identity", "background"
+    "storage", "notifications", "identity", "background", "https://*.chromiumapp.org/", "https://chromiumapp.org/*"
   ],
   "oauth2": {
     "client_id": "962679610062-g98hk06dc820d1egmabhcht7a7l8v1tq.apps.googleusercontent.com",
