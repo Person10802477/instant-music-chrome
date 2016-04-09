@@ -5,11 +5,13 @@ require("./header.css");
 
 class Header extends React.Component {
   render() {
+    var version_name = (chrome.runtime.id ? chrome.runtime.getManifest().version : "Beta");
+
     return (
       <div className="header">
         <div className="brand-container">
           <span className="brand-logo">INSTANT MUSIC</span>
-          <span className="beta-logo">Beta</span>
+          <span className="beta-logo">v{version_name}</span>
         </div>
         <div className="brand-container-sm">
           IM
