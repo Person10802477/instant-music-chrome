@@ -11,7 +11,8 @@ function onTypingComplete() {
 
 function startTyping() {
   $(".cta__typing-text").typed({
-    strings: ["^1500 Beatles ^1000 let it be ^500",],
+    // strings: ["^1500 Beatles ^1000 let it be ^500"],
+    strings: ["^1500 Flo Rida ^1000 my house ^500"],
     typeSpeed: 50,
     callback: onTypingComplete
   });
