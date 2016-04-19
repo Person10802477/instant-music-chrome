@@ -45,14 +45,16 @@ class SongItem extends React.Component {
       "active": this.props.isCurrentSong,
       "is-saved": this.props.isSaved
     });
+    const ADD_TO_PLAYLIST = (chrome.runtime.id ? chrome.i18n.getMessage("add_to_playlist") : "Add To Playlist");
+    const REMOVE_SONG = (chrome.runtime.id ? chrome.i18n.getMessage("remove_song") : "Remove Song");
     var contextMenuItems = [
       {
         item: <span className="context-menu-item clearfix add-to-playlist-menu">
-          Add to Playlist
+          {ADD_TO_PLAYLIST}
           <i className="fa fa-caret-right fa-fw playlist-expand"></i></span>,
         action: null
       },
-      {item: <span>Remove Song</span>, action: this.onRemoveSongHandler},
+      {item: <span>{REMOVE_SONG}</span>, action: this.onRemoveSongHandler},
     ];
 
     return (

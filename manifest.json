@@ -9,7 +9,7 @@
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAildyw0aqh30SgFKo8hvOz5Hp3rB298RCdIdyuJyFZlbXRMDZp7WZ/nBiDqcTfQlbD4pyL0lTQLOg78XBdQLzg5v1B/noIyBzeG8xRGaUJbxHJd/u1p1XypKbyxGz7rf///3Nu54x8g8O9fzd96mpMj39kW/rdpgW0QhtMWu2JRYV6lN3BaR1WAzui7MkXmM1Tni1w+Fkdl/jk8nPtEqArzgIhXHNcmv9kkAlsVWG7ZGIK+i1LAVvmALUcvd/B1EstRkCaKcPB0NPJrdpZ0RHm92HDDreBIxYBc+rlW/3JlM/Xd7ZYMdY4U/EXXBjJsv1lgzT7ZM3aIcwQJKrQxoXcQIDAQAB",
   "manifest_version": 2,
   "name": "Instant Music",
-  "version": "0.304",
+  "version": "0.400",
   "default_locale": "en",
   "description": "Play music without effort",
   "icons": {

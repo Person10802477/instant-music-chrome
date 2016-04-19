@@ -43,13 +43,14 @@ class SidebarPlaylistItem extends React.Component {
 
   render() {
     const {playlistName, url} = this.props.playlist;
+    const REMOVE_PLAYLIST = (chrome.runtime.id ? chrome.i18n.getMessage("remove_playlist") : "Remove Playlist");
     var itemClass = classNames({
       "sidebar-playlist-item": true,
       "is-loading": this.props.playlist.isFetching,
       "active": this.props.isActive
     });
     var contextMenuItems = [
-      {item: <span>Remove Playlist</span>, action: this.onRemovePlaylist},
+      {item: <span>{REMOVE_PLAYLIST}</span>, action: this.onRemovePlaylist},
     ];
     var songNoti = this.props.playlist.source === "local" ?
       <SongNotificationsContainer playlistName={this.props.playlist.playlistName} /> : null;

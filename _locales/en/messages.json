@@ -172,5 +172,14 @@
   },
   "add_playlist": {
     "message": "Add Playlist"
+  },
+  "add_to_playlist": {
+    "message": "Add To Playlist"
+  },
+  "remove_song": {
+    "message": "Remove Song"
+  },
+  "remove_playlist": {
+    "message": "Remove Playlist"
   }
 }

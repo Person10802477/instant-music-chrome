@@ -172,5 +172,14 @@
   },
   "add_playlist": {
     "message": "재생목록 추가"
+  },
+  "add_to_playlist": {
+    "message": "재생목록에 추가"
+  },
+  "remove_song": {
+    "message": "노래 삭제"
+  },
+  "remove_playlist": {
+    "message": "재생목록 삭제"
   }
 }
