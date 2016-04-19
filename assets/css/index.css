@@ -64,12 +64,23 @@ button.main__download-btn {
   font-size: 30px;
   border: 0;
   height: 100%;
+  outline: none;
+}
+
+button.main__download-btn:focus {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .main__download-btn,
 .main__download-btn:focus,
 .main__download-btn:active,
 .main__download-btn:active:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.btn:focus {
   outline: none;
 }
 
