@@ -11,7 +11,7 @@ function onTypingComplete() {
 
 function startTyping() {
   $(".cta__typing-text").typed({
-    strings: ["^1500 Flo Rida ^1000 my house ^500"],
+    strings: ["^1500 김광석 ^1000 서른 즈음에 ^500"],
     typeSpeed: 50,
     callback: onTypingComplete
   });
