@@ -33,15 +33,15 @@ if (chrome.runtime.id) {
 if (chrome.runtime.id) {
   PLAYLIST_DATA = {
     melon: [
-      {source: 'melon', playlistName: chrome.i18n.getMessage("k_pop_trending"), url: "http://instant-iv0npoz3.cloudapp.net/charts/realtime?version=1&page=1&count="+NUM_SONGS},
-      {source: 'melon', playlistName: chrome.i18n.getMessage("k_pop_new"), url: "http://instant-iv0npoz3.cloudapp.net/newreleases/songs?version=1&page=1&count="+NUM_SONGS},
-      {source: 'melon', playlistName: chrome.i18n.getMessage("k_pop_ost"), url: "http://instant-iv0npoz3.cloudapp.net/charts/topgenres/DP0300?version=1&page=1&count="+NUM_SONGS},
-      {source: 'melon', playlistName: chrome.i18n.getMessage("pop_trending"), url: "http://instant-iv0npoz3.cloudapp.net/charts/topgenres/DP0200?version=1&page=1&count="+NUM_SONGS},
-      {source: 'melon', playlistName: chrome.i18n.getMessage("j_pop_trending"), url: "http://instant-iv0npoz3.cloudapp.net/charts/topgenres/DP0400?version=1&page=1&count="+NUM_SONGS},
-      {source: 'melon', playlistName: chrome.i18n.getMessage("classic"), url: "http://instant-iv0npoz3.cloudapp.net/charts/topgenres/DP0500?version=1&page=1&count="+NUM_SONGS},
-      {source: 'melon', playlistName: chrome.i18n.getMessage("newage"), url: "http://instant-iv0npoz3.cloudapp.net/charts/topgenres/DP0800?version=1&page=1&count="+NUM_SONGS},
-      {source: 'melon', playlistName: chrome.i18n.getMessage("jazz"), url: "http://instant-iv0npoz3.cloudapp.net/charts/topgenres/DP0900?version=1&page=1&count="+NUM_SONGS},
-      {source: 'melon', playlistName: chrome.i18n.getMessage("christian"), url: "http://instant-iv0npoz3.cloudapp.net/charts/topgenres/DP0600?version=1&page=1&count="+NUM_SONGS},
+      {source: 'melon', playlistName: chrome.i18n.getMessage("k_pop_trending"), url: "http://instantmusic-test8858.cloudapp.net/charts/realtime?version=1&page=1&count="+NUM_SONGS},
+      {source: 'melon', playlistName: chrome.i18n.getMessage("k_pop_new"), url: "http://instantmusic-test8858.cloudapp.net/newreleases/songs?version=1&page=1&count="+NUM_SONGS},
+      {source: 'melon', playlistName: chrome.i18n.getMessage("k_pop_ost"), url: "http://instantmusic-test8858.cloudapp.net/charts/topgenres/DP0300?version=1&page=1&count="+NUM_SONGS},
+      {source: 'melon', playlistName: chrome.i18n.getMessage("pop_trending"), url: "http://instantmusic-test8858.cloudapp.net/charts/topgenres/DP0200?version=1&page=1&count="+NUM_SONGS},
+      {source: 'melon', playlistName: chrome.i18n.getMessage("j_pop_trending"), url: "http://instantmusic-test8858.cloudapp.net/charts/topgenres/DP0400?version=1&page=1&count="+NUM_SONGS},
+      {source: 'melon', playlistName: chrome.i18n.getMessage("classic"), url: "http://instantmusic-test8858.cloudapp.net/charts/topgenres/DP0500?version=1&page=1&count="+NUM_SONGS},
+      {source: 'melon', playlistName: chrome.i18n.getMessage("newage"), url: "http://instantmusic-test8858.cloudapp.net/charts/topgenres/DP0800?version=1&page=1&count="+NUM_SONGS},
+      {source: 'melon', playlistName: chrome.i18n.getMessage("jazz"), url: "http://instantmusic-test8858.cloudapp.net/charts/topgenres/DP0900?version=1&page=1&count="+NUM_SONGS},
+      {source: 'melon', playlistName: chrome.i18n.getMessage("christian"), url: "http://instantmusic-test8858.cloudapp.net/charts/topgenres/DP0600?version=1&page=1&count="+NUM_SONGS},
     ],
     itunes: [
       {source: 'itunes', playlistName: chrome.i18n.getMessage("us_pop"), url: 'https://itunes.apple.com/us/rss/topsongs/limit='+NUM_SONGS+'/explicit=true/json'},
@@ -59,29 +59,30 @@ if (chrome.runtime.id) {
       {source: 'itunes', playlistName: chrome.i18n.getMessage("easy"), url: 'https://itunes.apple.com/us/rss/topsongs/genre=25/limit='+NUM_SONGS+'/explicit=true/json'},
     ],
     spotify: [
-      {source: 'spotify', playlistName: chrome.i18n.getMessage("viral"), url: "http://instant-iv0npoz3.cloudapp.net/spotify/?country=global&recurrence=daily&date=latest&type=viral"},
-      {source: 'spotify', playlistName: chrome.i18n.getMessage("global"), url: "http://instant-iv0npoz3.cloudapp.net/spotify/?country=global&recurrence=daily&date=latest&type=regional"},
-      {source: 'spotify', playlistName: chrome.i18n.getMessage("us"), url: "http://instant-iv0npoz3.cloudapp.net/spotify/?country=us&recurrence=daily&date=latest&type=regional"},
-      {source: 'spotify', playlistName: chrome.i18n.getMessage("uk"), url: "http://instant-iv0npoz3.cloudapp.net/spotify/?country=gb&recurrence=daily&date=latest&type=regional"},
-      {source: 'spotify', playlistName: chrome.i18n.getMessage("france"), url: "http://instant-iv0npoz3.cloudapp.net/spotify/?country=fr&recurrence=daily&date=latest&type=regional"},
-      {source: 'spotify', playlistName: chrome.i18n.getMessage("spain"), url: "http://instant-iv0npoz3.cloudapp.net/spotify/?country=es&recurrence=daily&date=latest&type=regional"}
+      {source: 'spotify', playlistName: chrome.i18n.getMessage("viral"), url: "http://instantmusic-test8858.cloudapp.net/spotify/?country=global&recurrence=daily&date=latest&type=viral"},
+      {source: 'spotify', playlistName: chrome.i18n.getMessage("global"), url: "http://instantmusic-test8858.cloudapp.net/spotify/?country=global&recurrence=daily&date=latest&type=regional"},
+      {source: 'spotify', playlistName: chrome.i18n.getMessage("us"), url: "http://instantmusic-test8858.cloudapp.net/spotify/?country=us&recurrence=daily&date=latest&type=regional"},
+      {source: 'spotify', playlistName: chrome.i18n.getMessage("uk"), url: "http://instantmusic-test8858.cloudapp.net/spotify/?country=gb&recurrence=daily&date=latest&type=regional"},
+      {source: 'spotify', playlistName: chrome.i18n.getMessage("france"), url: "http://instantmusic-test8858.cloudapp.net/spotify/?country=fr&recurrence=daily&date=latest&type=regional"},
+      {source: 'spotify', playlistName: chrome.i18n.getMessage("spain"), url: "http://instantmusic-test8858.cloudapp.net/spotify/?country=es&recurrence=daily&date=latest&type=regional"}
     ],
     local: [
       // {source: 'local', playlistName: 'favorites', url: null}
     ]
+
   };
 } else {
   PLAYLIST_DATA = {
     melon: [
-      {source: 'melon', playlistName: "k_pop_trending", url: "http://instant-iv0npoz3.cloudapp.net/charts/realtime?version=1&page=1&count="+NUM_SONGS},
-      {source: 'melon', playlistName: "k_pop_new", url: "http://instant-iv0npoz3.cloudapp.net/newreleases/songs?version=1&page=1&count="+NUM_SONGS},
-      {source: 'melon', playlistName: "k_pop_ost", url: "http://instant-iv0npoz3.cloudapp.net/charts/topgenres/DP0300?version=1&page=1&count="+NUM_SONGS},
-      {source: 'melon', playlistName: "pop_trending", url: "http://instant-iv0npoz3.cloudapp.net/charts/topgenres/DP0200?version=1&page=1&count="+NUM_SONGS},
-      {source: 'melon', playlistName: "j_pop_trending", url: "http://instant-iv0npoz3.cloudapp.net/charts/topgenres/DP0400?version=1&page=1&count="+NUM_SONGS},
-      {source: 'melon', playlistName: "classic", url: "http://instant-iv0npoz3.cloudapp.net/charts/topgenres/DP0500?version=1&page=1&count="+NUM_SONGS},
-      {source: 'melon', playlistName: "newage", url: "http://instant-iv0npoz3.cloudapp.net/charts/topgenres/DP0800?version=1&page=1&count="+NUM_SONGS},
-      {source: 'melon', playlistName: "jazz", url: "http://instant-iv0npoz3.cloudapp.net/charts/topgenres/DP0900?version=1&page=1&count="+NUM_SONGS},
-      {source: 'melon', playlistName: "christian", url: "http://instant-iv0npoz3.cloudapp.net/charts/topgenres/DP0600?version=1&page=1&count="+NUM_SONGS},
+      {source: 'melon', playlistName: "k_pop_trending", url: "http://instantmusic-test8858.cloudapp.net/charts/realtime?version=1&page=1&count="+NUM_SONGS},
+      {source: 'melon', playlistName: "k_pop_new", url: "http://instantmusic-test8858.cloudapp.net/newreleases/songs?version=1&page=1&count="+NUM_SONGS},
+      {source: 'melon', playlistName: "k_pop_ost", url: "http://instantmusic-test8858.cloudapp.net/charts/topgenres/DP0300?version=1&page=1&count="+NUM_SONGS},
+      {source: 'melon', playlistName: "pop_trending", url: "http://instantmusic-test8858.cloudapp.net/charts/topgenres/DP0200?version=1&page=1&count="+NUM_SONGS},
+      {source: 'melon', playlistName: "j_pop_trending", url: "http://instantmusic-test8858.cloudapp.net/charts/topgenres/DP0400?version=1&page=1&count="+NUM_SONGS},
+      {source: 'melon', playlistName: "classic", url: "http://instantmusic-test8858.cloudapp.net/charts/topgenres/DP0500?version=1&page=1&count="+NUM_SONGS},
+      {source: 'melon', playlistName: "newage", url: "http://instantmusic-test8858.cloudapp.net/charts/topgenres/DP0800?version=1&page=1&count="+NUM_SONGS},
+      {source: 'melon', playlistName: "jazz", url: "http://instantmusic-test8858.cloudapp.net/charts/topgenres/DP0900?version=1&page=1&count="+NUM_SONGS},
+      {source: 'melon', playlistName: "christian", url: "http://instantmusic-test8858.cloudapp.net/charts/topgenres/DP0600?version=1&page=1&count="+NUM_SONGS},
     ],
     itunes: [
       {source: 'itunes', playlistName: "us_pop", url: 'https://itunes.apple.com/us/rss/topsongs/limit='+NUM_SONGS+'/explicit=true/json'},
@@ -99,12 +100,12 @@ if (chrome.runtime.id) {
       {source: 'itunes', playlistName: "easy", url: 'https://itunes.apple.com/us/rss/topsongs/genre=25/limit='+NUM_SONGS+'/explicit=true/json'},
     ],
     spotify: [
-      {source: 'spotify', playlistName: "viral", url: "http://instant-iv0npoz3.cloudapp.net/spotify/?country=global&recurrence=daily&date=latest&type=viral"},
-      {source: 'spotify', playlistName: "global", url: "http://instant-iv0npoz3.cloudapp.net/spotify/?country=global&recurrence=daily&date=latest&type=regional"},
-      {source: 'spotify', playlistName: "U.S.", url: "http://instant-iv0npoz3.cloudapp.net/spotify/?country=us&recurrence=daily&date=latest&type=regional"},
-      {source: 'spotify', playlistName: "U.K.", url: "http://instant-iv0npoz3.cloudapp.net/spotify/?country=gb&recurrence=daily&date=latest&type=regional"},
-      {source: 'spotify', playlistName: "France", url: "http://instant-iv0npoz3.cloudapp.net/spotify/?country=fr&recurrence=daily&date=latest&type=regional"},
-      {source: 'spotify', playlistName: "Spain", url: "http://instant-iv0npoz3.cloudapp.net/spotify/?country=es&recurrence=daily&date=latest&type=regional"},
+      {source: 'spotify', playlistName: "viral", url: "http://instantmusic-test8858.cloudapp.net/spotify/?country=global&recurrence=daily&date=latest&type=viral"},
+      {source: 'spotify', playlistName: "global", url: "http://instantmusic-test8858.cloudapp.net/spotify/?country=global&recurrence=daily&date=latest&type=regional"},
+      {source: 'spotify', playlistName: "U.S.", url: "http://instantmusic-test8858.cloudapp.net/spotify/?country=us&recurrence=daily&date=latest&type=regional"},
+      {source: 'spotify', playlistName: "U.K.", url: "http://instantmusic-test8858.cloudapp.net/spotify/?country=gb&recurrence=daily&date=latest&type=regional"},
+      {source: 'spotify', playlistName: "France", url: "http://instantmusic-test8858.cloudapp.net/spotify/?country=fr&recurrence=daily&date=latest&type=regional"},
+      {source: 'spotify', playlistName: "Spain", url: "http://instantmusic-test8858.cloudapp.net/spotify/?country=es&recurrence=daily&date=latest&type=regional"},
     ],
     local: [
       // {source: 'local', playlistName: 'favorites', url: null}
