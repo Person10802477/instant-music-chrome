@@ -5,5 +5,3 @@ class Playlist < ActiveRecord::Base
 
   has_many :songs, dependent: :destroy
 end
-
-# How do I ensure one user cannot have two playlists with the same title?
