@@ -35,5 +35,5 @@ function onInstallClicked(event) {
 
 $(function() {
   startTyping();
-  $(".main__download-btn").click(onInstallClicked);
+  // $(".main__download-btn").click(onInstallClicked);
 });
