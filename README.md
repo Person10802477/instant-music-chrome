@@ -7,8 +7,8 @@ Instant Music is a music player as a chrome app. It fetches popular music charts
 ### Demo
 
 - Demo1: http://woniesong92.github.io/instant-music-chrome/
-- Demo2: http://woniesong92.github.io/instant-music-chrome/kr/
-- Demo3: https://howonsong.com/work/instantmusic
+- Demo2: https://howonsong.com/work/instantmusic
+- Demo3: https://howonsong.com/work/bots (Facebook messenger bot)
 
 <img src="https://media.giphy.com/media/l378bnkmNvUWEiVNe/giphy.gif" width="640px">
 
